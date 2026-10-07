@@ -13,6 +13,14 @@ from this folder. It writes `index.html` and `404.html`. Styles are in `assets/c
 labels and the video player are in `assets/js/site.js`. Videos play from YouTube only when someone presses
 play (youtube-nocookie.com), so the page itself loads nothing from YouTube.
 
+## Keep it a project site
+
+This repo is named `scoopanddude.com`, not `scoopanddude.github.io`, on purpose. A custom domain on a
+`scoopanddude.github.io` repo (a GitHub "user site") makes GitHub forward every
+`scoopanddude.github.io/<repo>/` address to scoopanddude.com, which broke La Porte Weather Now's data
+loads from `scoopanddude.github.io/laporteweathernow-posts/` on Oct. 7, 2026. As a project site with its
+own domain, only this site moves to scoopanddude.com.
+
 ## Credits
 
 - Photos and videos: Scoop.

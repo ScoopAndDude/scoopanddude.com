@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Builds index.html and 404.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.github.io).
+"""Builds index.html and 404.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
+
+Keep this a project site with its own custom domain. Don't move it back to a repo named
+scoopanddude.github.io: a custom domain on that "user site" makes GitHub forward every
+scoopanddude.github.io/<repo>/ address to scoopanddude.com, and browsers then block La Porte Weather
+Now's data loads from scoopanddude.github.io/laporteweathernow-posts/ (Oct. 7, 2026).
 
     python3 tools/build.py        (from the repo root)
 
@@ -263,6 +268,17 @@ NOT_FOUND = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wrong turn | Scoop &amp; Dude</title>
 <meta name="robots" content="noindex">
+<script>
+/* Oct. 7, 2026, about 9:45 to 10:55 AM Central, GitHub forwarded scoopanddude.github.io/laporteweathernow-posts/
+   (La Porte Weather Now's data and frames) to this site. Browsers that saw the forward can remember it, so send
+   them back to the real address, once: "back=1" makes it an address they were never forwarded from, and a page
+   that already has it stays here, so this can't loop. */
+(function () {
+  var p = location.pathname, s = location.search;
+  if (p.indexOf("/laporteweathernow-posts/") !== 0 || /[?&]back=1(&|$)/.test(s)) return;
+  location.replace("https://scoopanddude.github.io" + p + (s ? s + "&" : "?") + "back=1" + location.hash);
+})();
+</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/site.css">
 </head>
