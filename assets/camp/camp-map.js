@@ -18,7 +18,7 @@ const EXTRA_PAGE = 15;
 // search for common things like springs); anything in the box's corners beyond the radius is dropped.
 const EXTRAS = {
   spring: {
-    list: "springList", title: "&#128167; Springs &amp; water",
+    list: "springList", title: "Springs &amp; water",
     query: () => `node["natural"="spring"]["name"];
   node["natural"="spring"]["drinking_water"];
   nwr["natural"="hot_spring"];
@@ -27,7 +27,7 @@ const EXTRAS = {
     note: `<strong>Before you fill up or soak:</strong> spring water isn&rsquo;t tested, and clear, cold water can still carry germs. Boiling is the surest way to make it safe. Hot springs can be scalding, so test the water first, and always keep your head above water in hot springs. Many springs are on private land or have posted rules, so check access before you go. <span class="src">Sources: <a href="https://wwwnc.cdc.gov/travel/page/water-disinfection" target="_blank" rel="noopener">CDC: making water safe</a> &middot; <a href="https://www.cdc.gov/naegleria/prevention/swimming.html" target="_blank" rel="noopener">CDC: hot springs</a></span>`,
   },
   stops: {
-    list: "stopsList", title: "&#128656; Dump stations, showers, laundry &amp; Wi-Fi",
+    list: "stopsList", title: "Dump stations, showers, laundry &amp; Wi-Fi",
     query: () => `nwr["amenity"="sanitary_dump_station"];
   nwr["amenity"="shower"];
   nwr["shop"="laundry"];
@@ -35,7 +35,7 @@ const EXTRAS = {
     note: `<strong>Call ahead:</strong> hours and fees change, and some showers and dump stations are only for paying campers or customers. Most public libraries have free Wi-Fi and a place to charge; ask about time limits.`,
   },
   fuel: {
-    list: "fuelList", title: "&#9981; Propane &amp; truck stops",
+    list: "fuelList", title: "Propane &amp; truck stops",
     query: () => `nwr["shop"="gas"];
   nwr["amenity"="fuel"]["hgv"="yes"];
   nwr["amenity"="fuel"]["fuel:lpg"="yes"];
@@ -585,7 +585,7 @@ function showFuelPrice() {
   const [y, mo, d] = String(fuelData.week).split("-").map(Number);
   const week = new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
   bar.hidden = false;
-  bar.innerHTML = `<strong>&#9981; Fuel this week:</strong> regular ${money(gas.price)}${trend(gas)} (${escapeHtml(gasWhere)} average) &middot; diesel ${money(diesel.price)}${trend(diesel)} (${escapeHtml(dieselWhere)} average). ` +
+  bar.innerHTML = `<strong>Fuel this week:</strong> regular ${money(gas.price)}${trend(gas)} (${escapeHtml(gasWhere)} average) &middot; diesel ${money(diesel.price)}${trend(diesel)} (${escapeHtml(dieselWhere)} average). ` +
     `<span class="fuel-src">Official averages from the <a href="${escapeHtml(fuelData.sourceUrl || "https://www.eia.gov/petroleum/gasdiesel/")}" target="_blank" rel="noopener">U.S. Energy Information Administration</a> for the week of ${week}. Prices at the pump vary by station.</span>`;
 }
 function STATE_NAMES_SHORT(ab) {
