@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds index.html and 404.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
+"""Builds index.html, 404.html and camp-map/index.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
 
 Keep this a project site with its own custom domain. Don't move it back to a repo named
 scoopanddude.github.io: a custom domain on that "user site" makes GitHub forward every
@@ -133,7 +133,8 @@ PAGE = """<!doctype html>
     <nav aria-label="Sections">
       <a class="opt2" href="#crew">The crew</a>
       <a href="#map">The map</a>
-      <a href="#clips">Clips</a>
+      <a href="camp-map/">Camp map</a>
+      <a class="opt2" href="#clips">Clips</a>
       <a class="opt" href="#shop">Shop</a>
       <a class="opt" href="#follow">Follow</a>
     </nav>
@@ -196,6 +197,7 @@ PAGE = """<!doctype html>
       <figure><img src="assets/img/fog-hat-800.jpg" width="800" height="1067" loading="lazy" decoding="async" alt="Scoop in a wide-brim hat taking a selfie beside the van on a foggy morning by a river lined with evergreens" style="object-position:50% 80%"><figcaption>A foggy morning on the road.</figcaption></figure>
       <figure><img src="assets/img/waterfall-960.jpg" width="960" height="720" loading="lazy" decoding="async" alt="A waterfall pouring into a muddy spring river below rocky cliffs and bare trees"><figcaption>Waterfall stop.</figcaption></figure>
     </div>
+    <a class="guide" href="camp-map/"><span class="guide-in"><span><span class="guide-t">Camp map</span><span class="guide-s">Free campsites, water, dump stations and propane near any U.S. town, and which way the weather's better.</span></span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 35 L33 15 M17 15 H33 V31" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 </section>
 
@@ -296,13 +298,195 @@ NOT_FOUND = """<!doctype html>
 """
 
 
+# The camp map (scoopanddude.com/camp-map/): La Porte Weather Now's camp map, copied into this site (Oct. 7, 2026).
+# Its scripts are in assets/camp/ (camp-map.js, compass.js and their helpers, copied from laporteweathernow.com);
+# the places come from the weekly OpenStreetMap copy in the laporteweathernow-posts repo, with Overpass as the backup.
+STAY = [
+    ("Recreation.gov", "https://www.recreation.gov/", "Public land. The official site for federal campgrounds, cabins and permits from the Park Service, Forest Service, BLM, Army Corps and more."),
+    ("BLM public lands", "https://www.blm.gov/programs/recreation/camping", "Public land. Free dispersed camping on Bureau of Land Management land, mostly in the West. Stays are generally limited to 14 days in any 28-day period; rules vary by area."),
+    ("Harvest Hosts", "https://harvesthosts.com", "Overnight parking at wineries, farms and breweries. Membership required."),
+    ("Boondockers Welcome", "https://boondockerswelcome.com", "Driveway camping hosted by fellow RVers and van-lifers."),
+    ("Hipcamp", "https://hipcamp.com", "Private land, farms and backyard camping spots you book by the night."),
+    ("Sniffspot", "https://www.sniffspot.com", "Rent a private, fenced yard by the hour so the dogs can run on a travel day."),
+    ("FreeCampsites.net", "https://freecampsites.net", "A crowdsourced list of free camping spots: a good second opinion next to this map."),
+]
+TYPE_CHIPS = [  # (data-type, label, on by default, the map dot's color)
+    ("camp", "Campsites &amp; RV parks", True, "#2f7d4f"), ("rest", "Rest &amp; service areas", True, "#3a6ea5"),
+    ("dogpark", "Dog parks", False, "#8e44ad"), ("spring", "Springs &amp; water", True, "#0e9aa7"),
+    ("stops", "Dump, showers, laundry &amp; Wi-Fi", False, "#6d4c41"), ("fuel", "Propane &amp; truck stops", False, "#37474f"),
+    ("private", "Private &amp; group-only", False, "#8a8a8a"),
+]
+LEGEND = [("#2f7d4f", "Listed free"), ("#e8963d", "Fee unknown"), ("#8a8a8a", "Paid"), ("#3a6ea5", "Rest or service area"),
+          ("#8e44ad", "Dog park"), ("#0e9aa7", "Spring or water fill"), ("#d6336c", "Hot spring"),
+          ("#6d4c41", "Dump, shower, laundry, library"), ("#37474f", "Propane or truck stop")]
+
+CAMP = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camp map: free camping, water and dump stations near any town | Scoop &amp; Dude</title>
+<meta name="description" content="Free campsites, rest areas, springs, water, dump stations, showers and propane near any U.S. town, this week's fuel prices, and which way the weather's better. For van life.">
+<link rel="canonical" href="https://scoopanddude.com/camp-map/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/camp-map/">
+<meta property="og:title" content="Camp map | Scoop &amp; Dude">
+<meta property="og:description" content="Free campsites, water, dump stations and propane near any U.S. town, and which way the weather's better.">
+<meta property="og:image" content="https://scoopanddude.com/assets/img/og-1200x630.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#00663f">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/overpass-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://scoopanddude.github.io" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/camp/leaflet.css">
+<link rel="stylesheet" href="../assets/css/camp.css">
+</head>
+<body>
+<a class="skip" href="#find">Skip to the camp map</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="../">Scoop &amp; Dude</a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../#crew">The crew</a>
+      <a href="../#map">The map</a>
+      <a href="./" aria-current="page">Camp map</a>
+      <a class="opt2" href="../#clips">Clips</a>
+      <a class="opt" href="../#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="camp-hero" id="find">
+  <div class="wrap">
+    <div class="sign camp-sign"><div class="sign-in">
+      <h1>Camp map</h1>
+      <p class="sign-sub">Find a place to park it tonight, the water and dump stations nearby, this week's fuel prices, and <a href="#weather">which way the weather's better</a>. Search any U.S. town.</p>
+      <div class="where">
+        <div class="camp-search">
+          <label class="visually-hidden" for="campSearch">Search for any U.S. town</label>
+          <input type="search" id="campSearch" placeholder="Search any U.S. town" autocomplete="off" enterkeyhint="search">
+          <div id="campSearchResults" class="search-results"></div>
+        </div>
+        <label class="visually-hidden" for="mapLocationSelect">Or pick a city from the list</label>
+        <select id="mapLocationSelect"></select>
+        <label class="visually-hidden" for="radiusSelect">How far to look</label>
+        <select id="radiusSelect"><option value="40000">25 mi</option><option value="80000" selected>50 mi</option><option value="160000">100 mi</option></select>
+        <button type="button" id="nearMe">Near me</button>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<section class="camp-tool" aria-label="Camp map results">
+  <div class="wrap">
+    <div class="filter-bar" role="group" aria-label="Camp map filters">
+      <div class="filter-row" id="feeChips">
+        <span class="filter-label">Fee</span>
+        <button type="button" class="chip" data-fee="all" aria-pressed="true">All, free first <span class="count" data-count="all"></span></button>
+        <button type="button" class="chip" data-fee="free" aria-pressed="false">Listed free <span class="count" data-count="free"></span></button>
+        <button type="button" class="chip" data-fee="nopaid" aria-pressed="false">Hide paid <span class="count" data-count="nopaid"></span></button>
+      </div>
+      <div class="filter-row" id="dogChips">
+        <span class="filter-label">Dogs</span>
+        <button type="button" class="chip" data-dog="any" aria-pressed="true">Any</button>
+        <button type="button" class="chip" data-dog="yes" aria-pressed="false">Dogs allowed (tagged) <span class="count" data-count="dogs"></span></button>
+      </div>
+      <div class="filter-row" id="typeChips">
+        <span class="filter-label">Show</span>
+        %TYPECHIPS%
+      </div>
+    </div>
+    <div id="campMap" role="region" aria-label="Map of the places found"></div>
+    <div class="legend" aria-hidden="true">%LEGEND%</div>
+    <p id="mapStatus" class="loading-text" role="status" aria-live="polite">Loading places from OpenStreetMap&hellip;</p>
+    <p id="fuelBar" class="fuel-bar" hidden></p>
+    <p class="disclaimer"><strong>The places come from volunteers.</strong> They're from OpenStreetMap, a free map kept by volunteers (our copy is refreshed every week), and tags like fee and dogs can be missing or out of date. &ldquo;Listed free&rdquo; means a volunteer marked the site as no fee. Treat this as a starting point, and check the rules before you camp or sleep at a rest stop.</p>
+    <div id="freeNote"></div>
+    <div class="result-list" id="resultList"></div>
+    <div class="more-row"><button type="button" class="btn" id="showMore" hidden>Show more results</button></div>
+    <div id="springList" class="extra-list" aria-live="polite"></div>
+    <div id="stopsList" class="extra-list" aria-live="polite"></div>
+    <div id="fuelList" class="extra-list" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="camp-weather" id="weather" aria-labelledby="weather-h">
+  <div class="wrap">
+    <h2 id="weather-h">Which way is the good weather?</h2>
+    <p class="lead">We check the National Weather Service's next 3 days where the map is centered, and at 8 spots a day's drive away in every direction, and rate each one for camping.</p>
+    <div class="fw-controls">
+      <span>Checking around <strong id="fwCenter">the map's town</strong> <span class="fw-hint">(change the town on the map above)</span></span>
+      <label for="fwDist">How far would you drive?</label>
+      <select id="fwDist"><option value="100">About 100 miles</option><option value="200" selected>About 200 miles</option><option value="300">About 300 miles</option></select>
+      <button type="button" id="fwMoved" hidden></button>
+    </div>
+    <div class="fw-verdict" id="fwVerdict" aria-live="polite"><div class="k">Which way to go</div><p class="big">The weather check starts when you scroll here.</p></div>
+    <div class="fw-wrap">
+      <div>
+        <div class="fw-n" aria-hidden="true">&uarr; North</div>
+        <div class="fw-grid" id="fwGrid" role="group" aria-label="Weather around you, with north at the top"></div>
+      </div>
+      <div class="fw-detail" id="fwDetail" aria-live="polite"></div>
+    </div>
+    <details class="fw-how">
+      <summary>How the rating works</summary>
+      <p>It's a rule of thumb built from the official NWS forecast for the next 3 days (sooner days count a little more). A spot rates best with highs from about 60 to 82&deg;F, nights above about 40&deg;F, low rain chances, wind under 15 mph, and no thunderstorms, snow or ice. Active NWS warnings pull a spot's rating down a lot, and watches and advisories a little. Spots are straight-line distances, so the drive will be longer. Over water or outside the U.S. there's no NWS forecast, so it tries a nearby spot on land instead.</p>
+    </details>
+  </div>
+</section>
+
+<section class="camp-more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More places to stay</h2>
+    <p class="lead">Federal public land is often the cheapest place to camp. The private hosts are paid marketplaces, not public land; they fill the gap when free camping isn't close.</p>
+    <ul class="stay-list">
+      %STAY%
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Home base: La Porte, Indiana. When I'm home, I run <a href="https://laporteweathernow.com">La Porte Weather Now</a>, where this camp map started.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="credit">Places: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL). Weather: National Weather Service. Fuel prices: U.S. Energy Information Administration. Map: <a href="https://leafletjs.com">Leaflet</a>.</p>
+    <p class="small">&copy; 2026 Scoop &amp; Dude.</p>
+  </div>
+</footer>
+<script src="../assets/camp/timeutil.js"></script>
+<script src="../assets/camp/locations.js"></script>
+<script src="../assets/camp/weather.js"></script>
+<script src="../assets/camp/leaflet.js"></script>
+<script src="../assets/camp/camp-map.js"></script>
+<script src="../assets/camp/compass.js"></script>
+</body>
+</html>
+"""
+
+
+def camp_page():
+    chips = "\n        ".join(
+        f'<button type="button" class="chip small" data-type="{t}" aria-pressed="{"true" if on else "false"}"><span class="dot" style="background:{c}"></span>{label}</button>'
+        for t, label, on, c in TYPE_CHIPS)
+    legend = "".join(f'<span><span class="dot" style="background:{c}"></span>{e(t)}</span>' for c, t in LEGEND)
+    stay = "\n      ".join(f'<li><a href="{u}"><strong>{e(n)}</strong><span>{e(d)}</span></a></li>' for n, u, d in STAY)
+    return CAMP.replace("%TYPECHIPS%", chips).replace("%LEGEND%", legend).replace("%STAY%", stay)
+
+
 def main():
     page = (PAGE.replace("%JSONLD%", json.dumps(JSONLD, ensure_ascii=False, separators=(",", ":")))
                 .replace("%MAP%", map_svg()).replace("%MAPKEY%", map_key())
                 .replace("%CLIPS%", clips_html()).replace("%FOLLOW%", follow_html()))
     open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8").write(NOT_FOUND)
-    print(f"index.html {len(page) // 1024} KB, {len(CLIPS)} clips, not yet: {NOT_YET or 'unknown'}")
+    os.makedirs(os.path.join(ROOT, "camp-map"), exist_ok=True)
+    camp = camp_page()
+    open(os.path.join(ROOT, "camp-map", "index.html"), "w", encoding="utf-8").write(camp)
+    print(f"index.html {len(page) // 1024} KB, {len(CLIPS)} clips, not yet: {NOT_YET or 'unknown'}; camp-map/index.html {len(camp) // 1024} KB")
 
 
 if __name__ == "__main__":

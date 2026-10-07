@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camp map: free camping, water and dump stations near any town | Scoop &amp; Dude</title>
+<meta name="description" content="Free campsites, rest areas, springs, water, dump stations, showers and propane near any U.S. town, this week's fuel prices, and which way the weather's better. For van life.">
+<link rel="canonical" href="https://scoopanddude.com/camp-map/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/camp-map/">
+<meta property="og:title" content="Camp map | Scoop &amp; Dude">
+<meta property="og:description" content="Free campsites, water, dump stations and propane near any U.S. town, and which way the weather's better.">
+<meta property="og:image" content="https://scoopanddude.com/assets/img/og-1200x630.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#00663f">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/overpass-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://scoopanddude.github.io" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/camp/leaflet.css">
+<link rel="stylesheet" href="../assets/css/camp.css">
+</head>
+<body>
+<a class="skip" href="#find">Skip to the camp map</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="../">Scoop &amp; Dude</a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../#crew">The crew</a>
+      <a href="../#map">The map</a>
+      <a href="./" aria-current="page">Camp map</a>
+      <a class="opt2" href="../#clips">Clips</a>
+      <a class="opt" href="../#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="camp-hero" id="find">
+  <div class="wrap">
+    <div class="sign camp-sign"><div class="sign-in">
+      <h1>Camp map</h1>
+      <p class="sign-sub">Find a place to park it tonight, the water and dump stations nearby, this week's fuel prices, and <a href="#weather">which way the weather's better</a>. Search any U.S. town.</p>
+      <div class="where">
+        <div class="camp-search">
+          <label class="visually-hidden" for="campSearch">Search for any U.S. town</label>
+          <input type="search" id="campSearch" placeholder="Search any U.S. town" autocomplete="off" enterkeyhint="search">
+          <div id="campSearchResults" class="search-results"></div>
+        </div>
+        <label class="visually-hidden" for="mapLocationSelect">Or pick a city from the list</label>
+        <select id="mapLocationSelect"></select>
+        <label class="visually-hidden" for="radiusSelect">How far to look</label>
+        <select id="radiusSelect"><option value="40000">25 mi</option><option value="80000" selected>50 mi</option><option value="160000">100 mi</option></select>
+        <button type="button" id="nearMe">Near me</button>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<section class="camp-tool" aria-label="Camp map results">
+  <div class="wrap">
+    <div class="filter-bar" role="group" aria-label="Camp map filters">
+      <div class="filter-row" id="feeChips">
+        <span class="filter-label">Fee</span>
+        <button type="button" class="chip" data-fee="all" aria-pressed="true">All, free first <span class="count" data-count="all"></span></button>
+        <button type="button" class="chip" data-fee="free" aria-pressed="false">Listed free <span class="count" data-count="free"></span></button>
+        <button type="button" class="chip" data-fee="nopaid" aria-pressed="false">Hide paid <span class="count" data-count="nopaid"></span></button>
+      </div>
+      <div class="filter-row" id="dogChips">
+        <span class="filter-label">Dogs</span>
+        <button type="button" class="chip" data-dog="any" aria-pressed="true">Any</button>
+        <button type="button" class="chip" data-dog="yes" aria-pressed="false">Dogs allowed (tagged) <span class="count" data-count="dogs"></span></button>
+      </div>
+      <div class="filter-row" id="typeChips">
+        <span class="filter-label">Show</span>
+        <button type="button" class="chip small" data-type="camp" aria-pressed="true"><span class="dot" style="background:#2f7d4f"></span>Campsites &amp; RV parks</button>
+        <button type="button" class="chip small" data-type="rest" aria-pressed="true"><span class="dot" style="background:#3a6ea5"></span>Rest &amp; service areas</button>
+        <button type="button" class="chip small" data-type="dogpark" aria-pressed="false"><span class="dot" style="background:#8e44ad"></span>Dog parks</button>
+        <button type="button" class="chip small" data-type="spring" aria-pressed="true"><span class="dot" style="background:#0e9aa7"></span>Springs &amp; water</button>
+        <button type="button" class="chip small" data-type="stops" aria-pressed="false"><span class="dot" style="background:#6d4c41"></span>Dump, showers, laundry &amp; Wi-Fi</button>
+        <button type="button" class="chip small" data-type="fuel" aria-pressed="false"><span class="dot" style="background:#37474f"></span>Propane &amp; truck stops</button>
+        <button type="button" class="chip small" data-type="private" aria-pressed="false"><span class="dot" style="background:#8a8a8a"></span>Private &amp; group-only</button>
+      </div>
+    </div>
+    <div id="campMap" role="region" aria-label="Map of the places found"></div>
+    <div class="legend" aria-hidden="true"><span><span class="dot" style="background:#2f7d4f"></span>Listed free</span><span><span class="dot" style="background:#e8963d"></span>Fee unknown</span><span><span class="dot" style="background:#8a8a8a"></span>Paid</span><span><span class="dot" style="background:#3a6ea5"></span>Rest or service area</span><span><span class="dot" style="background:#8e44ad"></span>Dog park</span><span><span class="dot" style="background:#0e9aa7"></span>Spring or water fill</span><span><span class="dot" style="background:#d6336c"></span>Hot spring</span><span><span class="dot" style="background:#6d4c41"></span>Dump, shower, laundry, library</span><span><span class="dot" style="background:#37474f"></span>Propane or truck stop</span></div>
+    <p id="mapStatus" class="loading-text" role="status" aria-live="polite">Loading places from OpenStreetMap&hellip;</p>
+    <p id="fuelBar" class="fuel-bar" hidden></p>
+    <p class="disclaimer"><strong>The places come from volunteers.</strong> They're from OpenStreetMap, a free map kept by volunteers (our copy is refreshed every week), and tags like fee and dogs can be missing or out of date. &ldquo;Listed free&rdquo; means a volunteer marked the site as no fee. Treat this as a starting point, and check the rules before you camp or sleep at a rest stop.</p>
+    <div id="freeNote"></div>
+    <div class="result-list" id="resultList"></div>
+    <div class="more-row"><button type="button" class="btn" id="showMore" hidden>Show more results</button></div>
+    <div id="springList" class="extra-list" aria-live="polite"></div>
+    <div id="stopsList" class="extra-list" aria-live="polite"></div>
+    <div id="fuelList" class="extra-list" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="camp-weather" id="weather" aria-labelledby="weather-h">
+  <div class="wrap">
+    <h2 id="weather-h">Which way is the good weather?</h2>
+    <p class="lead">We check the National Weather Service's next 3 days where the map is centered, and at 8 spots a day's drive away in every direction, and rate each one for camping.</p>
+    <div class="fw-controls">
+      <span>Checking around <strong id="fwCenter">the map's town</strong> <span class="fw-hint">(change the town on the map above)</span></span>
+      <label for="fwDist">How far would you drive?</label>
+      <select id="fwDist"><option value="100">About 100 miles</option><option value="200" selected>About 200 miles</option><option value="300">About 300 miles</option></select>
+      <button type="button" id="fwMoved" hidden></button>
+    </div>
+    <div class="fw-verdict" id="fwVerdict" aria-live="polite"><div class="k">Which way to go</div><p class="big">The weather check starts when you scroll here.</p></div>
+    <div class="fw-wrap">
+      <div>
+        <div class="fw-n" aria-hidden="true">&uarr; North</div>
+        <div class="fw-grid" id="fwGrid" role="group" aria-label="Weather around you, with north at the top"></div>
+      </div>
+      <div class="fw-detail" id="fwDetail" aria-live="polite"></div>
+    </div>
+    <details class="fw-how">
+      <summary>How the rating works</summary>
+      <p>It's a rule of thumb built from the official NWS forecast for the next 3 days (sooner days count a little more). A spot rates best with highs from about 60 to 82&deg;F, nights above about 40&deg;F, low rain chances, wind under 15 mph, and no thunderstorms, snow or ice. Active NWS warnings pull a spot's rating down a lot, and watches and advisories a little. Spots are straight-line distances, so the drive will be longer. Over water or outside the U.S. there's no NWS forecast, so it tries a nearby spot on land instead.</p>
+    </details>
+  </div>
+</section>
+
+<section class="camp-more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More places to stay</h2>
+    <p class="lead">Federal public land is often the cheapest place to camp. The private hosts are paid marketplaces, not public land; they fill the gap when free camping isn't close.</p>
+    <ul class="stay-list">
+      <li><a href="https://www.recreation.gov/"><strong>Recreation.gov</strong><span>Public land. The official site for federal campgrounds, cabins and permits from the Park Service, Forest Service, BLM, Army Corps and more.</span></a></li>
+      <li><a href="https://www.blm.gov/programs/recreation/camping"><strong>BLM public lands</strong><span>Public land. Free dispersed camping on Bureau of Land Management land, mostly in the West. Stays are generally limited to 14 days in any 28-day period; rules vary by area.</span></a></li>
+      <li><a href="https://harvesthosts.com"><strong>Harvest Hosts</strong><span>Overnight parking at wineries, farms and breweries. Membership required.</span></a></li>
+      <li><a href="https://boondockerswelcome.com"><strong>Boondockers Welcome</strong><span>Driveway camping hosted by fellow RVers and van-lifers.</span></a></li>
+      <li><a href="https://hipcamp.com"><strong>Hipcamp</strong><span>Private land, farms and backyard camping spots you book by the night.</span></a></li>
+      <li><a href="https://www.sniffspot.com"><strong>Sniffspot</strong><span>Rent a private, fenced yard by the hour so the dogs can run on a travel day.</span></a></li>
+      <li><a href="https://freecampsites.net"><strong>FreeCampsites.net</strong><span>A crowdsourced list of free camping spots: a good second opinion next to this map.</span></a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Home base: La Porte, Indiana. When I'm home, I run <a href="https://laporteweathernow.com">La Porte Weather Now</a>, where this camp map started.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="credit">Places: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL). Weather: National Weather Service. Fuel prices: U.S. Energy Information Administration. Map: <a href="https://leafletjs.com">Leaflet</a>.</p>
+    <p class="small">&copy; 2026 Scoop &amp; Dude.</p>
+  </div>
+</footer>
+<script src="../assets/camp/timeutil.js"></script>
+<script src="../assets/camp/locations.js"></script>
+<script src="../assets/camp/weather.js"></script>
+<script src="../assets/camp/leaflet.js"></script>
+<script src="../assets/camp/camp-map.js"></script>
+<script src="../assets/camp/compass.js"></script>
+</body>
+</html>
