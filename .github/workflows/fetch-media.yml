@@ -1,0 +1,46 @@
+# Pulls Scoop's own YouTube thumbnails into media/yt so the site can host them itself
+# (visitors don't load anything from YouTube until they press play). Runs on the draft branch.
+name: Fetch media
+
+on:
+  push:
+    branches: [draft]
+    paths:
+      - media/youtube.txt
+      - .github/workflows/fetch-media.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-media
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download thumbnails
+        run: |
+          mkdir -p media/yt
+          grep -v '^#' media/youtube.txt | while read -r id rest; do
+            [ -z "$id" ] && continue
+            for v in maxresdefault oardefault hqdefault; do
+              f="media/yt/$id-$v.jpg"
+              [ -s "$f" ] && continue
+              if ! curl -sfL --retry 2 -o "$f" "https://i.ytimg.com/vi/$id/$v.jpg"; then rm -f "$f"; fi
+            done
+          done
+          ls media/yt | wc -l
+      - name: Save them
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media/yt
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git commit -q -m "YouTube thumbnails for the site"
+          for i in 1 2 3; do git push -q origin HEAD:draft && exit 0; git pull -q --rebase origin draft; done
+          exit 1
