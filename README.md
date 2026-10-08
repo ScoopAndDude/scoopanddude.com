@@ -9,7 +9,9 @@ Edit `tools/build.py` (the four states not visited yet, the clips, the links, th
 
     python3 tools/build.py
 
-from this folder. It writes `index.html`, `404.html`, `camp-map/index.html` and `projects/index.html`. Styles are in `assets/css/site.css`; the map
+from this folder. It writes `index.html`, `404.html`, `camp-map/index.html`, `projects/index.html`, `sitemap.xml`
+and `robots.txt`. The sitemap lists every page that has no noindex tag, dated by its last commit (Central time);
+the moved pages that still carry noindex stay out of it until that tag comes off. Styles are in `assets/css/site.css`; the map
 labels and the video player are in `assets/js/site.js`. Videos play from YouTube only when someone presses
 play (youtube-nocookie.com), so the page itself loads nothing from YouTube.
 

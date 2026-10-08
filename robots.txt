@@ -1,0 +1,6 @@
+# scoopanddude.com: search engines may read every page. Pages that should stay out of search
+# carry their own noindex tag and are left out of the sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: https://scoopanddude.com/sitemap.xml

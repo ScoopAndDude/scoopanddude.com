@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds index.html, 404.html, camp-map/index.html and projects/index.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
+"""Builds index.html, 404.html, camp-map/index.html, projects/index.html, sitemap.xml and robots.txt for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
 
 Keep this a project site with its own custom domain. Don't move it back to a repo named
 scoopanddude.github.io: a custom domain on that "user site" makes GitHub forward every
@@ -14,6 +14,10 @@ tools/us-states.json come from us-atlas (US Census Bureau boundaries, Albers USA
 import html
 import json
 import os
+import re
+import subprocess
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://scoopanddude.com"
@@ -576,6 +580,62 @@ def projects_page():
     return PROJECTS_PAGE.replace("%CARDS%", cards)
 
 
+# Sitemap and robots.txt (added Oct. 7, 2026, with Scoop's OK). The sitemap lists every page search
+# engines may show: index.html at the root and in each folder, minus pages marked noindex (the moved
+# weather-site pages that stay out of search keep that tag). A page's date is the day, in Central
+# time, of its last commit, or today when it has changes that aren't committed yet.
+ROBOTS = f"""# scoopanddude.com: search engines may read every page. Pages that should stay out of search
+# carry their own noindex tag and are left out of the sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: {SITE}/sitemap.xml
+"""
+
+
+def last_change(rel):
+    today = datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d")
+    git = ["git", "-C", ROOT]
+    try:
+        if subprocess.run(git + ["status", "--porcelain", "--", rel],
+                          capture_output=True, text=True, check=True).stdout.strip():
+            return today
+        day = subprocess.run(git + ["log", "-1", "--date=format-local:%Y-%m-%d", "--format=%cd", "--", rel],
+                             capture_output=True, text=True, check=True,
+                             env=dict(os.environ, TZ="America/Chicago")).stdout.strip()
+        return day or today
+    except (OSError, subprocess.CalledProcessError):
+        return today
+
+
+def sitemap_pages():
+    rels = ["index.html"] + sorted(
+        os.path.join(d, "index.html") for d in os.listdir(ROOT)
+        if not d.startswith((".", "_")) and d not in ("assets", "tools")
+        and os.path.isfile(os.path.join(ROOT, d, "index.html")))
+    pages = []
+    for rel in rels:
+        s = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+        robots = re.search(r'<meta name="robots" content="([^"]*)"', s, re.I)
+        if robots and "noindex" in robots.group(1).lower():
+            continue
+        canon = re.search(r'<link rel="canonical" href="([^"]+)"', s, re.I)
+        folder = os.path.dirname(rel)
+        pages.append((canon.group(1) if canon else f"{SITE}/{folder + '/' if folder else ''}", last_change(rel)))
+    return pages
+
+
+def sitemap_and_robots():
+    pages = sitemap_pages()
+    rows = "".join(f"  <url>\n    <loc>{html.escape(url)}</loc>\n    <lastmod>{day}</lastmod>\n  </url>\n"
+                   for url, day in pages)
+    open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + "</urlset>\n")
+    open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8").write(ROBOTS)
+    return pages
+
+
 def main():
     page = (PAGE.replace("%JSONLD%", json.dumps(JSONLD, ensure_ascii=False, separators=(",", ":")))
                 .replace("%MAP%", map_svg()).replace("%MAPKEY%", map_key())
@@ -588,6 +648,8 @@ def main():
     os.makedirs(os.path.join(ROOT, "projects"), exist_ok=True)
     open(os.path.join(ROOT, "projects", "index.html"), "w", encoding="utf-8").write(projects_page())
     print(f"index.html {len(page) // 1024} KB, {len(CLIPS)} clips, not yet: {NOT_YET or 'unknown'}; camp-map/index.html {len(camp) // 1024} KB")
+    listed = sitemap_and_robots()
+    print(f"sitemap.xml: {len(listed)} pages ({', '.join(u.replace(SITE, '') or '/' for u, _ in listed)}); robots.txt")
 
 
 if __name__ == "__main__":
