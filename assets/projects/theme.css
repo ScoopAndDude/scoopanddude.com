@@ -1,0 +1,47 @@
+/* Scoop & Dude look for the pages that moved from La Porte Weather Now (Oct. 7, 2026).
+   Loads after lpwn-base.css (the weather site's stylesheet the pages were built on) and swaps its
+   tactical black and orange for Scoop & Dude's road-sign green, sunset and Overpass. */
+@font-face { font-family: "Overpass"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/overpass-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Overpass"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/overpass-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Overpass"; font-style: normal; font-weight: 800; font-display: swap; src: url("../fonts/overpass-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Overpass"; font-style: normal; font-weight: 900; font-display: swap; src: url("../fonts/overpass-latin-900-normal.woff2") format("woff2"); }
+:root {
+  --forest: #00663f; --forest-dark: #004d30; --forest-soft: #0b5a3b;
+  --amber: #f08a24; --amber-bright: #f1bf2c; --amber-dark: #c96d12; --amber-text: #8a4a07;
+  --dusk: #2e2340;
+  --serif: "Overpass", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --sans: "Overpass", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --sign: #00663f; --sign-deep: #004d30; --line-sad: #d6dbd7; --concrete: #eef0ed;
+}
+html, body { background: #fff; }
+body.sad-project { font-family: var(--sans); color: #2c3034; }
+.sad-project .hero { background: linear-gradient(160deg, #2e2340 0%, #4f3150 55%, #7a4a5e 100%); }
+.sad-project .hero h1, .sad-project .section h2 { font-weight: 900; letter-spacing: -0.01em; }
+.sad-project .btn-amber { background: var(--amber-bright); color: #2e2340; }
+.sad-project .btn-amber:hover { background: #ffd35a; }
+.skip { position: absolute; left: -9999px; top: 8px; background: #fff; padding: 8px 12px; z-index: 50; }
+.skip:focus { left: 8px; }
+
+/* the Scoop & Dude top bar (same as the home page) */
+.top { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.96); backdrop-filter: saturate(1.4) blur(8px); border-bottom: 1px solid var(--line-sad); }
+.top .top-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.top .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+.top .brand img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--sign); }
+.top .mark { display: inline-block; background: var(--sign); color: #fff; font-weight: 900; font-size: 1.02rem; line-height: 1; padding: 9px 13px 7px; border-radius: 7px; box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 4px #fff; white-space: nowrap; }
+.top nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.top nav::-webkit-scrollbar { display: none; }
+.top nav a { color: #2c3034; text-decoration: none; font-weight: 500; padding: 8px 10px; border-radius: 8px; white-space: nowrap; font-size: 1rem; }
+.top nav a:hover { background: var(--concrete); }
+@media (max-width: 800px) { .top nav a.opt { display: none; } }
+@media (max-width: 600px) { .top nav a.opt2 { display: none; } }
+@media (max-width: 430px) { .top nav a.opt3 { display: none; } }
+@media (max-width: 430px) { .top nav a { padding: 8px 6px; } }
+@media (max-width: 400px) { .top .brand { gap: 8px; } .top .brand img { width: 34px; height: 34px; } .top .mark { font-size: .95rem; padding: 8px 11px 6px; } }
+
+/* the Scoop & Dude footer */
+footer.foot { background: var(--sign); color: #fff; padding: 36px 0 30px; font-size: 1rem; }
+footer.foot .wrap { display: block; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+footer.foot a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+footer.foot p { margin: 0 0 8px; }
+footer.foot .motto { font-weight: 800; font-size: 1.15rem; margin: 10px 0 12px; }
+footer.foot .small { color: #cfe7da; font-size: .9rem; }

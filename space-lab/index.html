@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>Yuyu’s Space Lab | Scoop &amp; Dude</title>
+<meta name="description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments and badges to earn.">
+<link rel="canonical" href="https://scoopanddude.com/space-lab/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/space-lab/">
+<meta property="og:title" content="Yuyu’s Space Lab">
+<meta property="og:description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments and badges to earn.">
+<meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#00663f">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/overpass-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/projects/lpwn-base.css">
+<link rel="stylesheet" href="../assets/projects/theme.css">
+<link rel="stylesheet" href="../assets/camp/leaflet.css">
+
+</head>
+<body class="sad-project">
+<a class="skip" href="#main">Skip to the page</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../#crew">The crew</a>
+      <a class="opt3" href="../#map">The map</a>
+      <a href="../camp-map/">Camp map</a>
+      <a href="../projects/">Projects</a>
+      <a class="opt" href="../#clips">Clips</a>
+      <a class="opt" href="../#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<header class="hero sl-hero" style="padding-bottom:56px;">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-eyebrow">FOR MY FRIENDS &middot; SPACE &amp; PHYSICS</div>
+    <h1>Yuyu&rsquo;s Space <span>Lab.</span></h1>
+    <p class="lede">See what&rsquo;s in tonight&rsquo;s sky over Cebu. Wave at the space station. Fire Newton&rsquo;s cannonball into orbit. Weigh yourself on Jupiter and race a beam of light to Neptune. Then do real experiments at home, the way scientists do: guess first, then test.</p>
+    <p class="sl-ded">Made for Yuyu, a young scientist in Cebu who asks big questions. Keep asking them. Every great discovery started with someone who wanted to know why. &mdash; Scoop</p>
+    <nav class="sl-jump" aria-label="On this page">
+      <a href="#sky">Tonight&rsquo;s sky</a><a href="#iss">Space station</a><a href="#launch">Next launch</a><a href="#weigh">Planet weights</a><a href="#cannon">Cannonball</a><a href="#typhoons">Typhoons</a><a href="#ph-space">Philippines in space</a><a href="#badges">Badges</a>
+    </nav>
+  </div>
+</header>
+<style>
+  main [hidden] { display: none !important; }
+  .sl-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; position: relative; }
+  .sl-jump a { display: inline-flex; align-items: center; min-height: 38px; padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(143,211,255,.45); color: #dfe9ff; font-weight: 700; font-size: 13.5px; text-decoration: none; }
+  .sl-jump a:focus-visible { outline: 3px solid #8fd3ff; outline-offset: 2px; }
+  #sky, #iss, #launch, #weigh, #cannon, #typhoons, #ph-space, #badges { scroll-margin-top: 72px; }
+  .sl-ghost { background: var(--cream-2); color: var(--ink); }
+  .btn[disabled] { opacity: .5; cursor: not-allowed; }
+  .sl-sky { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+  .sl-obj { background: var(--cream-2); border-radius: var(--radius-sm); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+  .sl-obj b { font-size: 17px; }
+  .sl-obj .dir { font-weight: 800; color: var(--amber-text); }
+  .sl-moon { width: 56px; height: 56px; }
+  .sl-note { font-size: 14px; color: var(--ink-soft); margin: 0; }
+  .sl-map { height: 300px; border-radius: var(--radius-sm); z-index: 0; background: #dfe7ea; }
+  .sl-pin { font-size: 26px; line-height: 1; background: none; border: 0; }
+  .sl-stats { display: flex; flex-wrap: wrap; gap: 10px 26px; font-variant-numeric: tabular-nums; }
+  .sl-stats div { display: grid; } .sl-stats b { font-size: 24px; } .sl-stats span { font-size: 12.5px; color: var(--ink-soft); }
+  .sl-count { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 460px; }
+  .sl-count div { background: #0b1030; color: #fff; border-radius: 10px; padding: 10px 4px; text-align: center; }
+  .sl-count b { display: block; font-size: 28px; font-variant-numeric: tabular-nums; }
+  .sl-count span { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #8fd3ff; }
+  .sl-next { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 14px; display: grid; gap: 4px; }
+  .sl-cannon { width: 100%; max-width: 520px; aspect-ratio: 1; height: auto; display: block; background: #05060f; border-radius: var(--radius-sm); }
+  .sl-range { width: 100%; max-width: 420px; accent-color: #3d7bd9; min-height: 32px; }
+  .sl-quiz { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sl-quiz button { border: 2px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 8px 14px; font: inherit; font-weight: 700; cursor: pointer; min-height: 42px; }
+  .sl-quiz button:focus-visible, .sl-badge:focus-visible { outline: 3px solid #3d7bd9; outline-offset: 2px; }
+  .sl-quiz button.right { border-color: #2f7d4f; background: #e6f4ea; }
+  .sl-quiz button.wrong { border-color: #c62828; background: #fdecec; }
+  .sl-storms { display: grid; gap: 10px; }
+  .sl-storm { background: var(--cream-2); border-radius: var(--radius-sm); padding: 12px 14px; border-left: 5px solid #2f7d4f; }
+  .sl-storm.orange { border-left-color: #d98b00; } .sl-storm.red { border-left-color: #c62828; }
+  .sl-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+  .sl-step { background: var(--card); border-radius: var(--radius-sm); padding: 14px 16px; box-shadow: var(--shadow); line-height: 1.5; color: var(--ink-soft); }
+  .sl-step b { display: block; margin-bottom: 4px; color: var(--ink); font-size: 16px; }
+  .sl-badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 10px; }
+  .sl-badge { border-radius: var(--radius-sm); padding: 12px 10px; text-align: center; background: var(--cream-2); color: var(--ink-soft); border: 2px dashed var(--line); }
+  .sl-badge .ic { font-size: 30px; filter: grayscale(1); opacity: .45; }
+  .sl-badge.on { background: #fff6e5; color: var(--ink); border: 2px solid var(--amber); }
+  .sl-badge.on .ic { filter: none; opacity: 1; }
+  .sl-badge b { display: block; font-size: 14px; margin-top: 4px; }
+  .sl-badge small { display: block; font-size: 12px; line-height: 1.35; margin-top: 2px; }
+  .sl-did { margin-top: 10px; }
+  .sl-toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 1000; background: #0b1030; color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 800; box-shadow: 0 8px 24px rgba(0,0,0,.35); max-width: calc(100% - 32px); text-align: center; }
+  .sl-cert { display: none; }
+  @media print {
+    body * { visibility: hidden !important; }
+    .sl-cert, .sl-cert * { visibility: visible !important; }
+    .sl-cert { display: block !important; position: fixed; inset: 0; padding: 56px 48px; text-align: center; border: 10px double #0b1030; font-family: Georgia, serif; color: #000; }
+    .sl-cert h2 { font-size: 40px; margin: 10px 0 18px; }
+    .sl-cert .who { font-size: 46px; font-weight: 700; margin: 8px 0 18px; }
+    .sl-cert p { font-size: 17px; line-height: 1.55; margin: 0 0 12px; }
+  }
+</style>
+
+<section class="section" id="sky">
+  <div class="wrap">
+    <div class="section-eyebrow">TONIGHT&rsquo;S SKY OVER CEBU</div>
+    <h2>What can you see tonight?</h2>
+    <p class="lede">Worked out for Cebu City from where the Moon and planets really are. No telescope needed: planets look like bright stars that don&rsquo;t twinkle much.</p>
+    <div class="sl-panel">
+      <p class="sl-note" id="skyWhen">Working out tonight&rsquo;s sky&hellip;</p>
+      <div class="sl-sky" id="skyList"></div>
+      <p class="sl-note" id="skyClouds"></p>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="skySaw" type="button">I saw it! &#128301;</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="iss">
+  <div class="wrap">
+    <div class="section-eyebrow">THE SPACE STATION, LIVE</div>
+    <h2>Wave at the space station.</h2>
+    <p class="lede">Astronauts live on the International Space Station, about 400 km above the Earth. It flies all the way around the planet every 90 minutes, about 16 times a day. Here it is right now.</p>
+    <div class="sl-panel">
+      <div id="issMap" class="sl-map" role="img" aria-label="Map showing where the space station is right now"></div>
+      <div class="sl-stats" aria-live="polite"><div><b id="issSpeed">&ndash;</b><span>km per hour</span></div><div><b id="issAlt">&ndash;</b><span>km up</span></div><div><b id="issDist">&ndash;</b><span>km from Cebu</span></div></div>
+      <p class="sl-note" id="issNote">Finding the space station&hellip;</p>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="issWave" type="button">I waved! &#128075;</button><a class="btn sl-btn sl-ghost" href="https://spotthestation.nasa.gov/" target="_blank" rel="noopener">When can I see it over Cebu? &#8599;</a></div>
+      <p class="sl-note">On NASA&rsquo;s Spot the Station, search for Cebu. From the ground the station looks like a bright, steady star sliding across the sky, a little after sunset or before sunrise.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="launch">
+  <div class="wrap">
+    <div class="section-eyebrow">NEXT ROCKET LAUNCH</div>
+    <h2 id="launchName">Counting down&hellip;</h2>
+    <p class="lede" id="launchWhat">Finding the next rocket launch anywhere in the world.</p>
+    <div class="sl-panel">
+      <div class="sl-count" role="timer"><div><b id="cdD">&ndash;</b><span>days</span></div><div><b id="cdH">&ndash;</b><span>hours</span></div><div><b id="cdM">&ndash;</b><span>min</span></div><div><b id="cdS">&ndash;</b><span>sec</span></div></div>
+      <p class="sl-note" id="launchWhen"></p>
+      <ul class="sl-next" id="launchNext"></ul>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="launchWatch" type="button">I&rsquo;ll watch for it! &#128640;</button></div>
+      <p class="small-print">Launch times often change, sometimes at the last minute. Launch data: <a href="https://thespacedevs.com/llapi" target="_blank" rel="noopener">The Space Devs</a>.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section alt" id="weigh">
+  <div class="wrap">
+    <div class="section-eyebrow">EXPERIMENT 1 &middot; GRAVITY</div>
+    <h2>What would you weigh on other worlds?</h2>
+    <div class="sl-panel">
+      <div class="sl-row"><label for="kg">Your weight on Earth:</label><input class="sl-input" id="kg" type="number" inputmode="decimal" min="1" max="300" value="25" /> <span>kg</span></div>
+      <div class="sl-worlds" id="worlds"></div>
+      <p class="sl-sub"><b>Scientist&rsquo;s secret:</b> you are made of the same amount of stuff everywhere. That&rsquo;s your <i>mass</i>, and it never changes. Your <i>weight</i> is how hard a planet&rsquo;s gravity pulls on that stuff. Big, dense planets pull harder. On Jupiter we use the pull at the top of its clouds, because Jupiter has no ground to stand on!</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="jump">
+  <div class="wrap">
+    <div class="section-eyebrow">EXPERIMENT 2 &middot; JUMPING</div>
+    <h2>How high could you jump?</h2>
+    <div class="sl-panel">
+      <div class="sl-row"><label for="jumpcm">Your best jump on Earth:</label><input class="sl-input" id="jumpcm" type="number" inputmode="decimal" min="5" max="150" value="30" /> <span>cm</span></div>
+      <div class="sl-picks" id="jumpPicks" role="group" aria-label="Pick a world"></div>
+      <div class="sl-big" id="jumpOut"></div>
+      <p class="sl-sub" id="jumpNote"></p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="light">
+  <div class="wrap">
+    <div class="section-eyebrow">EXPERIMENT 3 &middot; THE SPEED OF LIGHT</div>
+    <h2>Race a beam of light.</h2>
+    <div class="sl-panel">
+      <p class="sl-sub">Light is the fastest thing in the universe: <b>299,792 km every second</b>. That&rsquo;s about 7&frac12; times around the Earth in one second. Pick a world and press the button to send light there from the Sun.</p>
+      <div class="sl-picks" id="lightPicks" role="group" aria-label="Pick a destination"></div>
+      <div class="sl-track" aria-hidden="true"><span class="sun"></span><span class="photon" id="photon"></span><span class="target" id="target"></span></div>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="fire" type="button">Send the light &rarr;</button><span id="lightTimer" class="sl-big" style="font-size:28px;"></span></div>
+      <p class="sl-sub" id="lightOut"></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="scale">
+  <div class="wrap">
+    <div class="section-eyebrow">EXPERIMENT 4 &middot; SIZE AND DISTANCE</div>
+    <h2>If the Sun were a basketball&hellip;</h2>
+    <p class="lede" style="max-width:760px;">Pictures in books squeeze the planets close together. Here is the real size and distance, shrunk so the Sun is a basketball (24 cm wide). Try it with a ball and a long walk!</p>
+    <div class="sl-panel sl-scale">
+      <table>
+        <thead><tr><th scope="col">World</th><th scope="col">Its size would be</th><th scope="col">Like a&hellip;</th><th scope="col">Distance from the ball</th></tr></thead>
+        <tbody id="scaleBody"></tbody>
+      </table>
+    </div>
+    <p class="small-print" style="margin-top:12px;">The nearest star after the Sun, Proxima Centauri, would be about 6,900 km away on this scale: farther than Cebu to Sydney.</p>
+  </div>
+</section>
+
+<section class="section alt" id="cannon">
+  <div class="wrap">
+    <div class="section-eyebrow">ISAAC NEWTON&rsquo;S CANNONBALL</div>
+    <h2>Fire a cannonball into orbit.</h2>
+    <p class="lede">Isaac Newton imagined a cannon on a mountain so tall it pokes out above the air. Fire slowly and the ball falls to the ground. Fire faster and it lands farther away. Fire fast enough and the Earth curves away as fast as the ball falls, so it never lands. That&rsquo;s an orbit, and it&rsquo;s how satellites stay up.</p>
+    <div class="sl-panel">
+      <canvas id="cannonCv" class="sl-cannon" width="520" height="520" role="img" aria-label="Newton's cannon: the Earth, a very tall mountain, and the path of the cannonball"></canvas>
+      <label for="cannonV">Speed: <b id="cannonVal">5</b> km per second</label>
+      <input class="sl-range" id="cannonV" type="range" min="1" max="12" step="0.5" value="5">
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="cannonFire" type="button">Fire! &#128165;</button></div>
+      <p class="sl-big" id="cannonOut" aria-live="polite" style="font-size:20px;">Pick a speed and fire.</p>
+      <p class="sl-sub">Real satellites near the Earth go about 7.8 km every second. That&rsquo;s about 28,000 km per hour, fast enough to fly from Cebu to Manila in about 73 seconds.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experiments">
+  <div class="wrap">
+    <div class="section-eyebrow">HOME LAB</div>
+    <h2>Real physics you can do today.</h2>
+    <p class="lede" style="max-width:760px;">Scientists always guess first. Before each test, say what you think will happen. Then test it. Being wrong is how you learn something new.</p>
+    <div class="sl-exps">
+      <div class="sl-exp">
+        <span class="tag">Gravity &middot; Galileo</span>
+        <h3>The paper and the book</h3>
+        <div class="need">You need: a book and a sheet of paper.</div>
+        <ol><li>Drop them side by side. Which lands first?</li><li>Now crumple the paper into a ball and drop them again.</li><li>Last: lay the flat paper on top of the book and drop them together.</li></ol>
+        <div class="why"><b>Why:</b> gravity pulls everything down at the same speed. The flat paper was slowed by <i>air</i> pushing on it. On the Moon there&rsquo;s no air, and in 1971 astronaut David Scott dropped a hammer and a feather there. They landed at the same time!</div>
+      </div>
+      <div class="sl-exp">
+        <span class="tag">Forces &middot; Newton</span>
+        <h3>Balloon rocket</h3>
+        <div class="need">You need: a balloon, a straw, tape, and a long string.</div>
+        <ol><li>Thread the string through the straw and tie it tight between two chairs.</li><li>Blow up the balloon, hold the end shut, and tape it to the straw.</li><li>Let go!</li></ol>
+        <div class="why"><b>Why:</b> the air rushes out the back, so the balloon is pushed forward. Isaac Newton said every push has an equal push back. Real rockets work exactly like this, even in space.</div>
+      </div>
+      <div class="sl-exp">
+        <span class="tag">Moon &middot; Craters</span>
+        <h3>Make Moon craters</h3>
+        <div class="need">You need: a tray, flour, cocoa powder, and pebbles.</div>
+        <ol><li>Fill the tray with flour and sprinkle cocoa on top.</li><li>Drop pebbles from different heights.</li><li>Look at the craters and the white &ldquo;rays&rdquo; around them.</li></ol>
+        <div class="why"><b>Why:</b> faster rocks make bigger craters and throw material farther. The Moon is covered in craters because it has no air to burn up space rocks, and no rain to wash the craters away.</div>
+      </div>
+      <div class="sl-exp">
+        <span class="tag">Time &middot; Pendulum</span>
+        <h3>The swinging spoon</h3>
+        <div class="need">You need: string, a spoon (or keys), and a timer.</div>
+        <ol><li>Tie the spoon to a string 25 cm long. Count 10 swings and time them.</li><li>Now use a string 1 m long. Time 10 swings again.</li><li>Add a second spoon. Does it change the time?</li></ol>
+        <div class="why"><b>Why:</b> only the length changes the swing time, not the weight. A 1 m pendulum takes about 2 seconds for one swing there and back. Old clocks used this to keep time!</div>
+      </div>
+      <div class="sl-exp">
+        <span class="tag">Light &middot; Colors</span>
+        <h3>Make a rainbow</h3>
+        <div class="need">You need: a glass of water, sunshine, and white paper.</div>
+        <ol><li>Put the glass at the edge of a sunny table.</li><li>Hold the paper on the floor where the light lands.</li><li>Move it until you see colors.</li></ol>
+        <div class="why"><b>Why:</b> white sunlight is really all the colors mixed together. Water bends each color a different amount, so they spread apart. Raindrops do the same thing, and that&rsquo;s a rainbow.</div>
+      </div>
+      <div class="sl-exp">
+        <span class="tag">Air pressure</span>
+        <h3>The upside-down water glass</h3>
+        <div class="need">You need: a glass, water, and a piece of card. Do this over a sink!</div>
+        <ol><li>Fill the glass to the top.</li><li>Put the card flat on top.</li><li>Hold the card, turn the glass over, and let go of the card.</li></ol>
+        <div class="why"><b>Why:</b> the air around us is always pushing on everything, very hard. The air pushing up on the card is stronger than the water pushing down. You live at the bottom of an ocean of air!</div>
+      </div>
+    </div>
+    <p class="sl-safe" style="margin-top:14px;">Ask a grown-up before you start, and never look straight at the Sun.</p>
+  </div>
+</section>
+
+<section class="section alt" id="typhoons">
+  <div class="wrap">
+    <div class="section-eyebrow">TYPHOON SCIENCE</div>
+    <h2>How does a typhoon work?</h2>
+    <p class="lede">About 20 tropical cyclones enter the Philippine Area of Responsibility every year, more than almost anywhere else on Earth. Here&rsquo;s how they grow.</p>
+    <div class="sl-steps">
+      <div class="sl-step"><b>1. Warm ocean</b>The sea has to be at least 26.5&deg;C (80&deg;F). Warm water heats the air above it and fills it with water vapor.</div>
+      <div class="sl-step"><b>2. Rising air</b>Warm, wet air rises, cools and turns into giant clouds and rain. That lets out heat, which makes the air rise even faster and pulls in more air underneath.</div>
+      <div class="sl-step"><b>3. The spin</b>Because the Earth spins, the air rushing in starts to turn. North of the equator, where the Philippines is, typhoons spin counterclockwise.</div>
+      <div class="sl-step"><b>4. The eye</b>In the middle is a calm eye, often with clear sky. Around it is the eyewall, with the strongest winds and heaviest rain.</div>
+      <div class="sl-step"><b>5. Names by strength</b>PAGASA calls it a tropical depression, then a tropical storm, a severe tropical storm, a typhoon at 118 km/h, and a super typhoon at 185 km/h.</div>
+    </div>
+    <div class="sl-panel" style="margin-top:16px;">
+      <h3 style="margin:0;">Any storms near the Philippines right now?</h3>
+      <div id="stormList" class="sl-storms" aria-live="polite"><p class="sl-note">Checking the world&rsquo;s storm alerts&hellip;</p></div>
+      <p class="sl-note">This list comes from GDACS, the alert system of the United Nations and the European Commission. In the Philippines, <a href="https://www.pagasa.dost.gov.ph/" target="_blank" rel="noopener">PAGASA</a> gives the official warnings. When a storm is coming, listen to PAGASA and your parents.</p>
+    </div>
+    <div class="sl-panel" style="margin-top:16px;">
+      <h3 style="margin:0;">Quick question: what does a typhoon need to get started?</h3>
+      <div class="sl-quiz" data-badge="storm" data-right="ocean" data-out="stormQuizOut" role="group" aria-label="Answers">
+        <button type="button" data-a="snow">Snow</button><button type="button" data-a="ocean">Warm ocean water</button><button type="button" data-a="mountains">Tall mountains</button><button type="button" data-a="moon">A full moon</button>
+      </div>
+      <p class="sl-note" id="stormQuizOut" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ph-space">
+  <div class="wrap">
+    <div class="section-eyebrow">THE PHILIPPINES IN SPACE</div>
+    <h2>Satellites made by Filipinos.</h2>
+    <p class="lede">You don&rsquo;t have to fly to space to be a space scientist. Filipino engineers have already built satellites that circle the Earth.</p>
+    <div class="sl-steps">
+      <div class="sl-step"><b>Diwata-1 &middot; 2016</b>The first satellite built by Filipino engineers, working with Tohoku and Hokkaido universities in Japan. Astronauts sent it off from the International Space Station on April 27, 2016, and it took pictures of the Philippines to help with weather, farming and disasters.</div>
+      <div class="sl-step"><b>Maya-1 &middot; 2018</b>The first Philippine CubeSat: a tiny satellite only 10 cm on each side, about 1 kg. Filipino students built it in Japan, and it left the space station on August 10, 2018.</div>
+      <div class="sl-step"><b>Diwata-2 &middot; 2018</b>Launched on a Japanese H-IIA rocket on October 29, 2018. It carried cameras to watch the Philippines and a radio that ham radio operators could use, even during disasters.</div>
+      <div class="sl-step"><b>PhilSA &middot; 2019</b>The Philippine Space Agency was created by the Philippine Space Act in 2019. Its next big satellite, MULA, is planned to launch by early 2027.</div>
+      <div class="sl-step"><b>Next: maybe you</b>The people who built these satellites studied math and science in school, just like you. One day a satellite might be built by someone from Cebu.</div>
+    </div>
+    <div class="sl-panel" style="margin-top:16px;">
+      <h3 style="margin:0;">Quick question: what was the first satellite built by Filipinos?</h3>
+      <div class="sl-quiz" data-badge="ph" data-right="diwata" data-out="phQuizOut" role="group" aria-label="Answers">
+        <button type="button" data-a="sputnik">Sputnik</button><button type="button" data-a="diwata">Diwata-1</button><button type="button" data-a="hubble">Hubble</button><button type="button" data-a="apollo">Apollo 11</button>
+      </div>
+      <p class="sl-note" id="phQuizOut" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="questions">
+  <div class="wrap">
+    <div class="section-eyebrow">BIG QUESTIONS</div>
+    <h2>Things scientists wondered about.</h2>
+    <div class="sl-qs">
+      <details><summary>Why is the sky blue?</summary><p>Sunlight has every color in it. When it hits the air, the tiny bits of air bounce blue light around much more than red light, so blue comes at your eyes from every direction. At sunset, light travels through much more air, the blue gets bounced away, and the reds and oranges are left.</p></details>
+      <details><summary>Why doesn&rsquo;t the Moon fall down?</summary><p>It is falling! The Moon is falling toward Earth all the time, but it is also moving sideways very fast, about 1 km every second. So it keeps falling <i>around</i> the Earth instead of into it. That&rsquo;s what an orbit is: falling and missing, forever.</p></details>
+      <details><summary>How do we know how far away stars are?</summary><p>Hold up a finger and look at it with one eye, then the other. It jumps! Astronomers do the same thing with Earth&rsquo;s orbit: they look at a star in January and again in July, from opposite sides of the Sun, and measure how much it jumps. Closer stars jump more. It&rsquo;s called parallax.</p></details>
+      <details><summary>What is a black hole?</summary><p>A place where so much stuff is squeezed so tightly that gravity is too strong for anything to escape, not even light. That&rsquo;s why it&rsquo;s black. In 2019, scientists took the first picture of one, in a galaxy 55 million light-years away, using telescopes all over the Earth working together.</p></details>
+      <details><summary>Why are there seasons?</summary><p>The Earth is tilted. For half the year your part of the Earth leans toward the Sun and gets more direct sunlight; then it leans away. In the Philippines, near the equator, the sunlight stays strong all year, so the big change is wet season and dry season instead of summer and winter.</p></details>
+      <details><summary>How big is the universe?</summary><p>The part we can see is about 93 billion light-years across, and it has more stars than all the grains of sand on all the beaches of Earth. Nobody knows what is past the edge we can see. Maybe you will help find out.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="badges">
+  <div class="wrap">
+    <div class="section-eyebrow">JUNIOR SCIENTIST BADGES</div>
+    <h2>Earn all 10 badges.</h2>
+    <p class="lede">Every badge is for doing real science on this page. Get all 10 and print your Junior Space Scientist certificate. Badges are saved on this phone or computer.</p>
+    <p class="sl-big" id="badgeCount">0 of 10</p>
+    <div class="sl-badges" id="badgeGrid"></div>
+    <div class="sl-panel" style="margin-top:16px;">
+      <div class="sl-row"><label for="certInput">Name on the certificate:</label><input class="sl-input" id="certInput" type="text" value="Yuyu" maxlength="40" style="width:200px;font-size:18px;"></div>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="certPrint" type="button" disabled>Print my certificate &#127942;</button><span class="sl-note" id="certNote">Earn all 10 badges to unlock it.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="sl-cert" id="cert" aria-hidden="true">
+  <p>LA PORTE WEATHER NOW &middot; SPACE LAB</p>
+  <h2>Junior Space Scientist</h2>
+  <p>This certificate goes to</p>
+  <p class="who" id="certName">Yuyu</p>
+  <p>for earning all 10 Space Lab badges: weighing in on other worlds, jumping on the Moon, racing a beam of light, watching the sky over Cebu, waving at the space station, counting down to a rocket launch, putting a cannonball into orbit, doing a real experiment, learning how typhoons work, and learning about the Philippines in space.</p>
+  <p id="certDate"></p>
+  <p>Keep asking big questions. &mdash; Scoop</p>
+</div>
+
+<section class="section dark">
+  <div class="wrap">
+    <div class="promo-band">
+      <div>
+        <h3>More pages for my friends</h3>
+        <p>Pages I made for friends around the world. Free for anyone who finds them useful.</p>
+      </div>
+      <a class='btn btn-amber' href='../friends/'>See them all &rarr;</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Home base: La Porte, Indiana. When I'm home, I run <a href="https://laporteweathernow.com">La Porte Weather Now</a>, where this page started.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="small"><a href="../projects/">More of Scoop's projects</a> &middot; &copy; 2026 Scoop &amp; Dude.</p>
+  </div>
+</footer>
+<script>window.lpwnTrack = window.lpwnTrack || function () {};   /* the weather site counted visits; this site doesn't */</script>
+<script>
+(function () {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  // Surface gravity compared with Earth (NASA planetary fact sheets). Jupiter/Saturn/Uranus/Neptune: at the cloud tops.
+  const WORLDS = [
+    { n: "Mercury", g: 0.38, c: "#9a8f86", au: 0.39, d: 4879 },
+    { n: "Venus", g: 0.91, c: "#e3c07a", au: 0.72, d: 12104 },
+    { n: "Earth", g: 1, c: "#3d7bd9", au: 1, d: 12756 },
+    { n: "The Moon", g: 0.166, c: "#c9c9c9", au: null, d: 3475 },
+    { n: "Mars", g: 0.38, c: "#c1440e", au: 1.52, d: 6792 },
+    { n: "Jupiter", g: 2.53, c: "#d8a46b", au: 5.2, d: 142984 },
+    { n: "Saturn", g: 1.07, c: "#e6cf8f", au: 9.58, d: 120536 },
+    { n: "Uranus", g: 0.89, c: "#7fd1d8", au: 19.2, d: 51118 },
+    { n: "Neptune", g: 1.14, c: "#3f5bd6", au: 30.1, d: 49528 },
+    { n: "Pluto", g: 0.063, c: "#cdb79e", au: 39.5, d: 2377 }
+  ];
+  const fmt = (x, d = 0) => x.toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d });
+
+  // ---------- Weigh ----------
+  function weigh() {
+    const kg = Math.max(0, Math.min(300, parseFloat($("kg").value) || 0));
+    $("worlds").innerHTML = WORLDS.map((w) => `<div class="sl-world"><span class="dot" style="background:${w.c}"></span><b>${w.n}</b><span class="kg">${fmt(kg * w.g, 1)} kg</span><small>${w.g === 1 ? "home" : w.g > 1 ? fmt(w.g, 2) + "× heavier" : "only " + Math.round(w.g * 100) + "% as heavy"}</small></div>`).join("");
+  }
+  $("kg").addEventListener("input", weigh); weigh();
+
+  // ---------- Jump ----------
+  let jumpWorld = 3;
+  const jumpable = WORLDS.filter((w) => !/Jupiter|Saturn|Uranus|Neptune/.test(w.n));
+  function jump() {
+    const cm = Math.max(0, parseFloat($("jumpcm").value) || 0);
+    const w = jumpable[jumpWorld];
+    const h = cm / w.g;
+    $("jumpOut").textContent = h >= 100 ? `${fmt(h / 100, 2)} meters high!` : `${fmt(h)} cm high`;
+    const notes = { "The Moon": "That's why astronauts bounced around like kangaroos. And you'd stay in the air about 6 times longer before landing.", "Pluto": "On Pluto you could jump as high as a house! But be careful: if you jumped very hard on a tiny moon, you might never come back down.", "Mars": "On Mars you'd jump almost 3 times higher. Future astronauts will feel super-strong there.", "Earth": "Earth's gravity is the one your muscles grew up with.", "Venus": "Almost like Earth. But Venus is hotter than an oven, so don't go jumping there!", "Mercury": "Mercury is small, so its pull is weak, just like Mars." };
+    $("jumpNote").textContent = notes[w.n] || "";
+    [...$("jumpPicks").children].forEach((b, i) => b.setAttribute("aria-pressed", String(i === jumpWorld)));
+  }
+  $("jumpPicks").innerHTML = jumpable.map((w, i) => `<button class="sl-pick" type="button" data-i="${i}" aria-pressed="false">${w.n}</button>`).join("");
+  $("jumpPicks").addEventListener("click", (e) => { const b = e.target.closest("[data-i]"); if (b) { jumpWorld = +b.dataset.i; jump(); } });
+  $("jumpcm").addEventListener("input", jump); jump();
+
+  // ---------- Light race ----------
+  const lightWorlds = WORLDS.filter((w) => w.au);
+  let lightWorld = 2, timer = null;
+  function lightText(sec) {
+    if (sec < 60) return `${fmt(sec)} seconds`;
+    const m = sec / 60;
+    if (m < 60) return `${fmt(m, 1)} minutes`;
+    return `${Math.floor(m / 60)} hours ${Math.round(m % 60)} minutes`;
+  }
+  function pickLight() {
+    const w = lightWorlds[lightWorld];
+    const sec = w.au * 499;
+    $("target").style.background = w.c;
+    $("lightOut").innerHTML = `Light from the Sun takes <b>${lightText(sec)}</b> to reach ${w.n}. A car at 100 km/h would take <b>${fmt(w.au * 149.6e6 / 100 / 24 / 365.25)} years</b>.` + (w.n === "Earth" ? " So when you look at the Sun's light, you're seeing it as it was 8 minutes ago!" : "");
+    $("lightTimer").textContent = "";
+    const p = $("photon"); p.style.transition = "none"; p.style.left = "36px";
+    [...$("lightPicks").children].forEach((b, i) => b.setAttribute("aria-pressed", String(i === lightWorld)));
+    clearInterval(timer);
+  }
+  $("lightPicks").innerHTML = lightWorlds.map((w, i) => `<button class="sl-pick" type="button" data-i="${i}" aria-pressed="false">${w.n}</button>`).join("");
+  $("lightPicks").addEventListener("click", (e) => { const b = e.target.closest("[data-i]"); if (b) { lightWorld = +b.dataset.i; pickLight(); } });
+  $("fire").addEventListener("click", () => {
+    pickLight();
+    const w = lightWorlds[lightWorld];
+    const real = w.au * 499;                    // real seconds
+    const show = Math.min(8, Math.max(2, Math.log2(real) / 1.6)); // animation seconds, sped up
+    const p = $("photon");
+    const track = p.parentElement.getBoundingClientRect().width;
+    void p.offsetWidth;
+    p.style.transition = `left ${show}s linear`;
+    p.style.left = (track - 28) + "px";
+    const t0 = performance.now();
+    timer = setInterval(() => {
+      const f = Math.min(1, (performance.now() - t0) / (show * 1000));
+      $("lightTimer").textContent = lightText(real * f).replace(/\.0 /, " ");
+      if (f >= 1) { clearInterval(timer); $("lightTimer").textContent = "Arrived! " + lightText(real); }
+    }, 50);
+  });
+  pickLight();
+
+  // ---------- Scale model (Sun = 24 cm basketball) ----------
+  const SUN_KM = 1392700, BALL_CM = 24, K = BALL_CM / SUN_KM; // cm per km
+  const like = (mm) => mm < 0.3 ? "grain of fine sand" : mm < 1 ? "grain of sugar" : mm < 1.5 ? "grain of rice (end)" : mm < 3 ? "peppercorn" : mm < 6 ? "small bead" : mm < 12 ? "pea" : mm < 30 ? "grape" : "marble";
+  $("scaleBody").innerHTML = WORLDS.filter((w) => w.au).map((w) => {
+    const mm = w.d * K * 10;
+    const m = w.au * 149.6e6 * K / 100;
+    return `<tr><th scope="row"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${w.c};margin-right:8px"></span>${w.n}</th><td>${mm < 10 ? fmt(mm, 1) + " mm" : fmt(mm / 10, 1) + " cm"}</td><td>${like(mm)}</td><td>${m < 1000 ? fmt(m) + " m" : fmt(m / 1000, 1) + " km"}</td></tr>`;
+  }).join("");
+
+  // ---------- Stars in the header ----------
+  const cv = $("stars"), ctx = cv.getContext("2d");
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let stars = [];
+  function size() {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = r.width * dpr; cv.height = r.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({ length: Math.round(r.width * r.height / 2600) }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, r: Math.random() * 1.3 + 0.2, p: Math.random() * 6.28 }));
+  }
+  function draw(t) {
+    const r = cv.getBoundingClientRect();
+    ctx.clearRect(0, 0, r.width, r.height);
+    for (const s of stars) { ctx.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(s.p + t / 1400)); ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); addEventListener("resize", size); requestAnimationFrame(draw);
+})();
+</script>
+<script src="../assets/camp/leaflet.js"></script>
+<script src="../assets/projects/astronomy.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  // Yuyu's additions: tonight's sky over Cebu, the space station, the next launch, Newton's cannonball,
+  // storms near the Philippines, quizzes and Junior Scientist badges.
+  const $ = (id) => document.getElementById(id);
+  const CEBU = { lat: 10.3157, lon: 123.8854, tz: "Asia/Manila" };
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode: badges last until the page closes */ } }
+  };
+  const fmt = (x, d = 0) => Number(x).toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d });
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const rad = (x) => x * Math.PI / 180;
+  function dist(a, b, c, d) {
+    const p1 = rad(a), p2 = rad(c), h = Math.sin((p2 - p1) / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(rad(d - b) / 2) ** 2;
+    return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+  function bearing(a, b, c, d) {
+    const p1 = rad(a), p2 = rad(c), dl = rad(d - b);
+    return Math.atan2(Math.sin(dl) * Math.cos(p2), Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl)) * 180 / Math.PI;
+  }
+  const DIRS = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
+  const compass = (deg) => DIRS[Math.round((((deg % 360) + 360) % 360) / 45) % 8];
+  const cebuTime = (d, more) => d.toLocaleString("en-US", Object.assign({ timeZone: CEBU.tz, hour: "numeric", minute: "2-digit" }, more || {}));
+  const track = (what, v) => { if (typeof lpwnTrack === "function") lpwnTrack(what, v); };
+
+  // ---------- Junior Scientist badges ----------
+  const BADGES = [
+    ["weigh", "⚖️", "Weigh-in", "Weigh yourself on another world"],
+    ["jump", "🦘", "Moon jumper", "Pick a world to jump on"],
+    ["light", "💡", "Light racer", "Send the light to a planet"],
+    ["sky", "🔭", "Sky watcher", "Look up and tap “I saw it!”"],
+    ["iss", "🛰️", "Station spotter", "Wave at the space station"],
+    ["launch", "🚀", "Launch fan", "Count down to the next rocket"],
+    ["orbit", "🌍", "Cannon captain", "Put the cannonball into orbit"],
+    ["lab", "🧪", "Home scientist", "Do an experiment at home"],
+    ["storm", "🌀", "Storm scientist", "Answer the typhoon question"],
+    ["ph", "🇵🇭", "Philippine space fan", "Answer the satellite question"]
+  ];
+  let got = {};
+  try { got = JSON.parse(store.get("sl_badges") || "{}") || {}; } catch (e) { got = {}; }
+  function drawBadges() {
+    const n = BADGES.filter((b) => got[b[0]]).length, all = n === BADGES.length;
+    $("badgeCount").textContent = all ? "All 10! You're a Junior Space Scientist." : `${n} of ${BADGES.length} badges`;
+    $("badgeGrid").innerHTML = BADGES.map(([k, ic, name, how]) =>
+      `<div class="sl-badge${got[k] ? " on" : ""}"><div class="ic" aria-hidden="true">${ic}</div><b>${esc(name)}</b><small>${got[k] ? "Earned!" : esc(how)}</small></div>`).join("");
+    $("certPrint").disabled = !all;
+    $("certNote").textContent = all ? "Unlocked! Print it, or save it as a PDF." : "Earn all 10 badges to unlock it.";
+  }
+  let toastTimer = 0;
+  function toast(text) {
+    let t = document.querySelector(".sl-toast");
+    if (!t) { t = document.createElement("div"); t.className = "sl-toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.textContent = text; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
+  }
+  function earn(k) {
+    if (got[k]) return;
+    got[k] = Date.now();
+    store.set("sl_badges", JSON.stringify(got));
+    const b = BADGES.find((x) => x[0] === k);
+    toast(`${b[1]} Badge earned: ${b[2]}!`);
+    drawBadges();
+    track("spacelab-badge", k);
+  }
+  drawBadges();
+  if ($("kg")) $("kg").addEventListener("input", () => earn("weigh"));
+  if ($("jumpPicks")) $("jumpPicks").addEventListener("click", (e) => { if (e.target.closest("[data-i]")) earn("jump"); });
+  if ($("fire")) $("fire").addEventListener("click", () => earn("light"));
+  document.querySelectorAll(".sl-exp").forEach((card) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "btn sl-btn sl-ghost sl-did"; b.textContent = "I did this one! ✅";
+    b.addEventListener("click", () => { b.textContent = "Done! Great science ✅"; b.disabled = true; earn("lab"); });
+    card.appendChild(b);
+  });
+  $("skySaw").addEventListener("click", () => earn("sky"));
+  $("issWave").addEventListener("click", () => earn("iss"));
+  $("launchWatch").addEventListener("click", () => earn("launch"));
+  document.querySelectorAll(".sl-quiz").forEach((q) => {
+    q.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-a]");
+      if (!b) return;
+      const right = b.dataset.a === q.dataset.right;
+      b.classList.add(right ? "right" : "wrong");
+      $(q.dataset.out).textContent = right ? "That's right! 🎉" : "Not quite. Try another one!";
+      if (right) earn(q.dataset.badge);
+    });
+  });
+  const certName = () => ($("certInput").value || "").trim() || "Yuyu";
+  $("certInput").addEventListener("input", () => { $("certName").textContent = certName(); });
+  $("certPrint").addEventListener("click", () => {
+    $("certName").textContent = certName();
+    $("certDate").textContent = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    track("spacelab-certificate", "print");
+    window.print();
+  });
+
+  // ---------- Tonight's sky over Cebu (Astronomy Engine, MIT license) ----------
+  function moonSvg(f, waxing) {
+    const r = 26, k = 1 - 2 * f, rx = Math.abs(k) * r;
+    const outer = `M28 2 A${r} ${r} 0 0 ${waxing ? 1 : 0} 28 54`;
+    const term = `A${rx.toFixed(2)} ${r} 0 0 ${waxing ? (k > 0 ? 0 : 1) : (k > 0 ? 1 : 0)} 28 2`;
+    return `<svg class="sl-moon" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="#1b2433"/><path d="${outer} ${term} Z" fill="#f2efe3"/></svg>`;
+  }
+  const PLANETS = [["Mercury", "a small, pinkish dot near the horizon"], ["Venus", "the brightest “star” in the sky"], ["Mars", "a reddish dot"], ["Jupiter", "a bright, creamy-white dot"], ["Saturn", "a golden dot"]];
+  const HEIGHT = (alt) => alt < 20 ? "Low in the" : alt < 50 ? "Halfway up in the" : "High up in the";
+  function clouds(t) {
+    const hour = t.toLocaleString("sv-SE", { timeZone: CEBU.tz }).slice(0, 13).replace(" ", "T") + ":00";
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${CEBU.lat}&longitude=${CEBU.lon}&hourly=cloud_cover&timezone=Asia%2FManila&forecast_days=3`)
+      .then((r) => (r.ok ? r.json() : null)).then((d) => {
+        const i = d && d.hourly && d.hourly.time ? d.hourly.time.indexOf(hour) : -1;
+        if (i < 0) return;
+        const c = Math.round(d.hourly.cloud_cover[i]);
+        $("skyClouds").textContent = `Clouds over Cebu at ${cebuTime(t)}: about ${c}%. ` +
+          (c < 30 ? "Great night for looking up!" : c < 70 ? "Some clouds. Look for the gaps." : "Mostly cloudy. If you can't see much, try again tomorrow night.") + " (Cloud forecast: Open-Meteo.)";
+      }).catch(() => {});
+  }
+  function sky() {
+    const A = window.Astronomy;
+    if (!A) { $("skyWhen").textContent = "The sky calculator didn't load. Try reloading the page."; return; }
+    try {
+      const obs = new A.Observer(CEBU.lat, CEBU.lon, 10);
+      const pos = (body, t) => { const eq = A.Equator(body, t, obs, true, true); const h = A.Horizon(t, obs, eq.ra, eq.dec, "normal"); return { alt: h.altitude, az: h.azimuth }; };
+      const now = new Date();
+      const sunNow = pos(A.Body.Sun, now).alt, sunSoon = pos(A.Body.Sun, new Date(now.getTime() + 10 * 60e3)).alt;
+      let t, when;
+      if (sunNow < -8) { t = now; when = "Right now"; }
+      else if (sunNow < 0 && sunSoon < sunNow) { t = new Date(now.getTime() + 40 * 60e3); when = "Tonight at " + cebuTime(t); }
+      else {
+        const set = A.SearchRiseSet(A.Body.Sun, obs, -1, now, 1);
+        t = new Date((set ? set.date.getTime() : now.getTime() + 6 * 3600e3) + 75 * 60e3);
+        when = "Tonight at " + cebuTime(t);
+      }
+      const cards = [];
+      const ph = A.MoonPhase(t), ill = A.Illumination(A.Body.Moon, t).phase_fraction;
+      const NAMES = [[22.5, "New moon"], [67.5, "Waxing crescent"], [112.5, "First quarter"], [157.5, "Waxing gibbous"], [202.5, "Full moon"], [247.5, "Waning gibbous"], [292.5, "Last quarter"], [337.5, "Waning crescent"], [361, "New moon"]];
+      const phase = NAMES.find((x) => ph < x[0])[1];
+      const m = pos(A.Body.Moon, t);
+      let moonWhere;
+      if (m.alt > 3) moonWhere = `<span class="dir">${HEIGHT(m.alt)} ${compass(m.az)}</span>`;
+      else {
+        const r = A.SearchRiseSet(A.Body.Moon, obs, +1, t, 1.2);
+        moonWhere = r ? `Below the horizon. It rises ${cebuTime(r.date, { weekday: "long" }).replace(" ", " at ")}.` : "Below the horizon tonight.";
+      }
+      cards.push(`<div class="sl-obj">${moonSvg(ill, ph < 180)}<b>The Moon</b><span>${phase}, ${Math.round(ill * 100)}% lit</span><span>${moonWhere}</span></div>`);
+      const seen = [];
+      PLANETS.forEach(([name, looks]) => { const p = pos(A.Body[name], t); if (p.alt > 8) seen.push({ name, looks, p, mag: A.Illumination(A.Body[name], t).mag }); });
+      seen.sort((a, b) => a.mag - b.mag).forEach(({ name, looks, p }) =>
+        cards.push(`<div class="sl-obj"><b>${name}</b><span class="dir">${HEIGHT(p.alt)} ${compass(p.az)}</span><span>Look for ${looks}.</span></div>`));
+      if (!seen.length) {
+        const rise = A.SearchRiseSet(A.Body.Sun, obs, +1, t, 1);
+        const dawn = rise ? new Date(rise.date.getTime() - 60 * 60e3) : null;
+        const early = dawn ? PLANETS.map(([name]) => ({ name, p: pos(A.Body[name], dawn) })).filter((x) => x.p.alt > 8) : [];
+        cards.push(early.length
+          ? `<div class="sl-obj"><b>Before sunrise</b><span>At ${cebuTime(dawn)}: ${early.map((x) => `${x.name}, ${x.p.alt < 20 ? "low" : "up"} in the ${compass(x.p.az)}`).join("; ")}.</span></div>`
+          : `<div class="sl-obj"><b>No planets tonight</b><span>The planets are too close to the Sun to see right now. The Moon and stars are still up there!</span></div>`);
+      }
+      $("skyWhen").innerHTML = `<b>${esc(when)}</b> over Cebu:`;
+      $("skyList").innerHTML = cards.join("");
+      clouds(t);
+    } catch (e) {
+      $("skyWhen").textContent = "The sky calculator hit a snag. Try reloading the page.";
+    }
+  }
+
+  // ---------- The space station, live (wheretheiss.at) ----------
+  let issMap = null, issMarker = null, issFirst = true;
+  function issTick() {
+    fetch("https://api.wheretheiss.at/v1/satellites/25544", { cache: "no-store" })
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .then((d) => {
+        const lat = Number(d.latitude), lon = Number(d.longitude);
+        if (!isFinite(lat) || !isFinite(lon)) throw new Error("no position");
+        issMarker.setLatLng([lat, lon]);
+        if (!issMap.hasLayer(issMarker)) issMarker.addTo(issMap);
+        if (issFirst) { issMap.setView([lat, lon], 1); issFirst = false; }
+        const km = dist(lat, lon, CEBU.lat, CEBU.lon);
+        $("issSpeed").textContent = fmt(d.velocity);
+        $("issAlt").textContent = fmt(d.altitude);
+        $("issDist").textContent = fmt(km);
+        $("issNote").textContent = (d.visibility === "daylight" ? "Right now the station is in sunlight." : "Right now the station is in the Earth's shadow, so it's night up there.") + (km < 2500 ? " It's close to Cebu!" : "");
+      })
+      .catch(() => { $("issNote").textContent = "The space station tracker isn't answering right now. It will try again in a few seconds."; });
+  }
+  function issStart() {
+    if (typeof L === "undefined" || !$("issMap")) { $("issNote").textContent = "The map didn't load. Try reloading the page."; return; }
+    issMap = L.map("issMap", { worldCopyJump: true, scrollWheelZoom: false }).setView([CEBU.lat, CEBU.lon], 1);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 6, attribution: "&copy; OpenStreetMap contributors" }).addTo(issMap);
+    L.marker([CEBU.lat, CEBU.lon], { icon: L.divIcon({ className: "sl-pin", html: "📍", iconSize: [26, 26], iconAnchor: [13, 24] }), title: "Cebu", keyboard: false }).addTo(issMap).bindTooltip("Cebu");
+    issMarker = L.marker([0, 0], { icon: L.divIcon({ className: "sl-pin", html: "🛰️", iconSize: [30, 30], iconAnchor: [15, 15] }), title: "Space station", keyboard: false });
+    issTick();
+    setInterval(() => { if (!document.hidden) issTick(); }, 5000);
+  }
+
+  // ---------- Next rocket launch (The Space Devs, Launch Library 2) ----------
+  const LL = "https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=5&mode=normal&hide_recent_previous=true";
+  const pick = (o, path) => path.split(".").reduce((v, k) => (v && v[k] != null ? v[k] : null), o);
+  const slim = (r) => ({ name: r.name || "", net: r.net, status: pick(r, "status.abbrev") || "", provider: pick(r, "launch_service_provider.name") || "",
+    rocket: pick(r, "rocket.configuration.name") || "", mission: pick(r, "mission.name") || "", about: pick(r, "mission.description") || "", where: pick(r, "pad.location.name") || "" });
+  function shorten(t, n) {
+    t = String(t || "");
+    if (t.length <= n) return t;
+    const cut = t.slice(0, n), dot = cut.lastIndexOf(". ");
+    return dot > 60 ? cut.slice(0, dot + 1) : cut.replace(/\s+\S*$/, "") + "…";
+  }
+  let launchAt = null, launchTimer = 0;
+  function tickCount() {
+    if (!launchAt) return;
+    let s = Math.max(0, Math.floor((launchAt.getTime() - Date.now()) / 1000));
+    const d = Math.floor(s / 86400); s -= d * 86400;
+    const h = Math.floor(s / 3600); s -= h * 3600;
+    const m = Math.floor(s / 60); s -= m * 60;
+    $("cdD").textContent = d; $("cdH").textContent = String(h).padStart(2, "0");
+    $("cdM").textContent = String(m).padStart(2, "0"); $("cdS").textContent = String(s).padStart(2, "0");
+    if (launchAt.getTime() <= Date.now()) { clearInterval(launchTimer); $("launchWhen").textContent = "It's liftoff time! Reload the page later for the next one."; }
+  }
+  function showLaunches(list) {
+    const next = list.filter((l) => new Date(l.net).getTime() > Date.now() - 30 * 60e3);
+    if (!next.length) { $("launchName").textContent = "No launches on the schedule right now"; $("launchWhat").textContent = "Check back soon."; return; }
+    const l = next[0];
+    launchAt = new Date(l.net);
+    $("launchName").textContent = (l.rocket || l.name || "Rocket") + (l.mission ? " · " + l.mission : "");
+    const who = l.provider && l.where ? `${l.provider} is launching it from ${l.where}.` : l.provider ? `By ${l.provider}.` : l.where ? `From ${l.where}.` : "";
+    $("launchWhat").textContent = [who, shorten(l.about, 230)].filter(Boolean).join(" ");
+    $("launchWhen").textContent = `Liftoff in Cebu time: ${cebuTime(launchAt, { weekday: "long", month: "short", day: "numeric" })}` +
+      (/^(TBD|TBC)$/i.test(l.status) ? " (not confirmed yet, so it may change)." : ".");
+    $("launchNext").innerHTML = next.slice(1, 4).map((x) => `<li>${esc(cebuTime(new Date(x.net), { month: "short", day: "numeric" }))}: ${esc(x.rocket || x.name)}${x.where ? " from " + esc(x.where) : ""}</li>`).join("");
+    clearInterval(launchTimer); tickCount(); launchTimer = setInterval(tickCount, 1000);
+  }
+  function launches() {
+    let cached = null;
+    try { cached = JSON.parse(store.get("sl_launches") || "null"); } catch (e) { cached = null; }
+    const usable = cached && Array.isArray(cached.list) && cached.list.length;
+    if (usable && Date.now() - cached.t < 30 * 60e3) { showLaunches(cached.list); return; }
+    fetch(LL).then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); }).then((d) => {
+      const list = ((d && d.results) || []).map(slim).filter((l) => l.net);
+      store.set("sl_launches", JSON.stringify({ t: Date.now(), list }));
+      showLaunches(list);
+    }).catch(() => {
+      if (usable) { showLaunches(cached.list); return; }
+      $("launchName").textContent = "Next rocket launch";
+      $("launchWhat").textContent = "The launch schedule isn't answering right now. Try again later.";
+    });
+  }
+
+  // ---------- Newton's cannonball ----------
+  const cv = $("cannonCv"), cx = cv.getContext("2d");
+  const GM = 398600, R = 6371, H = 1000;   // km. The mountain is 1,000 km tall: well above the air, as in Newton's idea.
+  const W = 520, C = W / 2, SCALE = 120 / R;
+  const skyDots = Array.from({ length: 90 }, () => [Math.random() * W, Math.random() * W, Math.random() * 1.1 + 0.3]);
+  let path = [], ball = null, raf = 0;
+  function drawScene() {
+    cx.fillStyle = "#05060f"; cx.fillRect(0, 0, W, W);
+    cx.fillStyle = "#ffffff"; cx.globalAlpha = 0.6;
+    skyDots.forEach(([x, y, r]) => { cx.beginPath(); cx.arc(x, y, r, 0, 6.283); cx.fill(); });
+    cx.globalAlpha = 1;
+    cx.fillStyle = "rgba(120,180,255,.18)"; cx.beginPath(); cx.arc(C, C, (R + 250) * SCALE, 0, 6.283); cx.fill();
+    const g = cx.createRadialGradient(C - 40, C - 40, 20, C, C, R * SCALE);
+    g.addColorStop(0, "#4f8fe0"); g.addColorStop(1, "#1d4f9a");
+    cx.fillStyle = g; cx.beginPath(); cx.arc(C, C, R * SCALE, 0, 6.283); cx.fill();
+    cx.save(); cx.beginPath(); cx.arc(C, C, R * SCALE, 0, 6.283); cx.clip();
+    cx.fillStyle = "#3f8f4f";
+    [[-0.6, -0.1, 40], [0.45, 0.3, 46], [0.05, 0.75, 30], [-0.35, 0.6, 26]].forEach(([ux, uy, r]) => { cx.beginPath(); cx.arc(C + ux * R * SCALE, C + uy * R * SCALE, r, 0, 6.283); cx.fill(); });
+    cx.restore();
+    const top = C - (R + H) * SCALE, base = C - R * SCALE + 8;
+    cx.fillStyle = "#8a7a66"; cx.beginPath(); cx.moveTo(C - 18, base); cx.lineTo(C, top); cx.lineTo(C + 18, base); cx.closePath(); cx.fill();
+    cx.fillStyle = "#e9e3d6"; cx.fillRect(C - 3, top - 5, 15, 5);
+    if (path.length > 1) {
+      cx.strokeStyle = "#ffb347"; cx.lineWidth = 2; cx.beginPath();
+      path.forEach(([x, y], i) => { const px = C + x * SCALE, py = C - y * SCALE; if (i) cx.lineTo(px, py); else cx.moveTo(px, py); });
+      cx.stroke();
+    }
+    if (ball) { cx.fillStyle = "#ffffff"; cx.beginPath(); cx.arc(C + ball.x * SCALE, C - ball.y * SCALE, 4.5, 0, 6.283); cx.fill(); }
+  }
+  function fire() {
+    cancelAnimationFrame(raf);
+    const v = Number($("cannonV").value);
+    let x = 0, y = R + H, vx = v, vy = 0, t = 0, swept = 0, lastA = Math.atan2(y, x), frames = 0, done = "";
+    path = [[x, y]]; ball = { x, y };
+    $("cannonOut").textContent = "Flying…";
+    const acc = (px, py) => { const r2 = px * px + py * py, k = -GM / (r2 * Math.sqrt(r2)); return [k * px, k * py]; };
+    function finish(kind) {
+      done = kind; ball = { x, y }; drawScene();
+      const hrs = Math.floor(t / 3600), mins = Math.round((t % 3600) / 60);
+      if (kind === "land") $("cannonOut").textContent = `It landed ${fmt(Math.abs(swept) * R)} km away. Try a faster shot!`;
+      else if (kind === "orbit") { $("cannonOut").textContent = `ORBIT! 🎉 It went all the way around the Earth in ${hrs ? hrs + " h " : ""}${mins} min and never landed. That's how satellites stay up!`; earn("orbit"); }
+      else if (kind === "loop") { $("cannonOut").textContent = "It's on a giant loop far out into space and back. That's an orbit too! 🎉"; earn("orbit"); }
+      else $("cannonOut").textContent = `It escaped! At ${v} km per second, Earth's gravity can't pull it back. Rockets to the Moon and Mars need speeds like this. Try a bit slower for an orbit.`;
+      track("spacelab-cannon", kind + " " + v);
+    }
+    function step() {
+      frames++;
+      const sub = 6, dt = 25 * Math.pow(Math.hypot(x, y) / R, 1.5) / sub;
+      for (let i = 0; i < sub && !done; i++) {
+        let [ax, ay] = acc(x, y);
+        vx += ax * dt / 2; vy += ay * dt / 2;
+        x += vx * dt; y += vy * dt;
+        [ax, ay] = acc(x, y);
+        vx += ax * dt / 2; vy += ay * dt / 2;
+        t += dt;
+        const a = Math.atan2(y, x);
+        let da = a - lastA;
+        if (da > Math.PI) da -= 2 * Math.PI;
+        if (da < -Math.PI) da += 2 * Math.PI;
+        swept += da; lastA = a;
+        const r = Math.hypot(x, y);
+        if (r <= R) { const s = R / r; x *= s; y *= s; path.push([x, y]); finish("land"); }
+        else if (Math.abs(swept) >= 2 * Math.PI) { path.push([x, y]); finish("orbit"); }
+        else if (r > 14 * R && (vx * vx + vy * vy) / 2 - GM / r >= 0) { path.push([x, y]); finish("escape"); }
+      }
+      if (done) return;
+      path.push([x, y]); ball = { x, y }; drawScene();
+      if (frames > 2400) { finish("loop"); return; }
+      raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+  $("cannonV").addEventListener("input", () => { $("cannonVal").textContent = $("cannonV").value; });
+  $("cannonFire").addEventListener("click", fire);
+  drawScene();
+
+  // ---------- Storms near the Philippines (GDACS) ----------
+  function storms() {
+    const LV = { red: "Red alert: GDACS expects a severe impact.", orange: "Orange alert: a big impact is possible.", green: "Green alert: a smaller impact is expected." };
+    fetch("https://www.gdacs.org/gdacsapi/api/events/geteventlist/EVENTS4APP")
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .then((j) => {
+        const list = ((j && j.features) || []).filter((f) => { const p = f.properties || {}; return String(p.eventtype) === "TC" && String(p.iscurrent) !== "false"; }).map((f) => {
+          const p = f.properties, c = (f.geometry && f.geometry.type === "Point" && f.geometry.coordinates) || [];
+          const lat = Number(c[1]), lon = Number(c[0]), lv = String(p.alertlevel || "").toLowerCase();
+          const link = p.url && typeof p.url.report === "string" && /^https:\/\//.test(p.url.report) ? p.url.report : "https://www.gdacs.org";
+          return { name: String(p.name || p.eventname || "Tropical cyclone").trim(), lv: LV[lv] ? lv : "green", lat, lon, link,
+            km: isFinite(lat) && isFinite(lon) ? dist(CEBU.lat, CEBU.lon, lat, lon) : Infinity };
+        }).filter((s) => s.km < 2500).sort((a, b) => a.km - b.km);
+        $("stormList").innerHTML = list.length
+          ? list.map((s) => `<div class="sl-storm ${s.lv}"><b>${esc(s.name)}</b><br>About ${fmt(Math.round(s.km / 10) * 10)} km ${compass(bearing(CEBU.lat, CEBU.lon, s.lat, s.lon))} of Cebu. ${LV[s.lv]} <a href="${esc(s.link)}" target="_blank" rel="noopener">Details &#8599;</a></div>`).join("")
+          : `<p class="sl-note"><b>No typhoons near the Philippines right now.</b> &#127780;&#65039;</p>`;
+      })
+      .catch(() => { $("stormList").innerHTML = `<p class="sl-note">The storm alert system isn't answering right now. For official news, check PAGASA.</p>`; });
+  }
+
+  sky();
+  setInterval(() => { if (!document.hidden) sky(); }, 10 * 60e3);
+  issStart();
+  launches();
+  storms();
+})();
+
+</script>
+</body>
+</html>

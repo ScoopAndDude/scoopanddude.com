@@ -67,7 +67,7 @@ p { margin: 0 0 1em; }
 @media (max-width: 800px) { .top nav a.opt { display: none; } }
 @media (max-width: 560px) { .top nav a { padding: 8px 8px; } }
 @media (max-width: 600px) { .top nav a.opt2 { display: none; } }
-@media (max-width: 430px) { .top nav a.opt3 { display: none; } }
+@media (max-width: 430px) { .top nav a.opt3 { display: none; } .top nav a { padding: 8px 6px; } }
 
 /* ---------- hero ---------- */
 .hero { padding: 28px 0 56px; }
@@ -178,3 +178,18 @@ p { margin: 0 0 1em; }
 .foot p { margin: 0 0 8px; }
 .foot .motto { font-weight: 800; font-size: 1.15rem; margin: 10px 0 12px; }
 .foot .small { color: #cfe7da; }
+
+/* ---------- projects (Oct. 7, 2026) ---------- */
+.guide-2 { margin-top: 14px; background: #2e2340; box-shadow: 0 12px 32px rgba(46, 35, 64, .22); }
+.guide-2:hover { background: #4f3150; }
+.proj-hero { padding: 34px 0 10px; }
+.proj-sign { max-width: 720px; }
+.proj-sign h1 { font-weight: 900; font-size: clamp(2.6rem, 6vw, 4rem); line-height: .95; margin: 0 0 .25em; }
+.proj { padding: 20px 0 56px; }
+.proj-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.proj-card { display: block; height: 100%; padding: 18px 20px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 26px rgba(0, 40, 25, .08); border-top: 5px solid var(--sign); }
+.proj-card:hover { border-color: var(--sign); color: var(--ink); }
+.proj-k { display: block; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--sign); }
+.proj-t { display: block; font-size: 1.35rem; font-weight: 900; line-height: 1.15; margin: 4px 0 6px; }
+.proj-s { display: block; color: var(--ink-soft); font-size: 1rem; line-height: 1.5; }
+.proj-note { margin: 22px 0 0; color: var(--ink-soft); }

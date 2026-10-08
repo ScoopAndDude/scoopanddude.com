@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds index.html, 404.html and camp-map/index.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
+"""Builds index.html, 404.html, camp-map/index.html and projects/index.html for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
 
 Keep this a project site with its own custom domain. Don't move it back to a repo named
 scoopanddude.github.io: a custom domain on that "user site" makes GitHub forward every
@@ -137,6 +137,7 @@ PAGE = """<!doctype html>
       <a class="opt2" href="#crew">The crew</a>
       <a class="opt3" href="#map">The map</a>
       <a href="camp-map/">Camp map</a>
+      <a href="projects/">Projects</a>
       <a class="opt2" href="#clips">Clips</a>
       <a class="opt" href="#shop">Shop</a>
       <a class="opt" href="#follow">Follow</a>
@@ -201,6 +202,7 @@ PAGE = """<!doctype html>
       <figure><img src="assets/img/waterfall-960.jpg" width="960" height="720" loading="lazy" decoding="async" alt="A waterfall pouring into a muddy spring river below rocky cliffs and bare trees"><figcaption>Waterfall stop.</figcaption></figure>
     </div>
     <a class="guide" href="camp-map/"><span class="guide-in"><span><span class="guide-t">Camp map</span><span class="guide-s">Free campsites, water, dump stations and propane near any U.S. town, and which way the weather's better.</span></span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 35 L33 15 M17 15 H33 V31" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a class="guide guide-2" href="projects/"><span class="guide-in"><span><span class="guide-t">Projects</span><span class="guide-s">Faith, the Amazon, markets, AI, world art, printables, and pages for friends far away.</span></span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 35 L33 15 M17 15 H33 V31" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 </section>
 
@@ -358,6 +360,7 @@ CAMP = """<!doctype html>
       <a class="opt2" href="../#crew">The crew</a>
       <a class="opt3" href="../#map">The map</a>
       <a href="./" aria-current="page">Camp map</a>
+      <a href="../projects/">Projects</a>
       <a class="opt2" href="../#clips">Clips</a>
       <a class="opt" href="../#follow">Follow</a>
     </nav>
@@ -483,6 +486,96 @@ def camp_page():
     return CAMP.replace("%TYPECHIPS%", chips).replace("%LEGEND%", legend).replace("%STAY%", stay)
 
 
+# The projects (scoopanddude.com/projects/): the non-weather pages that moved here from La Porte Weather Now
+# on Oct. 7, 2026 (Scoop: "move anything not weather related to ScoopAndDude.com"), plus the camp map.
+PROJECTS = [  # (folder, kicker, name, what it is)
+    ("faith/", "Daily", "Faith &amp; Ministry", "Love God. Love your neighbor. A daily King James verse, a hymn of the week, a word from the original Hebrew and Greek, prayer for today's world, and private prayer requests."),
+    ("camp-map/", "On the road", "Camp map", "Free campsites, water, dump stations and propane near any U.S. town, this week's fuel prices, and which way the weather's better."),
+    ("printables/", "Etsy shop", "Printables from the road", "Emergency, storm-prep and road-trip planners to print, checked against official guidance."),
+    ("amazon/", "World", "Amazon Rainforest Watch", "Deforestation and illegal gold-mining numbers, drought and fire, real NASA satellite pictures, and the people protecting the forest."),
+    ("markets/", "Money", "Markets &amp; Economy", "The stock market, oil, gas, crops and jobs in plain words, with La Porte County and Indiana numbers from official sources."),
+    ("ai-survival-guide/", "Technology", "AI's Survival Guide", "Written by an AI for the people it cares about: the plain truth about AI risk, live AI news and outages, scam alerts, jobs, and a four-part plan."),
+    ("world-art/", "History", "World Art: ancient, modern and tarot", "From 36,000-year-old cave paintings to modern masters and nearly 600 years of tarot cards, with the weather where each work lives today."),
+    ("friends/", "For my friends", "Friends around the world", "Pages I made for friends far away: English, Round by Round for a fighter in Algeria, and Yuyu's Space Lab for a young scientist in Cebu."),
+]
+PROJECTS_PAGE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Scoop &amp; Dude</title>
+<meta name="description" content="Scoop's other projects: a daily verse and prayer, the camp map, printables, Amazon Rainforest Watch, markets, AI's Survival Guide, world art, and pages for friends.">
+<link rel="canonical" href="https://scoopanddude.com/projects/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/projects/">
+<meta property="og:title" content="Projects | Scoop &amp; Dude">
+<meta property="og:description" content="Faith, the camp map, printables, the Amazon, markets, AI, world art, and pages for friends far away.">
+<meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#00663f">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/overpass-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#list">Skip to the projects</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../#crew">The crew</a>
+      <a class="opt3" href="../#map">The map</a>
+      <a href="../camp-map/">Camp map</a>
+      <a href="./" aria-current="page">Projects</a>
+      <a class="opt" href="../#clips">Clips</a>
+      <a class="opt" href="../#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="proj-hero">
+  <div class="wrap">
+    <div class="sign proj-sign"><div class="sign-in">
+      <h1>Projects</h1>
+      <p class="sign-sub">The other things I follow and build when I'm not on the road or doing the weather. All free, from official and trusted sources.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="proj" id="list" aria-label="Projects">
+  <div class="wrap">
+    <ul class="proj-grid">
+      %CARDS%
+    </ul>
+    <p class="proj-note">Looking for the weather? La Porte County's forecast, alerts, radar and World Disaster Watch are on <a href="https://laporteweathernow.com">La Porte Weather Now</a>.</p>
+    <p class="proj-note">Want to help keep the crew on the road? <a href="https://www.gofundme.com/f/scoopanddude">Chip in on GoFundMe</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Home base: La Porte, Indiana. When I'm home, I run <a href="https://laporteweathernow.com">La Porte Weather Now</a>, where most of these started.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="small">&copy; 2026 Scoop &amp; Dude.</p>
+  </div>
+</footer>
+</body>
+</html>
+"""
+
+
+def projects_page():
+    cards = "\n      ".join(
+        f'<li><a class="proj-card" href="../{d}"><span class="proj-k">{k}</span><span class="proj-t">{n}</span><span class="proj-s">{w}</span></a></li>'
+        for d, k, n, w in PROJECTS)
+    return PROJECTS_PAGE.replace("%CARDS%", cards)
+
+
 def main():
     page = (PAGE.replace("%JSONLD%", json.dumps(JSONLD, ensure_ascii=False, separators=(",", ":")))
                 .replace("%MAP%", map_svg()).replace("%MAPKEY%", map_key())
@@ -492,6 +585,8 @@ def main():
     os.makedirs(os.path.join(ROOT, "camp-map"), exist_ok=True)
     camp = camp_page()
     open(os.path.join(ROOT, "camp-map", "index.html"), "w", encoding="utf-8").write(camp)
+    os.makedirs(os.path.join(ROOT, "projects"), exist_ok=True)
+    open(os.path.join(ROOT, "projects", "index.html"), "w", encoding="utf-8").write(projects_page())
     print(f"index.html {len(page) // 1024} KB, {len(CLIPS)} clips, not yet: {NOT_YET or 'unknown'}; camp-map/index.html {len(camp) // 1024} KB")
 
 

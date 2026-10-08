@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>For My Friends | Scoop &amp; Dude</title>
+<meta name="description" content="Pages Scoop made for friends around the world, with the local time and weather where they live.">
+<link rel="canonical" href="https://scoopanddude.com/friends/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/friends/">
+<meta property="og:title" content="For My Friends">
+<meta property="og:description" content="Pages Scoop made for friends around the world, with the local time and weather where they live.">
+<meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#00663f">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/overpass-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/projects/lpwn-base.css">
+<link rel="stylesheet" href="../assets/projects/theme.css">
+
+</head>
+<body class="sad-project">
+<a class="skip" href="#main">Skip to the page</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../#crew">The crew</a>
+      <a class="opt3" href="../#map">The map</a>
+      <a href="../camp-map/">Camp map</a>
+      <a href="../projects/">Projects</a>
+      <a class="opt" href="../#clips">Clips</a>
+      <a class="opt" href="../#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<header class="hero fr-hero" style="padding-bottom:56px;">
+  <div class="wrap">
+    <div class="hero-eyebrow">FOR MY FRIENDS</div>
+    <h1>Friends around the world.</h1>
+    <p class="lede">La Porte is home, but some of the best people I know live far away. These pages are for them: something to learn from, made with care. They&rsquo;re free for anyone who finds them useful. &mdash; Scoop</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-eyebrow">PAGES I MADE</div>
+    <h2>Pick one.</h2>
+    <div class="fr-pages">
+      <a class="fr-page en" href="../english/"><small>For a friend in Algeria</small><b>English, Round by Round</b><span>Learn English from Darja like a fighter trains: five rounds of real phrases, audio, sparring quizzes, and a 30-day camp.</span></a>
+      <a class="fr-page sp" href="../space-lab/"><small>For Yuyu in Cebu, the Philippines</small><b>Yuyu&rsquo;s Space Lab</b><span>Tonight&rsquo;s sky over Cebu, the space station live, rocket launches, Newton&rsquo;s cannonball, typhoon science and badges to earn.</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-eyebrow">RIGHT NOW, WHERE MY FRIENDS ARE</div>
+    <h2>What time is it there, and what&rsquo;s the weather?</h2>
+    <div class="fr-grid" id="places"></div>
+    <p class="small-print" style="margin-top:14px;">Weather for the nearest big city, from Open-Meteo&rsquo;s free forecast data, updated when you open the page. For La Porte, the <a href="https://laporteweathernow.com/" style="text-decoration:underline;">home page</a> has the official National Weather Service forecast.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Home base: La Porte, Indiana. When I'm home, I run <a href="https://laporteweathernow.com">La Porte Weather Now</a>, where this page started.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="small"><a href="../projects/">More of Scoop's projects</a> &middot; &copy; 2026 Scoop &amp; Dude.</p>
+  </div>
+</footer>
+<script>window.lpwnTrack = window.lpwnTrack || function () {};   /* the weather site counted visits; this site doesn't */</script>
+<script>
+(function () {
+  "use strict";
+  const PLACES = [
+    { where: "Home", city: "La Porte, Indiana", lat: 41.61, lon: -86.72, tz: "America/Chicago", f: true },
+    { where: "Algeria", city: "Algiers", lat: 36.75, lon: 3.06, tz: "Africa/Algiers", link: ["../english/", "English, Round by Round →"] },
+    { where: "The Philippines", city: "Cebu", lat: 10.32, lon: 123.89, tz: "Asia/Manila", link: ["../space-lab/", "Yuyu's Space Lab →"] },
+    { where: "Ireland", city: "Dublin", lat: 53.35, lon: -6.26, tz: "Europe/Dublin" },
+    { where: "Georgia", city: "Atlanta area", lat: 33.75, lon: -84.39, tz: "America/New_York", f: true },
+    { where: "Arizona", city: "Tucson", lat: 32.22, lon: -110.97, tz: "America/Phoenix", f: true },
+    { where: "New York", city: "New York City", lat: 40.71, lon: -74.01, tz: "America/New_York", f: true }
+  ];
+  const WX = { 0: "Clear", 1: "Mostly clear", 2: "Partly cloudy", 3: "Cloudy", 45: "Fog", 48: "Fog", 51: "Light drizzle", 53: "Drizzle", 55: "Drizzle", 61: "Light rain", 63: "Rain", 65: "Heavy rain", 66: "Freezing rain", 67: "Freezing rain", 71: "Light snow", 73: "Snow", 75: "Heavy snow", 77: "Snow grains", 80: "Showers", 81: "Showers", 82: "Heavy showers", 85: "Snow showers", 86: "Snow showers", 95: "Thunderstorms", 96: "Thunderstorms, hail", 99: "Thunderstorms, hail" };
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const grid = document.getElementById("places");
+  grid.innerHTML = PLACES.map((p, i) => `<div class="fr-card"><span class="where">${esc(p.where)}</span><h3>${esc(p.city)}</h3>
+    <div class="fr-now"><span class="fr-time" id="t${i}"></span><span class="fr-day" id="d${i}"></span></div>
+    <div class="fr-wx" id="w${i}">Checking the weather&hellip;</div>
+    ${p.link ? `<a class="more" href="${p.link[0]}">${esc(p.link[1])}</a>` : ""}</div>`).join("");
+  function tick() {
+    const now = new Date();
+    PLACES.forEach((p, i) => {
+      document.getElementById("t" + i).textContent = now.toLocaleTimeString("en-US", { timeZone: p.tz, hour: "numeric", minute: "2-digit" });
+      document.getElementById("d" + i).textContent = now.toLocaleDateString("en-US", { timeZone: p.tz, weekday: "long" });
+    });
+  }
+  tick(); setInterval(tick, 20000);
+  const url = "https://api.open-meteo.com/v1/forecast?latitude=" + PLACES.map((p) => p.lat).join(",") + "&longitude=" + PLACES.map((p) => p.lon).join(",") + "&current=temperature_2m,weather_code,is_day&timezone=auto";
+  fetch(url).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((data) => {
+    const rows = Array.isArray(data) ? data : [data];
+    rows.forEach((d, i) => {
+      const c = d && d.current; if (!c || !PLACES[i]) return;
+      const tc = c.temperature_2m, tf = tc * 9 / 5 + 32;
+      const words = WX[c.weather_code] || "";
+      const temp = PLACES[i].f ? `<b>${Math.round(tf)}°F</b> (${Math.round(tc)}°C)` : `<b>${Math.round(tc)}°C</b> (${Math.round(tf)}°F)`;
+      document.getElementById("w" + i).innerHTML = `${temp} &middot; ${esc(words)}${c.is_day === 0 ? " &middot; night" : ""}`;
+    });
+  }).catch(() => {
+    PLACES.forEach((p, i) => { document.getElementById("w" + i).textContent = "Weather didn't load. Try again in a minute."; });
+  });
+})();
+</script>
+</body>
+</html>

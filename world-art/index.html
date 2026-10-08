@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>World Art: Ancient, Modern and Tarot | Scoop &amp; Dude</title>
+<meta name="description" content="From 36,000-year-old cave paintings to modern masters and nearly 600 years of tarot cards: who made them, where to see them, the weather there right now, and a tarot card of the day.">
+<link rel="canonical" href="https://scoopanddude.com/world-art/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/world-art/">
+<meta property="og:title" content="World Art: Ancient, Modern and Tarot">
+<meta property="og:description" content="From 36,000-year-old cave paintings to modern masters and nearly 600 years of tarot cards: who made them, where to see them, the weather there right now, and a tarot card of the day.">
+<meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#00663f">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/overpass-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/projects/lpwn-base.css">
+<link rel="stylesheet" href="../assets/projects/theme.css">
+<style>
+  .art-intro { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 18px; color: var(--ink-soft); font-size: 14px; }
+  .art-intro strong { color: var(--ink); }
+  .art-card { display: flex; flex-direction: column; }
+  .art-card .era { font-size: 13px; font-weight: 700; color: var(--ink-soft); margin: -4px 0 10px; font-variant-numeric: tabular-nums; }
+  .art-card .artist { font-size: 14px; margin: 0 0 10px; color: var(--ink); }
+  .art-card .artist b { color: var(--amber-text); }
+  .art-card .see { font-size: 13.5px; margin: 0 0 12px; color: var(--ink-soft); }
+  .art-card .now { margin-top: auto; display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border-radius: 10px; background: var(--cream-2); font-size: 13.5px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .art-card .now .dot { width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: var(--amber); flex: none; }
+  .art-card .more { display: inline-block; margin-top: 12px; }
+  .art-card.named { border-top-color: var(--amber); }
+  .art-empty { display: none; }
+  .art-sources { font-size: 12.5px; color: var(--ink-faint); margin-top: 26px; max-width: 760px; }
+  main [hidden] { display: none !important; }  /* .art-card (flex) and .btn (inline-flex) would otherwise stay visible when hidden */
+  .art-jump { display: flex; flex-wrap: wrap; gap: 8px; }
+  .art-jump a { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 15px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.45); color: #fff; font-weight: 700; font-size: 14px; text-decoration: none; }
+  .art-jump a:hover { background: rgba(255,255,255,0.12); }
+  .art-jump a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  #oldest, #modern, #tarot, #card-of-the-day { scroll-margin-top: 72px; }
+  .art-pic { margin: -22px -22px 16px; background: #15130f; border-radius: calc(var(--radius) - 3px) calc(var(--radius) - 3px) 0 0; overflow: hidden; }
+  .art-pic img { display: block; width: 100%; height: 230px; object-fit: contain; }
+  .art-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: -2px 0 12px; }
+  .art-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--cream-2); color: var(--ink); }
+  .art-badge.near { background: #fff1df; color: var(--amber-text); }
+  .tc-panel { display: grid; grid-template-columns: minmax(150px, 250px) 1fr; gap: 28px; align-items: start; max-width: 880px; padding: 22px; border-radius: var(--radius); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); }
+  .tc-pic { margin: 0; }
+  .tc-pic img { display: block; width: 100%; height: auto; border-radius: 10px; background: #2a2a2a; box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+  .tc-num { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-bright); margin-bottom: 6px; }
+  .tc-text h3 { font-family: var(--serif); font-size: 30px; line-height: 1.15; margin: 0 0 12px; color: #fff; }
+  .tc-text p { color: #d7ddd4; margin: 0 0 12px; font-size: 15px; line-height: 1.55; }
+  .tc-text strong { color: #fff; }
+  .tc-text p.tc-sky { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,138,0,0.16); color: #ffd9a8; font-size: 13.5px; font-weight: 700; }
+  .tc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 12px; }
+  .tc-actions .btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .tc-today { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.45); }
+  .tc-text p.tc-credit { font-size: 12.5px; color: #9fab9c; }
+  @media (max-width: 640px) {
+    .tc-panel { grid-template-columns: 1fr; padding: 18px; }
+    .tc-pic { max-width: 210px; margin: 0 auto; }
+    .tc-text h3 { font-size: 26px; }
+  }
+</style>
+</head>
+<body class="sad-project">
+<a class="skip" href="#main">Skip to the page</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../#crew">The crew</a>
+      <a class="opt3" href="../#map">The map</a>
+      <a href="../camp-map/">Camp map</a>
+      <a href="../projects/">Projects</a>
+      <a class="opt" href="../#clips">Clips</a>
+      <a class="opt" href="../#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<header class="hero" style="padding-bottom:50px;">
+  <div class="wrap">
+    <div class="hero-eyebrow">BEYOND THE MIDWEST</div>
+    <h1>Art of the world.</h1>
+    <p class="lede">From 36,000-year-old cave paintings to modern masters and nearly 600 years of tarot cards. For each work: who made it, where you can see it today, and the weather there right now.</p>
+    <nav class="art-jump" aria-label="On this page">
+      <a href="#oldest">The oldest art</a>
+      <a href="#modern">Modern art</a>
+      <a href="#tarot">Tarot</a>
+      <a href="#card-of-the-day">Card of the day</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" id="oldest">
+  <div class="wrap">
+    <div class="section-eyebrow">THE OLDEST ART</div>
+    <h2>From cave walls to 353 AD.</h2>
+    <div class="filter-bar" role="group" aria-label="Show art from">
+      <div class="filter-row" id="regionChips">
+        <span class="filter-label">Region</span>
+        <button type="button" class="chip" data-region="all" aria-pressed="true">All <span class="count">20</span></button>
+        <button type="button" class="chip" data-region="africa" aria-pressed="false">Africa <span class="count">4</span></button>
+        <button type="button" class="chip" data-region="middle-east" aria-pressed="false">Middle East <span class="count">3</span></button>
+        <button type="button" class="chip" data-region="asia" aria-pressed="false">Asia <span class="count">5</span></button>
+        <button type="button" class="chip" data-region="europe" aria-pressed="false">Europe <span class="count">3</span></button>
+        <button type="button" class="chip" data-region="americas" aria-pressed="false">Americas <span class="count">3</span></button>
+        <button type="button" class="chip" data-region="oceania" aria-pressed="false">Oceania <span class="count">2</span></button>
+      </div>
+    </div>
+    <p class="art-intro"><span>Oldest first.</span><span>Cards with an orange top name the artist: history kept only a few of those names.</span><span id="artWeatherNote">Loading the weather at each site&hellip;</span></p>
+
+    <div class="article-grid" id="artGrid">
+
+      <article class="article-card art-card" data-region="europe" data-lat="44.386" data-lon="4.416" data-place="Vallon-Pont-d'Arc">
+        <div class="tag">Europe</div>
+        <h3>Chauvet Cave paintings</h3>
+        <div class="era">About 36,000 years ago &middot; Ard&egrave;che, France</div>
+        <p class="artist">Artists: <b>Ice Age painters</b>, names unknown</p>
+        <p>Lions, horses, rhinoceroses, and mammoths drawn in charcoal and red ochre, using the bulges of the rock for shape and movement. Found in 1994, they are among the oldest known figurative paintings on Earth.</p>
+        <p class="see"><strong>See it:</strong> the cave is sealed to protect it; a full-size replica, Grotte Chauvet 2, is nearby.</p>
+        <p class="now" data-now>Weather at Vallon-Pont-d'Arc: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Chauvet+Cave" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="oceania" data-lat="-12.409" data-lon="132.957" data-place="Ubirr, Kakadu">
+        <div class="tag">Oceania</div>
+        <h3>Rock art of Kakadu</h3>
+        <div class="era">Tens of thousands of years, and still living &middot; Northern Territory, Australia</div>
+        <p class="artist">Artists: <b>generations of Aboriginal painters</b></p>
+        <p>Fish, turtles, and people painted in the "X-ray" style that shows bones and organs, layered on the same shelters over countless generations. It is one of the longest continuous art traditions in the world, cared for today by the Bininj/Mungguy traditional owners.</p>
+        <p class="see"><strong>See it:</strong> Ubirr and Burrungkuy (Nourlangie) in Kakadu National Park.</p>
+        <p class="now" data-now>Weather at Ubirr, Kakadu: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Ubirr" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="asia" data-lat="37.127" data-lon="138.756" data-place="Tokamachi">
+        <div class="tag">Asia</div>
+        <h3>J&omacr;mon pottery</h3>
+        <div class="era">From about 14,000 BCE &middot; Japan</div>
+        <p class="artist">Artists: <b>J&omacr;mon potters</b>, names unknown</p>
+        <p>Some of the oldest pottery on Earth, named for the cord ("j&omacr;mon") pressed into the wet clay. Thousands of years later, potters in Niigata built the wild "flame-style" pots, whose rims rise like fire.</p>
+        <p class="see"><strong>See it:</strong> Tokyo National Museum, and the Tokamachi City Museum, which holds a flame-style pot that is a National Treasure.</p>
+        <p class="now" data-now>Weather at Tokamachi: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=J%C5%8Dmon+pottery" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="africa" data-lat="-29.300" data-lon="29.500" data-place="the Drakensberg">
+        <div class="tag">Africa</div>
+        <h3>San rock paintings of the Drakensberg</h3>
+        <div class="era">Painted over at least 3,000 years &middot; South Africa and Lesotho</div>
+        <p class="artist">Artists: <b>San hunter-gatherers</b></p>
+        <p>Eland, hunters, dancers, and scenes from the spirit world, painted in rock shelters high in the mountains. The range holds tens of thousands of images, the largest group of rock paintings in Africa south of the Sahara.</p>
+        <p class="see"><strong>See it:</strong> Maloti-Drakensberg Park, with guided walks to shelters like Game Pass.</p>
+        <p class="now" data-now>Weather in the Drakensberg: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=San+rock+art" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card named" data-region="middle-east" data-lat="30.962" data-lon="46.103" data-place="Ur">
+        <div class="tag">Middle East</div>
+        <h3>The hymns of Enheduanna</h3>
+        <div class="era">About 2285&ndash;2250 BCE &middot; Ur, Iraq</div>
+        <p class="artist">Artist: <b>Enheduanna</b>, poet and high priestess</p>
+        <p>The daughter of King Sargon of Akkad, she served the moon god at Ur and wrote hymns to the goddess Inanna. She is the earliest author in the world known by name.</p>
+        <p class="see"><strong>See it:</strong> the Disk of Enheduanna, which shows her at worship, is at the Penn Museum in Philadelphia.</p>
+        <p class="now" data-now>Weather at Ur: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Enheduanna" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="oceania" data-lat="-21.060" data-lon="164.860" data-place="Kon&eacute;, New Caledonia">
+        <div class="tag">Oceania</div>
+        <h3>Lapita pottery</h3>
+        <div class="era">About 1500&ndash;500 BCE &middot; from New Guinea to Samoa</div>
+        <p class="artist">Artists: <b>Lapita potters</b>, ancestors of today's Polynesians</p>
+        <p>Pots stamped with fine toothed patterns, including faces, made by the seafarers who first settled the remote Pacific. Following the pottery traces one of the greatest voyages in human history.</p>
+        <p class="see"><strong>See it:</strong> museums in New Caledonia, Vanuatu, and Fiji. The name comes from the Lapita site in New Caledonia.</p>
+        <p class="now" data-now>Weather at Kon&eacute;, New Caledonia: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Lapita+culture" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card named" data-region="africa" data-lat="27.645" data-lon="30.897" data-place="Amarna">
+        <div class="tag">Africa</div>
+        <h3>Bust of Nefertiti</h3>
+        <div class="era">About 1345 BCE &middot; Amarna, Egypt</div>
+        <p class="artist">Artist: <b>Thutmose</b>, royal sculptor</p>
+        <p>The painted limestone portrait of Queen Nefertiti was found in 1912 in the ruins of Thutmose's own workshop. It is one of the few ancient masterpieces whose maker we can name.</p>
+        <p class="see"><strong>See it:</strong> Neues Museum, Berlin.</p>
+        <p class="now" data-now>Weather at Amarna: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Nefertiti+Bust" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="americas" data-lat="17.750" data-lon="-94.760" data-place="San Lorenzo, Veracruz">
+        <div class="tag">Americas</div>
+        <h3>Olmec colossal heads</h3>
+        <div class="era">About 1200&ndash;400 BCE &middot; Gulf Coast of Mexico</div>
+        <p class="artist">Artists: <b>Olmec sculptors</b>, names unknown</p>
+        <p>Seventeen giant basalt heads, some nearly 10 feet tall, each wearing a close-fitting helmet and likely showing a real ruler. The stone was hauled from mountains many miles away.</p>
+        <p class="see"><strong>See it:</strong> Museo de Antropolog&iacute;a de Xalapa, and Parque-Museo La Venta in Villahermosa.</p>
+        <p class="now" data-now>Weather at San Lorenzo, Veracruz: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Olmec+colossal+heads" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="africa" data-lat="9.520" data-lon="8.020" data-place="Nok, Nigeria">
+        <div class="tag">Africa</div>
+        <h3>Nok terracottas</h3>
+        <div class="era">About 900 BCE &ndash; 1 CE &middot; central Nigeria</div>
+        <p class="artist">Artists: <b>Nok sculptors</b>, names unknown</p>
+        <p>Fired-clay heads and figures with pierced eyes and carefully dressed hair. They are the oldest known large sculptures in Africa south of the Sahara.</p>
+        <p class="see"><strong>See it:</strong> the National Museum in Lagos, and collections around the world.</p>
+        <p class="now" data-now>Weather at Nok, Nigeria: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Nok+culture" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="middle-east" data-lat="32.542" data-lon="44.421" data-place="Babylon">
+        <div class="tag">Middle East</div>
+        <h3>The Ishtar Gate</h3>
+        <div class="era">About 575 BCE &middot; Babylon, Iraq</div>
+        <p class="artist">Artists: <b>Babylonian brick makers and glazers</b></p>
+        <p>A city gate faced in brilliant blue glazed brick, with rows of dragons and bulls in raised relief, built for King Nebuchadnezzar II.</p>
+        <p class="see"><strong>See it:</strong> rebuilt in Berlin's Pergamon Museum, which is closed for renovation, so check before you go. Some panels are in other museums, including Chicago's Oriental Institute.</p>
+        <p class="now" data-now>Weather at Babylon: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Ishtar+Gate" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card named" data-region="europe" data-lat="37.978" data-lon="23.718" data-place="Athens">
+        <div class="tag">Europe</div>
+        <h3>Achilles and Ajax at a board game</h3>
+        <div class="era">About 540 BCE &middot; Athens, Greece</div>
+        <p class="artist">Artist: <b>Exekias</b>, potter and vase painter</p>
+        <p>Two heroes of the Trojan War bend over a game in the middle of the fighting, painted in black on a red clay jar. Exekias signed it as both maker and painter.</p>
+        <p class="see"><strong>See it:</strong> Vatican Museums, Rome.</p>
+        <p class="now" data-now>Weather at Athens: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Exekias" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="middle-east" data-lat="29.935" data-lon="52.891" data-place="Persepolis">
+        <div class="tag">Middle East</div>
+        <h3>The Persepolis reliefs</h3>
+        <div class="era">Begun about 515 BCE &middot; Fars, Iran</div>
+        <p class="artist">Artists: <b>craftsmen from across the Persian Empire</b></p>
+        <p>Staircases carved with long processions of people from every land of the empire, each group in its own dress and bringing its own gifts. Alexander the Great burned the palace in 330 BCE, but much of the carving survived.</p>
+        <p class="see"><strong>See it:</strong> the ruins of Persepolis, a UNESCO World Heritage Site.</p>
+        <p class="now" data-now>Weather at Persepolis: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Persepolis" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="americas" data-lat="-14.735" data-lon="-75.130" data-place="Nazca">
+        <div class="tag">Americas</div>
+        <h3>The Nazca Lines</h3>
+        <div class="era">About 500 BCE &ndash; 500 CE &middot; southern Peru</div>
+        <p class="artist">Artists: <b>the Nazca people</b></p>
+        <p>A hummingbird, a monkey, a spider, and hundreds of straight lines, made by clearing dark stones to show the pale ground beneath. Many are so large they are best seen from the air.</p>
+        <p class="see"><strong>See it:</strong> on a flight over the desert, or from the viewing tower beside the Pan-American Highway.</p>
+        <p class="now" data-now>Weather at Nazca: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Nazca+Lines" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="asia" data-lat="34.385" data-lon="109.273" data-place="Xi'an">
+        <div class="tag">Asia</div>
+        <h3>The Terracotta Army</h3>
+        <div class="era">About 210 BCE &middot; Xi'an, China</div>
+        <p class="artist">Artists: <b>thousands of workers</b>; some figures carry the stamped names of their workshop foremen</p>
+        <p>Thousands of life-size clay soldiers, horses, and chariots buried to guard the tomb of Qin Shi Huang, China's first emperor. Farmers digging a well found them in 1974.</p>
+        <p class="see"><strong>See it:</strong> the Emperor Qinshihuang's Mausoleum Site Museum, outside Xi'an.</p>
+        <p class="now" data-now>Weather at Xi'an: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Terracotta+Army" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="asia" data-lat="20.552" data-lon="75.703" data-place="Ajanta">
+        <div class="tag">Asia</div>
+        <h3>The Ajanta Caves</h3>
+        <div class="era">About 200 BCE &ndash; 480 CE &middot; Maharashtra, India</div>
+        <p class="artist">Artists: <b>Buddhist monks and painters</b>, names unknown</p>
+        <p>About thirty temples and monasteries cut into a cliff above a river gorge, their walls painted with stories of the Buddha's past lives.</p>
+        <p class="see"><strong>See it:</strong> the Ajanta Caves, a UNESCO World Heritage Site.</p>
+        <p class="now" data-now>Weather at Ajanta: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Ajanta+Caves" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card named" data-region="europe" data-lat="40.749" data-lon="14.485" data-place="Pompeii">
+        <div class="tag">Europe</div>
+        <h3>The street musicians mosaic</h3>
+        <div class="era">About 100 BCE &middot; Pompeii, Italy</div>
+        <p class="artist">Artist: <b>Dioskourides of Samos</b>, mosaic maker</p>
+        <p>A tiny-tile scene from a comedy: masked musicians play a tambourine, cymbals, and a double flute. The artist set his own name into the mosaic.</p>
+        <p class="see"><strong>See it:</strong> National Archaeological Museum of Naples.</p>
+        <p class="now" data-now>Weather at Pompeii: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Dioscorides+of+Samos" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="asia" data-lat="34.008" data-lon="71.578" data-place="Peshawar">
+        <div class="tag">Asia</div>
+        <h3>Gandhara Buddhas</h3>
+        <div class="era">About 1st&ndash;5th century CE &middot; Pakistan and Afghanistan</div>
+        <p class="artist">Artists: <b>Gandharan sculptors</b>, names unknown</p>
+        <p>Some of the earliest images of the Buddha in human form, carved in gray schist with wavy hair and flowing robes that echo Greek and Roman sculpture.</p>
+        <p class="see"><strong>See it:</strong> the Peshawar Museum and the Taxila Museum in Pakistan.</p>
+        <p class="now" data-now>Weather at Peshawar: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Greco-Buddhist+art" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="americas" data-lat="-8.134" data-lon="-78.994" data-place="Trujillo">
+        <div class="tag">Americas</div>
+        <h3>Moche portrait vessels</h3>
+        <div class="era">About 100&ndash;800 CE &middot; north coast of Peru</div>
+        <p class="artist">Artists: <b>Moche potters</b>, names unknown</p>
+        <p>Clay jars shaped as faces so lifelike that the same people can be recognized on different pots, at different ages.</p>
+        <p class="see"><strong>See it:</strong> Museo Larco in Lima, and the Huaca de la Luna near Trujillo.</p>
+        <p class="now" data-now>Weather at Trujillo: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Moche+culture" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card" data-region="africa" data-lat="14.130" data-lon="38.720" data-place="Aksum">
+        <div class="tag">Africa</div>
+        <h3>The stelae of Aksum</h3>
+        <div class="era">About 300s CE &middot; Aksum, Ethiopia</div>
+        <p class="artist">Artists: <b>Aksumite stonemasons</b></p>
+        <p>Towering granite monuments carved to look like many-story buildings, with false doors and windows. One was taken to Rome in 1937 and came home in 2005.</p>
+        <p class="see"><strong>See it:</strong> the Northern Stelae Park in Aksum, a UNESCO World Heritage Site.</p>
+        <p class="now" data-now>Weather at Aksum: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Obelisk+of+Axum" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+      <article class="article-card art-card named" data-region="asia" data-lat="29.930" data-lon="120.510" data-place="Shaoxing">
+        <div class="tag">Asia</div>
+        <h3>Preface to the Orchid Pavilion</h3>
+        <div class="era">353 CE &middot; Shaoxing, China</div>
+        <p class="artist">Artist: <b>Wang Xizhi</b>, calligrapher</p>
+        <p>Written at a spring gathering of poets, this short preface is the most famous work of Chinese calligraphy. The original is lost; it lives on through careful copies made centuries ago.</p>
+        <p class="see"><strong>See it:</strong> the Palace Museum in Beijing holds a celebrated Tang dynasty copy.</p>
+        <p class="now" data-now>Weather at Shaoxing: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Lantingji+Xu" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+    </div>
+    <p class="art-sources">Dates are approximate, as they are for most ancient art. Weather: <a href="https://open-meteo.com" target="_blank" rel="noopener" style="color:var(--forest); font-weight:700;">Open-Meteo</a>, the same free source as our <a href="https://laporteweathernow.com/global" style="color:var(--forest); font-weight:700;">Global</a> page. Temperatures in &deg;F, times in each site's own local time.</p>
+  </div>
+</section>
+
+<section class="section alt" id="modern">
+  <div class="wrap">
+    <div class="section-eyebrow">MODERN ART</div>
+    <h2>Modern art, 1872 to today.</h2>
+    <p class="lede">Fourteen works that changed what art could be, from the painting that named Impressionism to a room of endless lights. Four are an hour from La Porte, in Chicago. Pictures appear only for works old enough to be in the public domain; for newer ones, follow &ldquo;Learn more.&rdquo;</p>
+    <div class="filter-bar" role="group" aria-label="Show modern art">
+      <div class="filter-row" id="modernChips">
+        <span class="filter-label">Show</span>
+        <button type="button" class="chip" data-show="all" aria-pressed="true">All <span class="count">14</span></button>
+        <button type="button" class="chip" data-show="wx" aria-pressed="false">Weather in the art <span class="count">9</span></button>
+        <button type="button" class="chip" data-show="near" aria-pressed="false">Near La Porte <span class="count">4</span></button>
+      </div>
+    </div>
+    <div class="article-grid" id="modernGrid">
+
+      <article class="article-card art-card" data-lat="48.8592" data-lon="2.2675" data-place="Paris" data-wx="1">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression,_Sunrise.jpg/500px-Monet_-_Impression,_Sunrise.jpg" alt="Claude Monet, Impression, Sunrise: a hazy blue harbor at dawn with an orange sun and small boats" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">Paris</div>
+        <h3>Impression, Sunrise</h3>
+        <div class="era">1872 &middot; Le Havre, France</div>
+        <p class="artist">Artist: <b>Claude Monet</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: haze over a harbor at sunrise</span></div>
+        <p>A harbor at dawn in a few quick strokes: blue haze, dark boats and a small orange sun. A critic mocked the title, and the name stuck. That&rsquo;s how Impressionism got its name.</p>
+        <p class="see"><strong>See it:</strong> Mus&eacute;e Marmottan Monet, Paris.</p>
+        <p class="now" data-now>Weather at Paris: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Impression%2C+Sunrise+Claude+Monet" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="41.8796" data-lon="-87.6237" data-place="Chicago" data-wx="1" data-near="1">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Gustave_Caillebotte_-_Paris_Street;_Rainy_Day_-_Google_Art_Project.jpg/500px-Gustave_Caillebotte_-_Paris_Street;_Rainy_Day_-_Google_Art_Project.jpg" alt="Gustave Caillebotte, Paris Street; Rainy Day: people with umbrellas crossing a wet Paris street" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">Chicago</div>
+        <h3>Paris Street; Rainy Day</h3>
+        <div class="era">1877 &middot; Paris, France</div>
+        <p class="artist">Artist: <b>Gustave Caillebotte</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: rain</span><span class="art-badge near">An hour from La Porte</span></div>
+        <p>Parisians under umbrellas cross wet cobblestones on a gray afternoon. Caillebotte caught an everyday rainy moment like a photograph, on a canvas almost 7 by 9 feet.</p>
+        <p class="see"><strong>See it:</strong> the Art Institute of Chicago.</p>
+        <p class="now" data-now>Weather at Chicago: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Paris+Street%3B+Rainy+Day+Gustave+Caillebotte" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="40.7614" data-lon="-73.9776" data-place="New York" data-wx="1">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/500px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Vincent van Gogh, The Starry Night: a swirling blue night sky with stars and a crescent moon over a village and a cypress" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">New York</div>
+        <h3>The Starry Night</h3>
+        <div class="era">1889 &middot; Saint-R&eacute;my-de-Provence, France</div>
+        <p class="artist">Artist: <b>Vincent van Gogh</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: a swirling night sky</span></div>
+        <p>Van Gogh painted the view from his window at an asylum in southern France, adding a village, a flame-like cypress and a sky that swirls with stars and a crescent moon.</p>
+        <p class="see"><strong>See it:</strong> the Museum of Modern Art (MoMA), New York.</p>
+        <p class="now" data-now>Weather at New York: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=The+Starry+Night+Vincent+van+Gogh" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="41.8796" data-lon="-87.6237" data-place="Chicago" data-wx="1" data-near="1">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Claude_Monet_-_Stack_of_Wheat_(Snow_Effect,_Overcast_Day)_-_1933.1155_-_Art_Institute_of_Chicago.jpg/500px-Claude_Monet_-_Stack_of_Wheat_(Snow_Effect,_Overcast_Day)_-_1933.1155_-_Art_Institute_of_Chicago.jpg" alt="Claude Monet, Stack of Wheat (Snow Effect, Overcast Day): a stack of wheat in a snowy field under a gray sky" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">Chicago</div>
+        <h3>Stacks of Wheat</h3>
+        <div class="era">1890&ndash;91 &middot; Giverny, France</div>
+        <p class="artist">Artist: <b>Claude Monet</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: snow, frost, fog and low sun</span><span class="art-badge near">An hour from La Porte</span></div>
+        <p>Monet painted the same stacks of wheat near his home again and again, in snow, frost, fog and low sun, to show how weather and light change one scene.</p>
+        <p class="see"><strong>See it:</strong> the Art Institute of Chicago, which owns six from the series.</p>
+        <p class="now" data-now>Weather at Chicago: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Stacks+of+Wheat+Claude+Monet" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="59.9114" data-lon="10.7290" data-place="Oslo" data-wx="1">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch,_1893,_The_Scream,_oil,_tempera_and_pastel_on_cardboard,_91_x_73_cm,_National_Gallery_of_Norway.jpg/500px-Edvard_Munch,_1893,_The_Scream,_oil,_tempera_and_pastel_on_cardboard,_91_x_73_cm,_National_Gallery_of_Norway.jpg" alt="Edvard Munch, The Scream: a figure holding its face on a bridge under a swirling red and orange sky" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">Oslo</div>
+        <h3>The Scream</h3>
+        <div class="era">1893 &middot; Norway</div>
+        <p class="artist">Artist: <b>Edvard Munch</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: a blood-red sky</span></div>
+        <p>A figure clutches its face on a road above the Oslo fjord under a blazing red sky. Munch wrote that he sensed &ldquo;an infinite scream passing through nature.&rdquo; Scientists still debate whether the sky was real: red sunsets after the 1883 Krakatoa eruption, or rare &ldquo;mother-of-pearl&rdquo; clouds.</p>
+        <p class="see"><strong>See it:</strong> the National Museum, Oslo. The Munch Museum holds other versions.</p>
+        <p class="now" data-now>Weather at Oslo: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=The+Scream+Edvard+Munch" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="48.1915" data-lon="16.3809" data-place="Vienna">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg/500px-The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg" alt="Gustav Klimt, The Kiss: two embracing lovers in golden patterned robes on a flowered meadow" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">Vienna</div>
+        <h3>The Kiss</h3>
+        <div class="era">1907&ndash;08 &middot; Vienna, Austria</div>
+        <p class="artist">Artist: <b>Gustav Klimt</b></p>
+        <p>Two lovers wrapped in robes of real gold leaf kneel at the edge of a flower meadow. It&rsquo;s the high point of what&rsquo;s called Klimt&rsquo;s &ldquo;golden period.&rdquo;</p>
+        <p class="see"><strong>See it:</strong> the Upper Belvedere, Vienna.</p>
+        <p class="now" data-now>Weather at Vienna: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=The+Kiss+Gustav+Klimt" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="55.7414" data-lon="37.6208" data-place="Moscow">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Vassily_Kandinsky,_1913_-_Composition_7.jpg/500px-Vassily_Kandinsky,_1913_-_Composition_7.jpg" alt="Wassily Kandinsky, Composition VII: a whirl of bright abstract colors, lines and shapes" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">Moscow</div>
+        <h3>Composition VII</h3>
+        <div class="era">1913 &middot; Munich, Germany</div>
+        <p class="artist">Artist: <b>Wassily Kandinsky</b></p>
+        <p>One of the first great abstract paintings: no people or places, just color and line meant to work like music. Kandinsky made dozens of studies first, then painted the final canvas in a few days.</p>
+        <p class="see"><strong>See it:</strong> the State Tretyakov Gallery, Moscow.</p>
+        <p class="now" data-now>Weather at Moscow: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Composition+VII+Wassily+Kandinsky" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="-34.5770" data-lon="-58.4035" data-place="Buenos Aires" data-wx="1">
+        <div class="tag">Buenos Aires</div>
+        <h3>Abaporu</h3>
+        <div class="era">1928 &middot; S&atilde;o Paulo, Brazil</div>
+        <p class="artist">Artist: <b>Tarsila do Amaral</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: a blazing sun</span></div>
+        <p>A giant figure with enormous feet sits beside a cactus under a hot sun. The title means &ldquo;the man who eats people&rdquo; in the Tupi language, and it sparked a Brazilian art movement: take ideas from everywhere and make them your own.</p>
+        <p class="see"><strong>See it:</strong> MALBA (Museo de Arte Latinoamericano de Buenos Aires).</p>
+        <p class="now" data-now>Weather at Buenos Aires: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Abaporu+Tarsila+do+Amaral" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="19.4235" data-lon="-99.1810" data-place="Mexico City" data-wx="1">
+        <div class="tag">Mexico City</div>
+        <h3>The Two Fridas</h3>
+        <div class="era">1939 &middot; Mexico City</div>
+        <p class="artist">Artist: <b>Frida Kahlo</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: a stormy sky</span></div>
+        <p>Two Fridas sit hand in hand under a stormy sky, their hearts showing and joined by a single vein. Kahlo painted it the year she and Diego Rivera divorced.</p>
+        <p class="see"><strong>See it:</strong> Museo de Arte Moderno, Mexico City.</p>
+        <p class="now" data-now>Weather at Mexico City: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=The+Two+Fridas+Frida+Kahlo" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="41.8796" data-lon="-87.6237" data-place="Chicago" data-wx="1" data-near="1">
+        <div class="tag">Chicago</div>
+        <h3>Sky Above Clouds IV</h3>
+        <div class="era">1965 &middot; New Mexico, USA</div>
+        <p class="artist">Artist: <b>Georgia O&rsquo;Keeffe</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: clouds seen from above</span><span class="art-badge near">An hour from La Porte</span></div>
+        <p>After years of flying, O&rsquo;Keeffe painted the view down onto rows of white clouds stretching to a pink horizon. At 24 feet wide, it&rsquo;s the largest painting she ever made.</p>
+        <p class="see"><strong>See it:</strong> the Art Institute of Chicago.</p>
+        <p class="now" data-now>Weather at Chicago: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Sky+Above+Clouds+IV+Georgia+O%27Keeffe" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="-37.8226" data-lon="144.9689" data-place="Melbourne">
+        <div class="tag">Melbourne</div>
+        <h3>Big Yam Dreaming</h3>
+        <div class="era">1995 &middot; Utopia, Northern Territory, Australia</div>
+        <p class="artist">Artist: <b>Emily Kam Kngwarray</b></p>
+        <p>A huge web of white lines on black, about 8 meters (26 feet) wide, tracing the underground roots of the pencil yam, a food and a Dreaming of her country. She began painting on canvas in her late seventies.</p>
+        <p class="see"><strong>See it:</strong> the National Gallery of Victoria, Melbourne, as <i>Anwerlarr anganenty</i>.</p>
+        <p class="now" data-now>Weather at Melbourne: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Emily+Kame+Kngwarreye" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="41.8827" data-lon="-87.6233" data-place="Chicago" data-wx="1" data-near="1">
+        <div class="tag">Chicago</div>
+        <h3>Cloud Gate</h3>
+        <div class="era">2004&ndash;06 &middot; Chicago</div>
+        <p class="artist">Artist: <b>Anish Kapoor</b></p>
+        <div class="art-badges"><span class="art-badge wx">&#9925; Weather in it: it mirrors the sky</span><span class="art-badge near">An hour from La Porte</span></div>
+        <p>Chicagoans call it &ldquo;the Bean&rdquo;: 168 stainless steel plates welded and polished until the seams disappeared. It mirrors the skyline and the sky, so it looks different in every kind of weather.</p>
+        <p class="see"><strong>See it:</strong> Millennium Park, Chicago. Free and outdoors.</p>
+        <p class="now" data-now>Weather at Chicago: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Cloud+Gate+Anish+Kapoor" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="40.7794" data-lon="-73.9632" data-place="New York">
+        <div class="tag">New York</div>
+        <h3>Between Earth and Heaven</h3>
+        <div class="era">2006 &middot; Nsukka, Nigeria</div>
+        <p class="artist">Artist: <b>El Anatsui</b></p>
+        <p>From across the room it looks like shimmering cloth. Up close it&rsquo;s thousands of flattened aluminum caps and seals from liquor bottles, joined with copper wire. El Anatsui, born in Ghana, has worked in Nigeria for decades.</p>
+        <p class="see"><strong>See it:</strong> the Metropolitan Museum of Art, New York.</p>
+        <p class="now" data-now>Weather at New York: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=El+Anatsui" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="34.0544" data-lon="-118.2506" data-place="Los Angeles">
+        <div class="tag">Los Angeles</div>
+        <h3>Infinity Mirrored Room</h3>
+        <div class="era">2013 &middot; Tokyo, Japan</div>
+        <p class="artist">Artist: <b>Yayoi Kusama</b></p>
+        <p>Step into a small mirrored room full of hanging colored lights, and they repeat forever in every direction. Its full title is <i>The Souls of Millions of Light Years Away</i>. Kusama has been making art about dots and infinity for more than 70 years.</p>
+        <p class="see"><strong>See it:</strong> The Broad, Los Angeles.</p>
+        <p class="now" data-now>Weather at Los Angeles: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Yayoi+Kusama+Infinity+Mirror+Rooms" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tarot">
+  <div class="wrap">
+    <div class="section-eyebrow">TAROT</div>
+    <h2>Nearly 600 years of painted cards.</h2>
+    <p class="lede">Tarot began in northern Italy in the 1400s as a card game, with trump cards painted by hand for noble families. Using the cards to tell fortunes came much later, in France in the 1780s. These five decks shaped how tarot looks today.</p>
+    <div class="article-grid" id="tarotGrid">
+
+      <article class="article-card art-card" data-lat="45.7044" data-lon="9.6766" data-place="Bergamo">
+        <div class="tag">Bergamo</div>
+        <h3>Visconti-Sforza tarot</h3>
+        <div class="era">About 1450s &middot; Milan, Italy</div>
+        <p class="artist">Artist: <b>Bonifacio Bembo</b> (attributed)</p>
+        <p>Painted by hand, with backgrounds of gold leaf, for the ruling families of Milan. 74 cards survive, the most complete deck of its time. Four are lost, including the Devil and the Tower.</p>
+        <p class="see"><strong>See it:</strong> 35 cards at the Morgan Library &amp; Museum in New York, 26 at the Accademia Carrara in Bergamo, and 13 with the Colleoni family in Bergamo.</p>
+        <p class="now" data-now>Weather at Bergamo: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Visconti-Sforza+Tarot" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="45.4719" data-lon="9.1879" data-place="Milan">
+        <div class="tag">Milan</div>
+        <h3>Sola Busca tarot</h3>
+        <div class="era">About 1491 &middot; Ferrara or Venice, Italy</div>
+        <p class="artist">Artists: <b>unknown engravers</b>, colored by hand</p>
+        <p>The oldest complete 78-card tarot, and the first to put a scene on every card, even the number cards. Pamela Colman Smith likely saw photos of it in London in 1907, and some of its scenes show up in her famous deck.</p>
+        <p class="see"><strong>See it:</strong> the Pinacoteca di Brera, Milan, which acquired it in 2009.</p>
+        <p class="now" data-now>Weather at Milan: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Sola+Busca+tarot" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="43.2965" data-lon="5.3698" data-place="Marseille">
+        <div class="tag">Marseille</div>
+        <h3>Tarot de Marseille</h3>
+        <div class="era">1600s&ndash;1700s &middot; Paris, Lyon and Marseille, France</div>
+        <p class="artist">Artists: <b>card makers such as Jean Noblet, Jean Dodal and Nicolas Conver</b></p>
+        <p>Printed from carved woodblocks and colored through stencils in a few bold colors. This pattern became the standard, and most decks since follow its order of 22 trump cards.</p>
+        <p class="see"><strong>See it:</strong> early decks at the Biblioth&egrave;que nationale de France in Paris. Conver&rsquo;s 1760 design is still printed.</p>
+        <p class="now" data-now>Weather at Marseille: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Tarot+of+Marseilles" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="51.5074" data-lon="-0.1278" data-place="London">
+        <figure class="art-pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/RWS_Tarot_17_Star.jpg/330px-RWS_Tarot_17_Star.jpg" alt="The Star card from the 1909 Rider-Waite-Smith deck: a kneeling woman pours water under eight stars" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></figure>
+        <div class="tag">London</div>
+        <h3>Rider-Waite-Smith tarot</h3>
+        <div class="era">1909 &middot; London, England</div>
+        <p class="artist">Artist: <b>Pamela Colman Smith</b>, with A. E. Waite</p>
+        <p>Smith drew all 78 cards in about six months for a flat fee, giving every card a scene. It became the best-known tarot in the world, while she died poor in 1951 and her name was left off the box for decades. The card of the day below uses her 1909 art.</p>
+        <p class="see"><strong>See it:</strong> her original drawings are lost. Early printings survive in libraries and private collections.</p>
+        <p class="now" data-now>Weather at London: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Rider-Waite+tarot" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+      <article class="article-card art-card" data-lat="42.2679" data-lon="2.9593" data-place="Figueres">
+        <div class="tag">Figueres</div>
+        <h3>Dal&iacute;&rsquo;s Universal Tarot</h3>
+        <div class="era">1973&ndash;84 &middot; Spain</div>
+        <p class="artist">Artist: <b>Salvador Dal&iacute;</b></p>
+        <p>The producers of the James Bond film <i>Live and Let Die</i> asked Dal&iacute; to paint its tarot cards. His fee was too high, so another artist made the film&rsquo;s deck, but Dal&iacute; kept going, mixing surrealism with famous old paintings. It was published in 1984.</p>
+        <p class="see"><strong>See it:</strong> the deck is still printed. Dal&iacute;&rsquo;s own museum is in Figueres, Spain.</p>
+        <p class="now" data-now>Weather at Figueres: loading&hellip;</p>
+        <a class="more" href="https://en.wikipedia.org/wiki/Special:Search?search=Salvador+Dali%27s+Tarot" target="_blank" rel="noopener">Learn more &#8599;</a>
+      </article>
+
+    </div>
+    <p class="art-sources">Pictures on this page are public-domain works, loaded from Wikimedia Commons. Newer works are still under copyright, so we describe them and link to more instead.</p>
+  </div>
+</section>
+
+<section class="section dark" id="card-of-the-day">
+  <div class="wrap">
+    <div class="section-eyebrow">TAROT CARD OF THE DAY</div>
+    <h2>Today&rsquo;s card.</h2>
+    <p class="lede">Tarot can&rsquo;t tell the future, and we won&rsquo;t pretend it can. For centuries, though, these pictures have been a good prompt for thinking things over. Today&rsquo;s card is picked by the date, so everyone sees the same one.</p>
+    <div class="tc-panel" aria-live="polite">
+      <figure class="tc-pic" id="tcPic"><img id="tcImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/RWS_Tarot_17_Star.jpg/330px-RWS_Tarot_17_Star.jpg" alt="The Star, painted by Pamela Colman Smith in 1909" width="330" height="565" decoding="async"></figure>
+      <div class="tc-text">
+        <div class="tc-num" id="tcNum">Card XVII</div>
+        <h3 id="tcName">The Star</h3>
+        <p class="tc-sky" id="tcSky">&#9925; Weather in this card: a clear night full of stars</p>
+        <p><strong>What&rsquo;s painted:</strong> <span id="tcArt">A woman kneels by a pool under eight bright stars, pouring water onto the land and into the pool.</span></p>
+        <p><strong>Traditionally stands for:</strong> <span id="tcTheme">hope, renewal and calm after a storm</span></p>
+        <p><strong>Think about:</strong> <span id="tcAsk">What gives me hope right now?</span></p>
+        <div class="tc-actions">
+          <button type="button" class="btn btn-amber" id="tcDraw">Draw another card</button>
+          <button type="button" class="btn tc-today" id="tcToday" hidden>Back to today&rsquo;s card</button>
+        </div>
+        <p class="tc-credit">The 22 picture cards of the 1909 Rider-Waite-Smith deck, painted by Pamela Colman Smith (public domain).</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Home base: La Porte, Indiana. When I'm home, I run <a href="https://laporteweathernow.com">La Porte Weather Now</a>, where this page started.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="small"><a href="../projects/">More of Scoop's projects</a> &middot; &copy; 2026 Scoop &amp; Dude.</p>
+  </div>
+</footer>
+<script>window.lpwnTrack = window.lpwnTrack || function () {};   /* the weather site counted visits; this site doesn't */</script>
+<script src="../assets/camp/timeutil.js"></script>
+<script>
+(function () {
+  "use strict";
+  function all(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function track(what, value) { if (typeof lpwnTrack === "function") lpwnTrack(what, value); }
+
+  // Filter chips: oldest art by region, modern art by "weather in the art" or "near La Porte".
+  function chipGroup(chipSel, cardSel, test, name) {
+    var chips = all(chipSel), cards = all(cardSel);
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+        cards.forEach(function (card) { card.hidden = !test(chip, card); });
+        track(name, chip.getAttribute("data-region") || chip.getAttribute("data-show"));
+      });
+    });
+  }
+  chipGroup("#regionChips .chip", "#artGrid .art-card", function (chip, card) {
+    var r = chip.getAttribute("data-region");
+    return r === "all" || card.getAttribute("data-region") === r;
+  }, "art-region");
+  chipGroup("#modernChips .chip", "#modernGrid .art-card", function (chip, card) {
+    var f = chip.getAttribute("data-show");
+    return f === "all" || card.getAttribute("data-" + f) === "1";
+  }, "art-modern");
+
+  // One request for every place's current weather (Open-Meteo accepts a list of places).
+  var cards = all(".art-card[data-lat]");
+  var WORDS = { 0: "clear", 1: "mostly clear", 2: "partly cloudy", 3: "cloudy", 45: "fog", 48: "freezing fog",
+    51: "light drizzle", 53: "drizzle", 55: "heavy drizzle", 56: "freezing drizzle", 57: "freezing drizzle",
+    61: "light rain", 63: "rain", 65: "heavy rain", 66: "freezing rain", 67: "freezing rain",
+    71: "light snow", 73: "snow", 75: "heavy snow", 77: "snow grains", 80: "showers", 81: "showers", 82: "heavy showers",
+    85: "snow showers", 86: "heavy snow showers", 95: "thunderstorms", 96: "thunderstorms with hail", 99: "thunderstorms with hail" };
+  var lats = cards.map(function (c) { return c.getAttribute("data-lat"); }).join(",");
+  var lons = cards.map(function (c) { return c.getAttribute("data-lon"); }).join(",");
+  var url = "https://api.open-meteo.com/v1/forecast?latitude=" + lats + "&longitude=" + lons +
+    "&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=auto";
+  var note = document.getElementById("artWeatherNote");
+  function show(card, text) {
+    var el = card.querySelector("[data-now]");
+    el.innerHTML = '<span class="dot" aria-hidden="true"></span><span></span>';
+    el.lastChild.textContent = text;
+  }
+  var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+  var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
+  fetch(url, ctrl ? { signal: ctrl.signal } : {}).then(function (r) {
+    if (!r.ok) throw new Error("Open-Meteo answered " + r.status);
+    return r.json();
+  }).then(function (data) {
+    clearTimeout(timer);
+    var list = Array.isArray(data) ? data : [data];
+    cards.forEach(function (card, i) {
+      var d = list[i];
+      var place = card.getAttribute("data-place");
+      if (!d || !d.current) { show(card, "Weather at " + place + " isn't available right now."); return; }
+      var t = Math.round(d.current.temperature_2m);
+      var sky = WORDS[d.current.weather_code] || "";
+      var clock = typeof fmtClock === "function" && d.timezone ? fmtClock(new Date(), d.timezone) : "";
+      show(card, "Right now at " + place + ": " + t + "°F" + (sky ? ", " + sky : "") + (clock ? " · " + clock + " local time" : ""));
+    });
+    note.textContent = "Weather updated " + (typeof fmtClock === "function" ? fmtClock(new Date(), (typeof LOCAL_TZ !== "undefined" ? LOCAL_TZ : undefined)) : "just now") + ".";
+  }).catch(function () {
+    clearTimeout(timer);
+    cards.forEach(function (card) { show(card, "Weather at " + card.getAttribute("data-place") + " isn't available right now."); });
+    note.textContent = "The weather service didn't answer. Reload the page to try again.";
+  });
+
+  // Tarot card of the day: picked by today's date, the same for everyone.
+  // [number, name, picture, what's painted, traditionally stands for, think about, weather in the card]
+  var CARDS = [["0", "The Fool", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/RWS_Tarot_00_Fool.jpg/330px-RWS_Tarot_00_Fool.jpg", "A young traveler steps toward a cliff edge with a white rose in hand and a small dog at his heels.", "beginnings, trust and taking a leap", "What new start am I being invited to take?", "a bright yellow sky and a high sun"], ["I", "The Magician", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/RWS_Tarot_01_Magician.jpg/330px-RWS_Tarot_01_Magician.jpg", "A figure points one hand to the sky and one to the ground. On his table: a cup, a sword, a wand and a coin.", "skill, focus and using what you have", "What tools do I already have for today?", ""], ["II", "The High Priestess", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/RWS_Tarot_02_High_Priestess.jpg/330px-RWS_Tarot_02_High_Priestess.jpg", "A woman sits between a black pillar and a white one, a scroll in her lap and a crescent moon at her feet.", "intuition and quiet knowing", "What do I know deep down that I haven’t said out loud?", ""], ["III", "The Empress", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/RWS_Tarot_03_Empress.jpg/330px-RWS_Tarot_03_Empress.jpg", "A crowned woman rests on cushions in a field of ripe wheat, with a stream and a forest behind her.", "abundance, care and growth", "What in my life needs tending?", ""], ["IV", "The Emperor", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/RWS_Tarot_04_Emperor.jpg/330px-RWS_Tarot_04_Emperor.jpg", "A bearded ruler sits on a stone throne carved with rams’ heads, bare mountains behind him.", "structure, leadership and responsibility", "Where would a little order help?", ""], ["V", "The Hierophant", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/RWS_Tarot_05_Hierophant.jpg/330px-RWS_Tarot_05_Hierophant.jpg", "A teacher in robes raises a hand in blessing over two kneeling students, crossed keys at his feet.", "tradition, teaching and community", "Who taught me something I still use?", ""], ["VI", "The Lovers", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/RWS_Tarot_06_Lovers.jpg/330px-RWS_Tarot_06_Lovers.jpg", "Two people stand in a garden beneath a winged angel and a blazing sun.", "love, choices and values", "What choice am I making with my heart?", "a blazing sun"], ["VII", "The Chariot", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RWS_Tarot_07_Chariot.jpg/330px-RWS_Tarot_07_Chariot.jpg", "A crowned driver rides under a starry canopy, his chariot pulled by a black sphinx and a white one.", "willpower, direction and momentum", "Where am I steering, and who’s holding the reins?", ""], ["VIII", "Strength", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/RWS_Tarot_08_Strength.jpg/330px-RWS_Tarot_08_Strength.jpg", "A woman gently closes a lion’s jaws, a sideways figure eight floating above her head.", "courage, patience and gentle strength", "Where could gentleness work better than force?", ""], ["IX", "The Hermit", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/RWS_Tarot_09_Hermit.jpg/330px-RWS_Tarot_09_Hermit.jpg", "An old man on a snowy peak holds up a lantern with a six-pointed star inside.", "solitude, reflection and wisdom", "What would I hear if things got quiet?", "snow on the mountaintop"], ["X", "Wheel of Fortune", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg/330px-RWS_Tarot_10_Wheel_of_Fortune.jpg", "A great wheel turns in the sky, with a sphinx on top and four winged figures reading books on the clouds.", "cycles, change and luck", "What’s changing that I can’t control, and what can I?", "clouds"], ["XI", "Justice", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/RWS_Tarot_11_Justice.jpg/330px-RWS_Tarot_11_Justice.jpg", "A judge sits between two pillars, holding an upright sword and a set of balanced scales.", "fairness, truth and consequences", "What’s the honest thing to do here?", ""], ["XII", "The Hanged Man", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/RWS_Tarot_12_Hanged_Man.jpg/330px-RWS_Tarot_12_Hanged_Man.jpg", "A man hangs upside down by one foot from a living tree, calm, with a glow around his head.", "pausing, letting go and a new point of view", "What would I see if I looked at this upside down?", ""], ["XIII", "Death", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/RWS_Tarot_13_Death.jpg/330px-RWS_Tarot_13_Death.jpg", "A skeleton in black armor rides a white horse while the sun rises between two towers.", "endings that make room for change (it rarely means death)", "What chapter is closing so a new one can start?", "a sunrise"], ["XIV", "Temperance", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/RWS_Tarot_14_Temperance.jpg/330px-RWS_Tarot_14_Temperance.jpg", "An angel pours water from one cup to another, one foot on land and one in a pool.", "balance, patience and moderation", "What needs mixing in the right measure?", ""], ["XV", "The Devil", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/RWS_Tarot_15_Devil.jpg/330px-RWS_Tarot_15_Devil.jpg", "A horned figure sits above two chained people, but their chains are loose enough to lift off.", "habits and the things that hold us", "What chain could I lift off myself?", ""], ["XVI", "The Tower", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/RWS_Tarot_16_Tower.jpg/330px-RWS_Tarot_16_Tower.jpg", "Lightning strikes a tower on a rocky peak. Its crown topples and two people fall.", "sudden upheaval, and the truth breaking through", "What shaky thing needs rebuilding on firmer ground?", "a lightning strike, the deck’s only storm"], ["XVII", "The Star", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/RWS_Tarot_17_Star.jpg/330px-RWS_Tarot_17_Star.jpg", "A woman kneels by a pool under eight bright stars, pouring water onto the land and into the pool.", "hope, renewal and calm after a storm", "What gives me hope right now?", "a clear night full of stars"], ["XVIII", "The Moon", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/RWS_Tarot_18_Moon.jpg/330px-RWS_Tarot_18_Moon.jpg", "A dog and a wolf howl at the moon while a crayfish climbs from a pool. A path winds between two towers.", "dreams, doubt and things half-seen", "What am I unsure of, and what would make it clearer?", "moonlight, with drops falling like dew"], ["XIX", "The Sun", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/RWS_Tarot_19_Sun.jpg/330px-RWS_Tarot_19_Sun.jpg", "A smiling child rides a white horse under a huge sun, with sunflowers along a garden wall.", "joy, warmth and clarity", "What’s going right that I should celebrate?", "a huge, blazing sun"], ["XX", "Judgement", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/RWS_Tarot_20_Judgement.jpg/330px-RWS_Tarot_20_Judgement.jpg", "An angel blows a trumpet from the clouds as people below rise up with open arms.", "awakening, a calling and second chances", "What’s calling me?", "clouds"], ["XXI", "The World", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/RWS_Tarot_21_World.jpg/330px-RWS_Tarot_21_World.jpg", "A dancer floats inside a wreath, with an angel, an eagle, a bull and a lion in the corners.", "completion and wholeness", "What have I finished that I can be proud of?", ""]];
+  var $ = function (id) { return document.getElementById(id); };
+  var now = new Date();
+  var today = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000) % CARDS.length;
+  var shown = today;
+  var img = $("tcImg");
+  img.addEventListener("error", function () { $("tcPic").hidden = true; });
+  img.addEventListener("load", function () { $("tcPic").hidden = false; });
+  function showCard(i) {
+    var c = CARDS[i];
+    shown = i;
+    $("tcNum").textContent = (i === today ? "Today's card · " : "You drew · ") + "Card " + c[0];
+    $("tcName").textContent = c[1];
+    img.src = c[2];
+    img.alt = c[1] + ", painted by Pamela Colman Smith in 1909";
+    $("tcArt").textContent = c[3];
+    $("tcTheme").textContent = c[4];
+    $("tcAsk").textContent = c[5];
+    $("tcSky").hidden = !c[6];
+    $("tcSky").textContent = c[6] ? "⛅ Weather in this card: " + c[6] : "";
+    $("tcToday").hidden = i === today;
+  }
+  showCard(today);
+  $("tcDraw").addEventListener("click", function () {
+    var i = shown;
+    while (i === shown) i = Math.floor(Math.random() * CARDS.length);
+    showCard(i);
+    track("tarot-draw", CARDS[i][1]);
+  });
+  $("tcToday").addEventListener("click", function () { showCard(today); });
+})();
+</script>
+</body>
+</html>
