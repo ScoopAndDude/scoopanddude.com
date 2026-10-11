@@ -157,3 +157,14 @@ if (heroVideo) {
   };
   document.querySelector('.hero-photo').appendChild(btn);
 }
+
+// back to top button
+const topBtn = document.createElement('button');
+topBtn.textContent = '↑';
+topBtn.setAttribute('aria-label', 'Back to top');
+topBtn.style.cssText = 'position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--sign);color:#fff;border:0;font-size:1.4rem;cursor:pointer;opacity:0;transition:opacity .2s;z-index:30;';
+topBtn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+document.body.appendChild(topBtn);
+window.addEventListener('scroll', () => {
+  topBtn.style.opacity = window.scrollY > 400 ? '1' : '0';
+});
