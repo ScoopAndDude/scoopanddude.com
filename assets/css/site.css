@@ -264,3 +264,10 @@ html.dark .hero-banner { background: var(--sign-deep); }
 
 /* loading skeleton for video */
 .hero-photo video { background: #1a2744; }
+
+/* print styles */
+@media print {
+  .top, .scroll-progress, .video-pause, .theme-toggle, .hero-banner { display: none; }
+  .hero-photo video { display: none; }
+  body { background: #fff; color: #000; }
+}
