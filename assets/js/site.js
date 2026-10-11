@@ -168,3 +168,10 @@ document.body.appendChild(topBtn);
 window.addEventListener('scroll', () => {
   topBtn.style.opacity = window.scrollY > 400 ? '1' : '0';
 });
+
+// keyboard shortcut: press "t" for top
+document.addEventListener('keydown', (e) => {
+  if (e.key === 't' && !e.target.matches('input, textarea')) {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+});

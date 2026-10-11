@@ -254,3 +254,13 @@ html.dark .hero-banner { background: var(--sign-deep); }
 
 /* checklist */
 .next-checklist label { font-weight: 500; }
+
+/* performance: reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner, .mileage dd.states.done { animation: none; }
+  .hero-photo video { display: none; }
+  .hero-photo img { display: block !important; }
+}
+
+/* loading skeleton for video */
+.hero-photo video { background: #1a2744; }
