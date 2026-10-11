@@ -1,0 +1,11 @@
+{
+  "name": "Scoop & Dude",
+  "short_name": "Scoop & Dude",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#191970",
+  "theme_color": "#191970",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

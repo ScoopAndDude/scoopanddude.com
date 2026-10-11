@@ -323,3 +323,23 @@ body { touch-action: manipulation; }
 /* smoother dark mode */
 html { transition: background-color .3s ease, color .3s ease; }
 html.dark body, html.dark .top, html.dark .shop-box { transition: background .3s ease, color .3s ease; }
+
+/* banner shimmer */
+.hero-banner strong { animation: shimmer 3s ease-in-out infinite; }
+@keyframes shimmer { 0%,100% { letter-spacing: .02em; } 50% { letter-spacing: .06em; } }
+
+/* custom cursor on interactive (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  a, button, .clip, .st { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='18' font-size='18'%3E🚐%3C/text%3E%3C/svg%3E") 12 12, pointer; }
+}
+
+/* just keep going parallax hook */
+.break p { transition: transform .1s linear; }
+
+/* footer social icons */
+.follow a::before { margin-right: 6px; }
+.follow a[href*="youtube"]::before { content: "▶️ "; }
+.follow a[href*="tiktok"]::before { content: "🎵 "; }
+.follow a[href*="x.com"]::before, .follow a[href*="twitter"]::before { content: "𝕏 "; }
+.follow a[href*="facebook"]::before { content: "📘 "; }
+.follow a[href*="etsy"]::before { content: "🛍️ "; }

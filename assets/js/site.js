@@ -216,3 +216,56 @@ document.querySelectorAll('.clip').forEach(clip => {
   clip.style.position = 'relative';
   clip.appendChild(share);
 });
+
+// just keep going parallax
+const breakP = document.querySelector('.break p');
+if (breakP) {
+  window.addEventListener('scroll', () => {
+    const rect = breakP.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const offset = (window.innerHeight - rect.top) * 0.05;
+      breakP.style.transform = `translateY(${offset}px)`;
+    }
+  }, { passive: true });
+}
+
+// map tooltips already exist via .map-tip; enhance click
+document.querySelectorAll('.st').forEach(st => {
+  st.addEventListener('click', () => {
+    const name = st.dataset.name || 'State';
+    const tip = document.getElementById('maptip');
+    if (tip) {
+      tip.textContent = name + (st.classList.contains('no') ? ' — still to go' : ' — been there');
+      tip.hidden = false;
+      setTimeout(() => tip.hidden = true, 2000);
+    }
+  });
+});
+
+// simple shop carousel (cycle images if multiple)
+const shopImg = document.querySelector('.shop-carousel img');
+if (shopImg) {
+  const imgs = [
+    'assets/img/shop-printables.jpg',
+    'assets/img/van-beach-1200.jpg',
+    'assets/img/surf-run-760.jpg'
+  ];
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % imgs.length;
+    shopImg.style.opacity = '0';
+    setTimeout(() => {
+      shopImg.src = imgs[i];
+      shopImg.style.opacity = '1';
+    }, 300);
+  }, 4000);
+  shopImg.style.transition = 'opacity .3s';
+}
+
+// PWA manifest link
+if (!document.querySelector('link[rel="manifest"]')) {
+  const m = document.createElement('link');
+  m.rel = 'manifest';
+  m.href = '/manifest.json';
+  document.head.appendChild(m);
+}
