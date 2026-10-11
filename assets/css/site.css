@@ -238,3 +238,8 @@ html.dark .proj-card, html.dark .shop-list li { background: #152050; color: var(
   .hero-photo[data-parallax] img { transform: translateY(0); }
 }
 .shop-carousel { box-shadow: 0 8px 24px rgba(25,25,112,.12); }
+
+/* hero banner */
+.hero-banner { background: var(--sign); color: #fff; padding: 10px 0; text-align: center; font-weight: 800; letter-spacing: .02em; }
+.hero-banner strong { font-size: clamp(1rem, 2.5vw, 1.25rem); }
+html.dark .hero-banner { background: var(--sign-deep); }
