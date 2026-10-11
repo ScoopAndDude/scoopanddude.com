@@ -312,3 +312,14 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 
 body { touch-action: manipulation; }
+
+/* next-trip badges */
+.badge { display: inline-block; background: rgba(255,255,255,.15); color: #fff; padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: .9rem; border: 1px solid rgba(255,255,255,.3); }
+
+/* hero video fade */
+.hero-photo video { opacity: 0; transition: opacity .6s ease; }
+.hero-photo video.ready { opacity: 1; }
+
+/* smoother dark mode */
+html { transition: background-color .3s ease, color .3s ease; }
+html.dark body, html.dark .top, html.dark .shop-box { transition: background .3s ease, color .3s ease; }

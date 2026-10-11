@@ -189,3 +189,30 @@ copyBtn.onclick = () => {
 };
 const foot = document.querySelector('.foot .wrap');
 if (foot) foot.appendChild(copyBtn);
+
+// hero video fade-in
+const vid = document.querySelector('.hero-photo video');
+if (vid) {
+  vid.addEventListener('playing', () => vid.classList.add('ready'));
+  vid.addEventListener('loadeddata', () => { if (!vid.paused) vid.classList.add('ready'); });
+}
+
+// clip share buttons
+document.querySelectorAll('.clip').forEach(clip => {
+  const share = document.createElement('button');
+  share.className = 'clip-share';
+  share.textContent = '↗';
+  share.setAttribute('aria-label', 'Copy clip link');
+  share.style.cssText = 'position:absolute;top:8px;left:8px;z-index:2;background:rgba(0,0,0,.6);color:#fff;border:0;border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:1rem;';
+  share.onclick = (e) => {
+    e.stopPropagation();
+    const id = clip.dataset.yt;
+    const url = id ? `https://www.youtube.com/watch?v=${id}` : location.href;
+    navigator.clipboard.writeText(url).then(() => {
+      share.textContent = '✓';
+      setTimeout(() => share.textContent = '↗', 1200);
+    });
+  };
+  clip.style.position = 'relative';
+  clip.appendChild(share);
+});
