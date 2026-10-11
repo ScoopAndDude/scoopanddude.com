@@ -310,3 +310,5 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .top nav a { padding: 8px 6px; font-size: .9rem; }
   .hero-copy { margin-top: -36px; }
 }
+
+body { touch-action: manipulation; }
