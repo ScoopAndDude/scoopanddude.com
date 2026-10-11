@@ -175,3 +175,17 @@ document.addEventListener('keydown', (e) => {
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
 });
+
+// copy page link button in footer
+const copyBtn = document.createElement('button');
+copyBtn.textContent = 'Copy link';
+copyBtn.className = 'btn btn-quiet';
+copyBtn.style.cssText = 'margin-top:8px;font-size:.9rem;padding:8px 14px;';
+copyBtn.onclick = () => {
+  navigator.clipboard.writeText(location.href).then(() => {
+    copyBtn.textContent = 'Copied!';
+    setTimeout(() => copyBtn.textContent = 'Copy link', 1500);
+  });
+};
+const foot = document.querySelector('.foot .wrap');
+if (foot) foot.appendChild(copyBtn);
