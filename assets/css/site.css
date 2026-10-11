@@ -36,7 +36,7 @@ p { margin: 0 0 1em; }
 .skip:focus { left: 8px; }
 
 /* ---------- the road-sign parts ---------- */
-.sign { background: var(--sign); color: #fff; border-radius: 16px; padding: 6px; box-shadow: 0 1px 0 rgba(0, 0, 0, .08), 0 12px 32px rgba(25, 25, 112, .22); }
+.sign { background: var(--sign); color: #fff; border-radius: 16px; padding: 6px; box-shadow: 0 4px 24px rgba(25, 25, 112, .28); }
 .sign-in { border: 3px solid #fff; border-radius: 11px; padding: 22px 26px 20px; }
 .sign h1 { font-weight: 900; font-size: clamp(2.7rem, 6.4vw, 4.7rem); line-height: .95; margin: 0 0 .25em; letter-spacing: -0.015em; }
 .sign-sub { font-size: 1.12rem; line-height: 1.45; margin: 0 0 18px; max-width: 26em; }
@@ -75,7 +75,7 @@ p { margin: 0 0 1em; }
 .hero-photo { margin: 0; position: relative; }
 .hero-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 62%; border-radius: 14px; }
 .hero-photo figcaption, figure figcaption { font-size: .88rem; color: var(--ink-soft); margin-top: 8px; }
-.hero-copy { position: relative; margin-top: -84px; padding: 0 10px; }
+.hero-copy { position: relative; margin-top: -72px; padding: 0 12px; }
 @media (max-width: 899px) { .hero-photo figcaption { display: none; } }
 .hero-copy .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding: 0 4px; }
 @media (min-width: 900px) {
@@ -171,7 +171,7 @@ p { margin: 0 0 1em; }
 .follow a:hover span { color: #d4e0f0; }
 @media (min-width: 900px) { .next-in { grid-template-columns: .9fr 1.1fr; gap: 56px; } }
 
-.foot { background: var(--sign); color: #fff; padding: 36px 0 30px; }
+.foot { background: linear-gradient(180deg, var(--sign) 0%, var(--sign-deep) 100%); color: #fff; padding: 40px 0 32px; }
 .foot a { color: #fff; }
 .foot p { margin: 0 0 8px; }
 .foot .motto { font-weight: 800; font-size: 1.15rem; margin: 10px 0 12px; }
