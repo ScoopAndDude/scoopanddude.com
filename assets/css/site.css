@@ -271,3 +271,6 @@ html.dark .hero-banner { background: var(--sign-deep); }
   .hero-photo video { display: none; }
   body { background: #fff; color: #000; }
 }
+
+/* better focus for keyboard users */
+.btn:focus-visible, .mark:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
