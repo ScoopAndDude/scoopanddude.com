@@ -132,3 +132,14 @@ if (nextSign) {
   prog.innerHTML = '<span></span>';
   nextSign.appendChild(prog);
 }
+
+// sound toggle (placeholder - plays nothing by default)
+const soundBtn = document.createElement('button');
+soundBtn.className = 'theme-toggle';
+soundBtn.textContent = '🔇';
+soundBtn.setAttribute('aria-label', 'Toggle sound');
+soundBtn.onclick = () => {
+  soundBtn.textContent = soundBtn.textContent === '🔇' ? '🔊' : '🔇';
+  // Hook for future ambient audio
+};
+document.querySelector('.top-in').appendChild(soundBtn);

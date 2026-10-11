@@ -237,3 +237,4 @@ html.dark .proj-card, html.dark .shop-list li { background: #152050; color: var(
 @media (min-width: 900px) {
   .hero-photo[data-parallax] img { transform: translateY(0); }
 }
+.shop-carousel { box-shadow: 0 8px 24px rgba(25,25,112,.12); }
