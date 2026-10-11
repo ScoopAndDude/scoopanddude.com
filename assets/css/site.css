@@ -280,3 +280,33 @@ html { -webkit-overflow-scrolling: touch; }
 
 /* reduce tap highlight */
 a, button { -webkit-tap-highlight-color: transparent; }
+
+/* ===== stronger mobile responsiveness ===== */
+@media (max-width: 600px) {
+  .wrap { padding: 0 16px; }
+  .hero { padding: 16px 0 40px; }
+  .hero-copy { margin-top: -48px; padding: 0 8px; }
+  .sign { border-radius: 12px; }
+  .sign-in { padding: 16px 18px 14px; }
+  .sign h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+  .mileage dd { font-size: 1.4rem; }
+  .btn { padding: 14px 20px; min-height: 48px; display: inline-flex; align-items: center; }
+  .cta { flex-direction: column; }
+  .cta .btn { width: 100%; justify-content: center; }
+  .top nav a { min-height: 44px; display: inline-flex; align-items: center; }
+  .mark { font-size: 1rem; padding: 8px 12px; }
+  .clips-grid { gap: 8px; }
+  .clip { aspect-ratio: 9 / 14; }
+  .shop-box { padding: 24px 18px; }
+  .next-in { gap: 24px; }
+  .foot { padding: 28px 0 24px; }
+  .hero-banner strong { font-size: 1rem; }
+  .video-pause { width: 48px; height: 48px; }
+}
+
+@media (max-width: 400px) {
+  .top-in { gap: 8px; }
+  .top nav { gap: 2px; }
+  .top nav a { padding: 8px 6px; font-size: .9rem; }
+  .hero-copy { margin-top: -36px; }
+}
