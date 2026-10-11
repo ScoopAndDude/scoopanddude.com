@@ -232,3 +232,8 @@ html.dark .proj-card, html.dark .shop-list li { background: #152050; color: var(
 /* dark mode toggle */
 .theme-toggle { background: none; border: 0; color: var(--ink); font-size: 1.2rem; cursor: pointer; padding: 6px 8px; border-radius: 6px; }
 .theme-toggle:hover { background: var(--concrete); }
+/* light parallax on hero photo */
+.hero-photo img { transition: transform .4s ease; }
+@media (min-width: 900px) {
+  .hero-photo[data-parallax] img { transform: translateY(0); }
+}
