@@ -86,3 +86,49 @@ if (statesEl && 'IntersectionObserver' in window) {
   }, { threshold: 0.5 });
   io.observe(statesEl);
 }
+
+// scroll progress
+const bar = document.createElement('div');
+bar.className = 'scroll-progress';
+document.body.prepend(bar);
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / h * 100) + '%';
+});
+
+// dark mode toggle
+const toggle = document.createElement('button');
+toggle.className = 'theme-toggle';
+toggle.textContent = '🌙';
+toggle.setAttribute('aria-label', 'Toggle dark mode');
+toggle.onclick = () => {
+  document.documentElement.classList.toggle('dark');
+  toggle.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+};
+document.querySelector('.top-in').appendChild(toggle);
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.classList.add('dark');
+  toggle.textContent = '☀️';
+}
+
+// mileage pulse when done
+const statesEl = document.querySelector('.mileage dd.states');
+if (statesEl) {
+  const obs = new MutationObserver(() => {
+    if (statesEl.textContent === statesEl.dataset.count) {
+      statesEl.classList.add('done');
+      obs.disconnect();
+    }
+  });
+  obs.observe(statesEl, { childList: true, characterData: true, subtree: true });
+}
+
+// next trip progress (92% = 46/50)
+const nextSign = document.querySelector('.sign-next .sign-in');
+if (nextSign) {
+  const prog = document.createElement('div');
+  prog.className = 'next-progress';
+  prog.innerHTML = '<span></span>';
+  nextSign.appendChild(prog);
+}

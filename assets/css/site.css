@@ -195,3 +195,40 @@ p { margin: 0 0 1em; }
 .proj-t { display: block; font-size: 1.35rem; font-weight: 900; line-height: 1.15; margin: 4px 0 6px; }
 .proj-s { display: block; color: var(--ink-soft); font-size: 1rem; line-height: 1.5; }
 .proj-note { margin: 22px 0 0; color: var(--ink-soft); }
+
+/* ===== cooler upgrades ===== */
+/* scroll progress */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--sign); z-index: 100; width: 0%; transition: width .1s linear; }
+
+/* dark mode */
+html.dark { --paper: #0d1442; --ink: #e8edf5; --ink-soft: #b0b8c8; --concrete: #1a2744; --line: #2a3a5a; --sign: #2a4a9a; --sign-deep: #1a3a7a; }
+html.dark body { background: var(--paper); color: var(--ink); }
+html.dark .top { background: linear-gradient(180deg, #0d1442 0%, #152050 100%); }
+html.dark .shop-box { background: #1a2744; }
+html.dark .proj-card, html.dark .shop-list li { background: #152050; color: var(--ink); }
+
+/* custom focus */
+:focus-visible { outline: 3px solid var(--sign); outline-offset: 3px; }
+
+/* map sticker hover glow */
+.st:hover { filter: brightness(1.15) drop-shadow(0 0 6px var(--sign)); }
+
+/* next trip progress */
+.next-progress { height: 8px; background: rgba(255,255,255,.2); border-radius: 4px; margin: 10px 0; overflow: hidden; }
+.next-progress span { display: block; height: 100%; background: #fff; width: 92%; border-radius: 4px; }
+
+/* mileage pulse */
+.mileage dd.states.done { animation: pulse .6s ease; }
+@keyframes pulse { 50% { transform: scale(1.08); color: var(--sun); } }
+
+/* just keep going text */
+.break p { background: linear-gradient(to top, rgba(13,20,66,.8), transparent); }
+.break p span { background: linear-gradient(90deg, #fff, #e8b86d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* clip polish */
+.clip-play { transition: transform .2s; }
+.clip:hover .clip-play { transform: scale(1.1); }
+
+/* dark mode toggle */
+.theme-toggle { background: none; border: 0; color: var(--ink); font-size: 1.2rem; cursor: pointer; padding: 6px 8px; border-radius: 6px; }
+.theme-toggle:hover { background: var(--concrete); }
