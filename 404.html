@@ -3,31 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wrong turn | Scoop &amp; Dude</title>
+<title>Wrong turn | Scoop & Dude</title>
 <meta name="robots" content="noindex">
-<script>
-/* Oct. 7, 2026, about 9:45 to 10:55 AM Central, GitHub forwarded scoopanddude.github.io/laporteweathernow-posts/
-   (La Porte Weather Now's data and frames) to this site. Browsers that saw the forward can remember it, so send
-   them back to the real address, once: "back=1" makes it an address they were never forwarded from, and a page
-   that already has it stays here, so this can't loop. */
-(function () {
-  var p = location.pathname, s = location.search;
-  if (p.indexOf("/laporteweathernow-posts/") !== 0 || /[?&]back=1(&|$)/.test(s)) return;
-  location.replace("https://scoopanddude.github.io" + p + (s ? s + "&" : "?") + "back=1" + location.hash);
-})();
-</script>
+<meta name="theme-color" content="#191970">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/"><span class="mark">Scoop & Dude</span></a>
+  </div>
+</header>
 <main class="wrap" style="padding:80px 20px;max-width:640px">
   <div class="sign"><div class="sign-in">
     <h1 style="font-size:clamp(2.4rem,7vw,3.6rem)">Wrong turn</h1>
-    <p class="sign-sub">Wrong turn. That page isn't on the map.</p>
+    <p class="sign-sub">That page isn't on the map.</p>
     <dl class="mileage"><div><dt>Back to the start</dt><dd>0 mi</dd></div></dl>
   </div></div>
   <p style="margin-top:22px"><a class="btn" href="/">Take me home</a></p>
+  <p class="small" style="margin-top:16px">Or try the <a href="/camp-map/">camp map</a> or <a href="/projects/">projects</a>.</p>
 </main>
+<footer class="foot">
+  <div class="wrap">
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="small">&copy; 2026 Scoop & Dude.</p>
+  </div>
+</footer>
 </body>
 </html>
