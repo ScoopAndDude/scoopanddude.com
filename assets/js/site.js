@@ -143,3 +143,17 @@ soundBtn.onclick = () => {
   // Hook for future ambient audio
 };
 document.querySelector('.top-in').appendChild(soundBtn);
+
+// video pause button
+const heroVideo = document.querySelector('.hero-photo video');
+if (heroVideo) {
+  const btn = document.createElement('button');
+  btn.className = 'video-pause';
+  btn.textContent = '⏸';
+  btn.setAttribute('aria-label', 'Pause video');
+  btn.onclick = () => {
+    if (heroVideo.paused) { heroVideo.play(); btn.textContent = '⏸'; }
+    else { heroVideo.pause(); btn.textContent = '▶'; }
+  };
+  document.querySelector('.hero-photo').appendChild(btn);
+}

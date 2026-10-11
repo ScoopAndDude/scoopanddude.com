@@ -243,3 +243,14 @@ html.dark .proj-card, html.dark .shop-list li { background: #152050; color: var(
 .hero-banner { background: var(--sign); color: #fff; padding: 10px 0; text-align: center; font-weight: 800; letter-spacing: .02em; }
 .hero-banner strong { font-size: clamp(1rem, 2.5vw, 1.25rem); }
 html.dark .hero-banner { background: var(--sign-deep); }
+
+/* banner animation */
+.hero-banner { animation: bannerIn .6s ease; }
+@keyframes bannerIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* video pause button */
+.video-pause { position: absolute; bottom: 12px; right: 12px; background: rgba(25,25,112,.8); color: #fff; border: 0; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; }
+.hero-photo { position: relative; }
+
+/* checklist */
+.next-checklist label { font-weight: 500; }
