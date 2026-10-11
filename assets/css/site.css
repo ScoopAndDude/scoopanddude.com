@@ -274,3 +274,9 @@ html.dark .hero-banner { background: var(--sign-deep); }
 
 /* better focus for keyboard users */
 .btn:focus-visible, .mark:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+
+/* smoother scrolling on iOS */
+html { -webkit-overflow-scrolling: touch; }
+
+/* reduce tap highlight */
+a, button { -webkit-tap-highlight-color: transparent; }
