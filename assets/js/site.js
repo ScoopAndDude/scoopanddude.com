@@ -62,3 +62,27 @@
   dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
   dlg.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
 })();
+
+// animated state counter
+function animateCount(el) {
+  const target = parseInt(el.dataset.count, 10);
+  const dur = 1200;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const statesEl = document.querySelector('.mileage dd.states');
+if (statesEl && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      animateCount(statesEl);
+      io.disconnect();
+    }
+  }, { threshold: 0.5 });
+  io.observe(statesEl);
+}
