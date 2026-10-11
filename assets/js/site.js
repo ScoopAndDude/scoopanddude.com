@@ -138,9 +138,20 @@ const soundBtn = document.createElement('button');
 soundBtn.className = 'theme-toggle';
 soundBtn.textContent = '🔇';
 soundBtn.setAttribute('aria-label', 'Toggle sound');
+let ambient;
 soundBtn.onclick = () => {
-  soundBtn.textContent = soundBtn.textContent === '🔇' ? '🔊' : '🔇';
-  // Hook for future ambient audio
+  if (!ambient) {
+    ambient = new Audio('assets/ambient.m4a');
+    ambient.loop = true;
+    ambient.volume = 0.15;
+  }
+  if (ambient.paused) {
+    ambient.play();
+    soundBtn.textContent = '🔊';
+  } else {
+    ambient.pause();
+    soundBtn.textContent = '🔇';
+  }
 };
 document.querySelector('.top-in').appendChild(soundBtn);
 
