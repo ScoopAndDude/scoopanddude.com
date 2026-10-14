@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds index.html, 404.html, camp-map/index.html, projects/index.html, sitemap.xml and robots.txt for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
+"""Builds van-life/index.html, 404.html, camp-map/index.html, projects/index.html, sitemap.xml and robots.txt for scoopanddude.com (GitHub Pages, repo ScoopAndDude/scoopanddude.com).
 
 Keep this a project site with its own custom domain. Don't move it back to a repo named
 scoopanddude.github.io: a custom domain on that "user site" makes GitHub forward every
@@ -52,6 +52,20 @@ FOLLOW = [
 STICKERS = ["#f08a24", "#e8607b", "#3d97d3", "#74a548", "#f1bf2c", "#8a6fd1"]
 
 e = lambda s: html.escape(s, quote=True)
+
+
+def van_life(page):
+    """The van-life page lives at /van-life/ since Oct. 14, 2026, when The Dinner Scoop became the homepage
+    (Scoop: "scoopanddude.com should be the app and everything else just live inside it"). The page is written
+    for the site root, so point its links and files at the root explicitly."""
+    page = re.sub(r'(\s(?:href|src|poster)=")(?=assets/|favicon\.svg|camp-map/|projects/)', r'\1/', page)
+    page = re.sub(r'srcset="([^"]*)"', lambda m: 'srcset="' + re.sub(r'(^|,\s*)assets/', r'\1/assets/', m.group(1)) + '"', page)
+    page = page.replace('<link rel="canonical" href="https://scoopanddude.com/">', '<link rel="canonical" href="https://scoopanddude.com/van-life/">')
+    page = page.replace('<meta property="og:url" content="https://scoopanddude.com/">', '<meta property="og:url" content="https://scoopanddude.com/van-life/">')
+    page = page.replace('<a class="brand" href="#top">', '<a class="brand" href="/">', 1)   # the logo goes home, like on every other page
+    if '<a class="opt3" href="/">Dinner</a>' not in page:   # hidden on phones, where the logo does the same job
+        page = page.replace('<a href="/camp-map/">Camp map</a>', '<a class="opt3" href="/">Dinner</a>\n      <a href="/camp-map/">Camp map</a>', 1)
+    return page
 
 
 def map_svg():
@@ -361,12 +375,12 @@ CAMP = """<!doctype html>
   <div class="wrap top-in">
     <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
     <nav aria-label="Sections">
-      <a class="opt2" href="../#crew">The crew</a>
-      <a class="opt3" href="../#map">The map</a>
+      <a class="opt2" href="../van-life/#crew">The crew</a>
+      <a class="opt3" href="../van-life/#map">The map</a>
       <a href="./" aria-current="page">Camp map</a>
       <a href="../projects/">Projects</a>
-      <a class="opt2" href="../#clips">Clips</a>
-      <a class="opt" href="../#follow">Follow</a>
+      <a class="opt2" href="../van-life/#clips">Clips</a>
+      <a class="opt" href="../van-life/#follow">Follow</a>
     </nav>
   </div>
 </header>
@@ -495,7 +509,7 @@ def camp_page():
 PROJECTS = [  # (folder, kicker, name, what it is)
     ("faith/", "Daily", "Faith &amp; Ministry", "Love God. Love your neighbor. A daily King James verse, a hymn of the week, a word from the original Hebrew and Greek, prayer for today's world, and private prayer requests."),
     ("camp-map/", "On the road", "Camp map", "Free campsites, water, dump stations and propane near any U.S. town, this week's fuel prices, and which way the weather's better."),
-    ("dinner/", "In the kitchen", "The Dinner Scoop", "Can't decide what's for dinner? A cheap, easy pick for tonight, a week of dinners with what they cost, the grocery list, and 51 recipes that taste like you tried."),
+    ("", "In the kitchen", "The Dinner Scoop", "Can't decide what's for dinner? A cheap, easy pick for tonight, a week of dinners with what they cost, the grocery list, and 51 recipes that taste like you tried."),
     ("printables/", "Etsy shop", "Printables from the road", "Emergency, storm-prep and road-trip planners to print, checked against official guidance."),
     ("amazon/", "World", "Amazon Rainforest Watch", "Deforestation and illegal gold-mining numbers, drought and fire, real NASA satellite pictures, and the people protecting the forest."),
     ("markets/", "Money", "Markets &amp; Economy", "The stock market, oil, gas, crops and jobs in plain words, with La Porte County and Indiana numbers from official sources."),
@@ -531,12 +545,12 @@ PROJECTS_PAGE = """<!doctype html>
   <div class="wrap top-in">
     <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
     <nav aria-label="Sections">
-      <a class="opt2" href="../#crew">The crew</a>
-      <a class="opt3" href="../#map">The map</a>
+      <a class="opt2" href="../van-life/#crew">The crew</a>
+      <a class="opt3" href="../van-life/#map">The map</a>
       <a href="../camp-map/">Camp map</a>
       <a href="./" aria-current="page">Projects</a>
-      <a class="opt" href="../#clips">Clips</a>
-      <a class="opt" href="../#follow">Follow</a>
+      <a class="opt" href="../van-life/#clips">Clips</a>
+      <a class="opt" href="../van-life/#follow">Follow</a>
     </nav>
   </div>
 </header>
@@ -641,14 +655,15 @@ def main():
     page = (PAGE.replace("%JSONLD%", json.dumps(JSONLD, ensure_ascii=False, separators=(",", ":")))
                 .replace("%MAP%", map_svg()).replace("%MAPKEY%", map_key())
                 .replace("%CLIPS%", clips_html()).replace("%FOLLOW%", follow_html()))
-    open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(page)
+    os.makedirs(os.path.join(ROOT, "van-life"), exist_ok=True)   # the homepage is The Dinner Scoop (not built here)
+    open(os.path.join(ROOT, "van-life", "index.html"), "w", encoding="utf-8").write(van_life(page))
     open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8").write(NOT_FOUND)
     os.makedirs(os.path.join(ROOT, "camp-map"), exist_ok=True)
     camp = camp_page()
     open(os.path.join(ROOT, "camp-map", "index.html"), "w", encoding="utf-8").write(camp)
     os.makedirs(os.path.join(ROOT, "projects"), exist_ok=True)
     open(os.path.join(ROOT, "projects", "index.html"), "w", encoding="utf-8").write(projects_page())
-    print(f"index.html {len(page) // 1024} KB, {len(CLIPS)} clips, not yet: {NOT_YET or 'unknown'}; camp-map/index.html {len(camp) // 1024} KB")
+    print(f"van-life/index.html {len(page) // 1024} KB, {len(CLIPS)} clips, not yet: {NOT_YET or 'unknown'}; camp-map/index.html {len(camp) // 1024} KB")
     listed = sitemap_and_robots()
     print(f"sitemap.xml: {len(listed)} pages ({', '.join(u.replace(SITE, '') or '/' for u, _ in listed)}); robots.txt")
 

@@ -74,12 +74,12 @@ HEAD = """<!doctype html>
   <div class="wrap top-in">
     <a class="brand" href="../"><img src="../assets/img/scoop-dude-96.jpg" srcset="../assets/img/scoop-dude-160.jpg 3x" width="40" height="40" alt=""><span class="mark">Scoop &amp; Dude</span></a>
     <nav aria-label="Sections">
-      <a class="opt2" href="../#crew">The crew</a>
-      <a class="opt3" href="../#map">The map</a>
+      <a class="opt2" href="../van-life/#crew">The crew</a>
+      <a class="opt3" href="../van-life/#map">The map</a>
       <a href="../camp-map/">Camp map</a>
       <a href="../projects/">Projects</a>
-      <a class="opt" href="../#clips">Clips</a>
-      <a class="opt" href="../#follow">Follow</a>
+      <a class="opt" href="../van-life/#clips">Clips</a>
+      <a class="opt" href="../van-life/#follow">Follow</a>
     </nav>
   </div>
 </header>

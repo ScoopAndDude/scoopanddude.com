@@ -112,8 +112,7 @@ if (localStorage.getItem('theme') === 'dark') {
   toggle.textContent = '☀️';
 }
 
-// mileage pulse when done
-const statesEl = document.querySelector('.mileage dd.states');
+// mileage pulse when done (statesEl is the counter found above; declaring it twice stopped this whole file from running)
 if (statesEl) {
   const obs = new MutationObserver(() => {
     if (statesEl.textContent === statesEl.dataset.count) {
@@ -141,7 +140,7 @@ soundBtn.setAttribute('aria-label', 'Toggle sound');
 let ambient;
 soundBtn.onclick = () => {
   if (!ambient) {
-    ambient = new Audio('assets/ambient.m4a');
+    ambient = new Audio('/assets/ambient.m4a');
     ambient.loop = true;
     ambient.volume = 0.15;
   }
@@ -257,9 +256,9 @@ document.querySelectorAll('.st').forEach(st => {
 const shopImg = document.querySelector('.shop-carousel img');
 if (shopImg) {
   const imgs = [
-    'assets/img/shop-printables.jpg',
-    'assets/img/van-beach-1200.jpg',
-    'assets/img/surf-run-760.jpg'
+    '/assets/img/shop-printables.jpg',
+    '/assets/img/van-beach-1200.jpg',
+    '/assets/img/surf-run-760.jpg'
   ];
   let i = 0;
   setInterval(() => {
