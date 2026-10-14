@@ -33,6 +33,21 @@ Scoop moved his non-weather pages here: `faith/`, `amazon/`, `markets/`, `ai-sur
   feeds through laporteweathernow.com/feeds/; if those don't answer here, the page links to the sources instead.
 - The daily-verse phone notification stayed with La Porte Weather Now's notification service and isn't on `faith/`.
 
+## The Dinner Scoop (`dinner/`, added Oct. 14, 2026)
+
+A what's-for-dinner app: tonight's pick with what it costs, a week planner with the food cost and a
+"Make it cheaper" button, a grocery list that builds itself, a what's-in-my-fridge finder, and 51 recipes
+with timers and a step-by-step cook mode. Everything is in the one file `dinner/index.html` (recipes, prices,
+styles and script); there's no build step and nothing loads from other sites. Visitors' plans, lists and
+favorites stay in their own browser (localStorage). The fonts, Big Shoulders and Atkinson Hyperlegible
+Next, are in `assets/fonts/`. It started as a Claude artifact; Ask the chef and account sync only work
+inside Claude, so on this site the page runs without them. Recipe costs are estimates from typical U.S.
+grocery prices (Oct. 2026).
+
+Heads-up (Oct. 14, 2026): `index.html`, `404.html`, `camp-map/index.html` and `projects/index.html` have
+hand edits newer than `tools/build.py` (the hero video, the ambient sound, the 404 forward fix and more).
+Running the build now would undo them, so carry those edits into `tools/build.py` before running it again.
+
 ## Keep it a project site
 
 This repo is named `scoopanddude.com`, not `scoopanddude.github.io`, on purpose. A custom domain on a
@@ -46,3 +61,6 @@ own domain, only this site moves to scoopanddude.com.
 - Photos and videos: Scoop.
 - State outlines: [us-atlas](https://github.com/topojson/us-atlas) (U.S. Census Bureau boundaries).
 - Font: [Overpass](https://github.com/RedHatOfficial/Overpass), SIL Open Font License (`assets/fonts/OFL.txt`).
+- The Dinner Scoop fonts: [Big Shoulders](https://github.com/xotypeco/big_shoulders) and
+  [Atkinson Hyperlegible Next](https://github.com/googlefonts/atkinson-hyperlegible-next), SIL Open Font License
+  (`assets/fonts/OFL-BigShoulders.txt`, `assets/fonts/OFL-AtkinsonHyperlegibleNext.txt`).

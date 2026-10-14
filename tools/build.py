@@ -206,7 +206,7 @@ PAGE = """<!doctype html>
       <figure><img src="assets/img/waterfall-960.jpg" width="960" height="720" loading="lazy" decoding="async" alt="A waterfall pouring into a muddy spring river below rocky cliffs and bare trees"><figcaption>Waterfall stop.</figcaption></figure>
     </div>
     <a class="guide" href="camp-map/"><span class="guide-in"><span><span class="guide-t">Camp map</span><span class="guide-s">Free campsites, water, dump stations and propane near any U.S. town, and which way the weather's better.</span></span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 35 L33 15 M17 15 H33 V31" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-    <a class="guide guide-2" href="projects/"><span class="guide-in"><span><span class="guide-t">Projects</span><span class="guide-s">Faith, the Amazon, markets, AI, world art, printables, and pages for friends far away.</span></span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 35 L33 15 M17 15 H33 V31" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a class="guide guide-2" href="projects/"><span class="guide-in"><span><span class="guide-t">Projects</span><span class="guide-s">Dinner ideas, faith, the Amazon, markets, AI, world art, printables, and pages for friends far away.</span></span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 35 L33 15 M17 15 H33 V31" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 </section>
 
@@ -495,6 +495,7 @@ def camp_page():
 PROJECTS = [  # (folder, kicker, name, what it is)
     ("faith/", "Daily", "Faith &amp; Ministry", "Love God. Love your neighbor. A daily King James verse, a hymn of the week, a word from the original Hebrew and Greek, prayer for today's world, and private prayer requests."),
     ("camp-map/", "On the road", "Camp map", "Free campsites, water, dump stations and propane near any U.S. town, this week's fuel prices, and which way the weather's better."),
+    ("dinner/", "In the kitchen", "The Dinner Scoop", "Can't decide what's for dinner? A cheap, easy pick for tonight, a week of dinners with what they cost, the grocery list, and 51 recipes that taste like you tried."),
     ("printables/", "Etsy shop", "Printables from the road", "Emergency, storm-prep and road-trip planners to print, checked against official guidance."),
     ("amazon/", "World", "Amazon Rainforest Watch", "Deforestation and illegal gold-mining numbers, drought and fire, real NASA satellite pictures, and the people protecting the forest."),
     ("markets/", "Money", "Markets &amp; Economy", "The stock market, oil, gas, crops and jobs in plain words, with La Porte County and Indiana numbers from official sources."),
@@ -508,12 +509,12 @@ PROJECTS_PAGE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | Scoop &amp; Dude</title>
-<meta name="description" content="Scoop's other projects: a daily verse and prayer, the camp map, printables, Amazon Rainforest Watch, markets, AI's Survival Guide, world art, and pages for friends.">
+<meta name="description" content="Scoop's other projects: The Dinner Scoop, a daily verse and prayer, the camp map, printables, Amazon Rainforest Watch, markets, AI's Survival Guide, world art, and pages for friends.">
 <link rel="canonical" href="https://scoopanddude.com/projects/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scoopanddude.com/projects/">
 <meta property="og:title" content="Projects | Scoop &amp; Dude">
-<meta property="og:description" content="Faith, the camp map, printables, the Amazon, markets, AI, world art, and pages for friends far away.">
+<meta property="og:description" content="Dinner ideas, faith, the camp map, printables, the Amazon, markets, AI, world art, and pages for friends far away.">
 <meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
