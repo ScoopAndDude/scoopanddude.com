@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>(function(){var ids=["top", "crew", "crew-h", "map", "map-h", "usmap", "maptip", "clips", "clips-h", "player", "shop", "shop-h", "follow", "follow-h", "lift", "next"];function go(){var h=location.hash.slice(1);if(ids.indexOf(h)>=0)location.replace("/van-life/#"+h);}go();window.addEventListener("hashchange",go);})();</script>
 <title>In the Kitchen at Scoop &amp; Dude: The Dinner Scoop</title>
-<meta name="description" content="What's for dinner? Here's the scoop. A cheap, easy pick for tonight, a week of dinners with the food cost, a grocery list that builds itself, and 51 recipes that taste like you tried. From Scoop & Dude.">
+<meta name="description" content="What's for dinner? Here's the scoop. A cheap, easy pick for tonight, a week of dinners with the food cost, a grocery list that builds itself, and 64 recipes that taste like you tried, slow cooker dinners included. From Scoop & Dude.">
 <link rel="canonical" href="https://scoopanddude.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scoopanddude.com/">
 <meta property="og:site_name" content="Scoop &amp; Dude">
 <meta property="og:title" content="In the Kitchen at Scoop &amp; Dude: what's for dinner? Here's the scoop.">
-<meta property="og:description" content="What's for dinner? Here's the scoop. A cheap, easy pick for tonight, a week of dinners with the food cost, a grocery list that builds itself, and 51 recipes that taste like you tried. From Scoop & Dude.">
+<meta property="og:description" content="What's for dinner? Here's the scoop. A cheap, easy pick for tonight, a week of dinners with the food cost, a grocery list that builds itself, and 64 recipes that taste like you tried, slow cooker dinners included. From Scoop & Dude.">
 <meta property="og:image" content="https://scoopanddude.com/assets/img/og-midnight-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -265,8 +265,14 @@ main { padding-block: 20px calc(var(--tabbar-h) + 40px + env(safe-area-inset-bot
   display: inline-flex; align-items: center; gap: 0; font-size: 13px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
   background: var(--surface-2); color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap;
 }
-.price.cheap { background: var(--relish-wash); color: var(--relish); }
-.price.splurge { background: var(--mustard-wash); color: var(--mustard-ink); }
+.price .tier { display: inline-block; margin: 0 6px 0 -3px; padding: 0 5px; border-radius: 999px; font-size: 11px; line-height: 16px; letter-spacing: .04em; color: var(--surface); background: var(--ink-2); }
+.price.t1 { background: var(--relish-wash); color: var(--relish); }
+.price.t1 .tier { background: var(--relish); }
+.price.t3 { background: var(--mustard-wash); color: var(--mustard-ink); }
+.price.t3 .tier { background: var(--mustard-ink); }
+.ctrl-hint { font-size: 13px; color: var(--ink-3); }
+.slow-note { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding: 9px 12px; border-radius: var(--r-1); background: var(--mustard-wash); color: var(--mustard-ink); font-size: 15px; font-weight: 600; }
+.slow-note .ic { width: 18px; height: 18px; }
 
 .stepper { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 700; color: var(--ink-2); }
 .stepper .lbl { margin-right: 6px; }
@@ -404,6 +410,7 @@ main { padding-block: 20px calc(var(--tabbar-h) + 40px + env(safe-area-inset-bot
 .ws-cost .l { font-size: 13px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-2); width: 100%; }
 .ws-cost b { font-family: var(--font-sign); font-weight: 800; font-size: 44px; line-height: .9; font-variant-numeric: tabular-nums; }
 .ws-cost .per { color: var(--ink-2); font-weight: 600; }
+.ws-mix { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; margin-top: 6px; }
 .ws-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 @media (min-width: 760px) {
   .week-sum { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
@@ -419,6 +426,7 @@ main { padding-block: 20px calc(var(--tabbar-h) + 40px + env(safe-area-inset-bot
 .day-date .dow { font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
 .day-date .dnum { font-family: var(--font-sign); font-weight: 800; font-size: 30px; font-variant-numeric: tabular-nums; margin-top: 2px; }
 .day-dish { display: grid; gap: 4px; text-align: left; min-width: 0; padding: 2px 0; }
+.day-top { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
 button.day-dish:hover .day-name { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
 .day-name { font-family: var(--font-sign); font-weight: 800; font-size: 23px; line-height: 1; font-variation-settings: "opsz" 72; overflow-wrap: anywhere; }
 .day-meta { font-size: 14px; color: var(--ink-2); }
@@ -934,6 +942,7 @@ const ING = {
   avocado: ["avocado", "avocados", "produce", "avocado"],
   lemon: ["lemon", "lemons", "produce", "lemon"],
   lime: ["lime", "limes", "produce", "lime"],
+  orange: ["orange", "oranges", "produce", 0],
   apple: ["apple", "apples", "produce", "apples"],
   coleslaw_mix: ["coleslaw mix", 0, "produce", "cabbage", { buy: "a 14-oz bag is about 6 cups" }],
   cabbage_head: ["green cabbage", 0, "produce", "cabbage", { short: "cabbage" }],
@@ -948,6 +957,7 @@ const ING = {
   dill: ["fresh dill", 0, "produce", "dill", { short: "dill" }],
   rosemary: ["fresh rosemary or thyme", 0, "produce", 0, { short: "fresh herbs" }],
   apple_cider: ["apple cider", 0, "produce", "apple_cider"],
+  corn_cob: ["ear of corn", "ears of corn", "produce", "corn", { w: 1 }],
 
   // Bread & tortillas
   tortillas_flour: ["flour tortilla", "flour tortillas", "bakery", "tortillas", { w: 1 }],
@@ -969,6 +979,7 @@ const ING = {
   short_pasta: ["penne or other short pasta", 0, "dry", "pasta", { short: "penne", buy: "a box is usually 16 oz" }],
   elbows: ["elbow macaroni", 0, "dry", "pasta", { short: "macaroni", buy: "a box is usually 16 oz" }],
   egg_noodles: ["wide egg noodles", 0, "dry", "pasta", { short: "egg noodles", buy: "a bag is usually 12 oz" }],
+  lentils: ["dried brown or green lentils", 0, "dry", "lentils", { short: "lentils", buy: "a 1-lb bag is about 2 1/4 cups" }],
   tortilla_chips: ["tortilla chips", 0, "dry", "tortilla_chips"],
 
   // Canned & jarred
@@ -980,6 +991,7 @@ const ING = {
   marinara: ["marinara sauce", 0, "canned", "marinara", { short: "marinara", buy: "a 24-oz jar is about 3 cups" }],
   black_beans: ["black beans", 0, "canned", "black_beans", { size: "15 oz" }],
   kidney_beans: ["kidney beans", 0, "canned", "kidney_beans", { size: "15 oz" }],
+  white_beans: ["great northern or cannellini beans", 0, "canned", "white_beans", { size: "15 oz", short: "white beans" }],
   chickpeas: ["chickpeas", 0, "canned", "chickpeas", { size: "15 oz" }],
   refried_beans: ["refried beans", 0, "canned", "refried_beans", { size: "16 oz" }],
   chicken_broth: ["chicken broth", 0, "canned", "broth", { buy: "a 32-oz carton is 4 cups" }],
@@ -987,12 +999,14 @@ const ING = {
   veg_broth: ["vegetable broth", 0, "canned", "broth", { buy: "a 32-oz carton is 4 cups" }],
   coconut_milk: ["full-fat coconut milk", 0, "canned", "coconut_milk", { size: "13.5 oz", short: "coconut milk" }],
   salsa: ["salsa", 0, "canned", "salsa", { buy: "a 16-oz jar is about 2 cups" }],
+  enchilada_sauce: ["red enchilada sauce", 0, "canned", "enchilada_sauce", { size: "10 oz", short: "enchilada sauce" }],
   pesto: ["basil pesto", 0, "canned", "pesto", { short: "pesto", buy: "a 6-oz jar is about 3/4 cup" }],
   sun_dried: ["sun-dried tomatoes in oil", 0, "canned", "sun_dried", { short: "sun-dried tomatoes" }],
 
   // Sauces & condiments
   bbq_sauce: ["BBQ sauce", 0, "cond", "bbq_sauce"],
   pickles: ["dill pickle slices", 0, "cond", "pickles", { short: "pickles" }],
+  pepperoncini: ["pepperoncini peppers", 0, "cond", 0, { short: "pepperoncini", buy: "a 16-oz jar is plenty" }],
   dijon: ["Dijon mustard", 0, "cond", "dijon"],
   sesame_oil: ["toasted sesame oil", 0, "cond", "sesame_oil", { short: "sesame oil" }],
   hoisin: ["hoisin sauce", 0, "cond", "hoisin"],
@@ -1107,12 +1121,15 @@ const CHIPS = [
   ["salsa", "Salsa", "pantry"],
   ["refried_beans", "Refried beans", "pantry"],
   ["kidney_beans", "Kidney beans", "pantry"],
+  ["white_beans", "White beans", "pantry"],
   ["chickpeas", "Chickpeas", "pantry"],
+  ["lentils", "Lentils", "pantry"],
   ["flatbread", "Pita or naan", "pantry"],
   ["coconut_milk", "Coconut milk", "pantry"],
   ["tortilla_chips", "Tortilla chips", "pantry"],
   ["breadcrumbs", "Breadcrumbs or panko", "pantry"],
   ["bbq_sauce", "BBQ sauce", "pantry"],
+  ["enchilada_sauce", "Enchilada sauce", "pantry"],
   ["pesto", "Pesto", "pantry"],
   ["pickles", "Pickles", "pantry"],
   ["dijon", "Dijon mustard", "pantry"],
@@ -1528,6 +1545,99 @@ const RECIPES = [
     lo: "Keeps 4 days and freezes for 3 months in its juices."
   },
   {
+    id: "slow-cooker-chicken-dumplings", n: "Slow Cooker Chicken & Dumplings", p: "chicken", t: 420, a: 20, d: 1, s: 6,
+    tags: ["slow", "comfort", "kid", "budget", "fall", "winter"],
+    b: "Tender chicken in a creamy, thyme-scented stew under a lid of fluffy biscuit dumplings.",
+    i: [
+      [2, "lb", "chicken_thighs"],
+      [1, "tsp", "salt"],
+      [0.5, "tsp", "pepper"],
+      [1, "tsp", "thyme"],
+      [1, "", "onion", "diced"],
+      [3, "", "carrots", "sliced"],
+      [2, "stalk", "celery", "sliced"],
+      [3, "clove", "garlic", "minced"],
+      [1, "", "bay_leaf"],
+      [4, "cup", "chicken_broth"],
+      [1 / 3, "cup", "flour"],
+      [1, "cup", "milk"],
+      [1, "cup", "peas"],
+      [1, "can", "biscuits", "each biscuit cut into 4 pieces"],
+      [2, "tbsp", "parsley", "chopped", "o"]
+    ],
+    st: [
+      ["Put the onion, carrots, celery and garlic in the slow cooker. Set the chicken on top, season it with the salt, pepper and thyme, tuck in the bay leaf and pour in the broth."],
+      ["Cover and cook on LOW for 5 to 6 hours (or HIGH for 3), until the chicken is very tender."],
+      ["Lift out the chicken, shred it with two forks and discard the bay leaf. Whisk the flour into the milk until smooth, then stir it into the pot with the chicken and peas."],
+      ["Turn the cooker to HIGH. Scatter the biscuit pieces over the top in a single layer, cover and cook without lifting the lid until they're puffed and cooked through. Break one open: the middle should be fluffy, not doughy. If it isn't, give it 10 more minutes.", 50],
+      ["Spoon into bowls with the dumplings on top and sprinkle with parsley."]
+    ],
+    tip: "Keep the lid on while the dumplings cook. They steam like little biscuits, and every peek lets the steam out.",
+    sw: "Chicken breasts work; check them at 4 hours on LOW. Out of biscuits? Stir in 8 oz of egg noodles instead and cook on HIGH until tender, about 30 minutes, for chicken and noodles.",
+    lo: "Keeps 3 days. The dumplings drink up the broth, so add a splash when you reheat it. It doesn't freeze well with the dumplings."
+  },
+  {
+    id: "slow-cooker-butter-chicken", n: "Slow Cooker Butter Chicken", p: "chicken", t: 360, a: 15, d: 1, s: 6,
+    tags: ["slow", "comfort", "date"],
+    b: "Takeout-style butter chicken in a rich, creamy tomato sauce, waiting for you when you get home.",
+    i: [
+      [2.5, "lb", "chicken_thighs", "cut into 1 1/2-inch pieces"],
+      [1, "", "onion", "diced"],
+      [5, "clove", "garlic", "minced"],
+      [1, "tbsp", "ginger", "grated"],
+      [2, "tbsp", "curry_powder"],
+      [1, "tsp", "paprika"],
+      [1, "tsp", "cumin"],
+      [1.5, "tsp", "salt"],
+      [3, "tbsp", "tomato_paste"],
+      [1, "can", "crushed_tomatoes"],
+      [0.75, "cup", "heavy_cream"],
+      [3, "tbsp", "butter", "cut into pieces"],
+      [2, "cup", "rice"],
+      [0.25, "cup", "cilantro", "chopped", "o"],
+      [4, "", "naan", "warmed", "o"]
+    ],
+    st: [
+      ["Put the chicken, onion, garlic and ginger in the slow cooker. Sprinkle with the curry powder, paprika, cumin and salt and toss until everything is coated."],
+      ["Stir the tomato paste into the crushed tomatoes and pour it over the chicken."],
+      ["Cover and cook on LOW for 5 to 6 hours (or HIGH for 3), until the chicken is very tender."],
+      ["About 30 minutes before dinner, cook the rice according to the package.", 20],
+      ["Stir the cream and butter into the sauce until the butter melts. If you'd like it thicker, let it bubble on HIGH with the lid off for 15 minutes. Taste for salt and serve over the rice with cilantro and warm naan."]
+    ],
+    tip: "Stir in the cream and butter at the end, not the start. Dairy can split over a long cook, and adding it last keeps the sauce silky.",
+    sw: "Use a can of coconut milk in place of the cream. Chicken breasts work; give them 3 to 4 hours on LOW. A teaspoon of garam masala stirred in at the end makes it taste even more like takeout.",
+    lo: "Keeps 4 days and freezes for 3 months. It's even better the next day."
+  },
+  {
+    id: "slow-cooker-teriyaki-chicken", n: "Slow Cooker Teriyaki Chicken", p: "chicken", t: 300, a: 15, d: 1, s: 6,
+    tags: ["slow", "kid", "budget"],
+    b: "Sticky, sweet-salty teriyaki chicken and broccoli over rice. Better than takeout for a fraction of the price.",
+    i: [
+      [2.5, "lb", "chicken_thighs"],
+      [0.5, "cup", "soy_sauce", "low-sodium if you have it"],
+      [0.25, "cup", "honey"],
+      [2, "tbsp", "brown_sugar"],
+      [2, "tbsp", "vinegar", "rice or cider"],
+      [4, "clove", "garlic", "minced"],
+      [1, "tbsp", "ginger", "grated"],
+      [2, "tbsp", "cornstarch"],
+      [1, "head", "broccoli", "cut into florets"],
+      [2, "cup", "rice"],
+      [3, "", "green_onions", "sliced"],
+      [1, "tsp", "sesame_oil", "", "o"]
+    ],
+    st: [
+      ["Whisk the soy sauce, honey, brown sugar, vinegar, garlic and ginger right in the slow cooker. Add the chicken and turn it to coat."],
+      ["Cover and cook on LOW for 4 to 5 hours (or HIGH for 2 1/2), until the chicken is tender."],
+      ["Lift out the chicken and shred or chop it. Stir the cornstarch into 2 tablespoons of cold water and whisk it into the sauce. Set the cooker to HIGH, pile the broccoli on top, cover and cook until the sauce is glossy and the broccoli is bright green and tender.", 20],
+      ["Meanwhile, cook the rice according to the package."],
+      ["Stir the chicken back into the sauce with the sesame oil. Serve over the rice with the broccoli and top with green onions."]
+    ],
+    tip: "Slow cookers trap steam, so the sauce stays thin until the end. A quick cornstarch slurry turns it into a sticky glaze in minutes.",
+    sw: "Chicken breasts work; check them at 3 hours on LOW. Add a pinch of red pepper flakes for heat, or swap the broccoli for a bag of frozen stir-fry vegetables.",
+    lo: "Keeps 4 days. Leftovers make great rice bowls, wraps or fried rice."
+  },
+  {
     id: "cheesy-chicken-rice", n: "Cheesy Chicken, Broccoli & Rice", p: "chicken", t: 40, a: 15, d: 1,
     tags: ["budget", "kid", "comfort", "onepan"],
     b: "Chicken, rice and broccoli cook together in one pan under a blanket of melted cheddar.",
@@ -1852,6 +1962,104 @@ const RECIPES = [
     sw: "No slow cooker? Use a Dutch oven, covered, at 300°F for 3 1/2 to 4 hours.",
     lo: "Shred leftovers for sandwiches, tacos, or beef and noodles."
   },
+  {
+    id: "slow-cooker-beef-stew", n: "Slow Cooker Beef Stew", p: "beef", t: 520, a: 25, d: 1, s: 6,
+    tags: ["slow", "comfort", "fall", "winter", "weekend"],
+    b: "Fork-tender beef, potatoes and carrots in a rich, glossy gravy. Ten minutes of browning pays off all day.",
+    i: [
+      [2, "lb", "chuck_roast", "cut into 1 1/2-inch chunks"],
+      [1.5, "tsp", "salt"],
+      [0.5, "tsp", "pepper"],
+      [3, "tbsp", "flour"],
+      [1, "tbsp", "veg_oil"],
+      [1.5, "lb", "potatoes_russet", "peeled, cut into 1 1/2-inch chunks"],
+      [4, "", "carrots", "cut into 1-inch pieces"],
+      [1, "", "onion", "chopped"],
+      [2, "stalk", "celery", "sliced"],
+      [3, "clove", "garlic", "minced"],
+      [2, "tbsp", "tomato_paste"],
+      [3, "cup", "beef_broth"],
+      [1, "tbsp", "worcestershire"],
+      [1, "tsp", "thyme"],
+      [2, "", "bay_leaf"],
+      [1, "cup", "peas"],
+      [1, "loaf", "crusty_bread", "for serving", "o"]
+    ],
+    st: [
+      ["Toss the beef with the salt, pepper and flour. Brown it in the oil in a large skillet over medium-high in two batches, about 4 minutes per batch. You can skip this if you're rushed, but it's where the deep flavor comes from.", 8],
+      ["Put the potatoes, carrots, onion, celery and garlic in the slow cooker and pile the beef on top."],
+      ["Pour 1/2 cup of the broth into the hot skillet and scrape up the browned bits. Whisk it with the rest of the broth, the tomato paste, Worcestershire and thyme, pour it over everything and tuck in the bay leaves."],
+      ["Cover and cook on LOW for 8 to 9 hours (or HIGH for 5 to 6), until the beef is fork-tender."],
+      ["Discard the bay leaves, stir in the peas and cover for 5 minutes to warm them through. Taste for salt and serve with crusty bread.", 5]
+    ],
+    tip: "Buy a chuck roast and cut it up yourself. Packs of stew meat are often mixed lean scraps that cook up dry, and chuck turns tender every time.",
+    sw: "Yukon Gold potatoes hold their shape better than russets. Swap 1/2 cup of the broth for red wine to make it extra rich.",
+    lo: "Keeps 4 days and freezes for 3 months. Like most stews, it's even better the next day."
+  },
+  {
+    id: "slow-cooker-italian-beef", n: "Slow Cooker Italian Beef Sandwiches", p: "beef", t: 540, a: 15, d: 1, s: 8,
+    tags: ["slow", "weekend", "fun"],
+    b: "The Chicago classic: garlicky, peppery shredded beef piled on rolls and dunked in its own juice.",
+    i: [
+      [3, "lb", "chuck_roast"],
+      [1, "tbsp", "italian_seasoning"],
+      [2, "tsp", "salt"],
+      [1, "tsp", "pepper"],
+      [1, "tsp", "garlic_powder"],
+      [1, "tsp", "onion_powder"],
+      [0.5, "tsp", "red_pepper_flakes"],
+      [6, "clove", "garlic", "smashed"],
+      [1, "cup", "pepperoncini", "plus a few spoonfuls of the brine"],
+      [3, "cup", "beef_broth"],
+      [8, "", "hoagie", "split"],
+      [8, "slice", "provolone", "", "o"]
+    ],
+    st: [
+      ["Mix the Italian seasoning, salt, pepper, garlic powder, onion powder and red pepper flakes and rub it all over the roast. Set it in the slow cooker."],
+      ["Scatter the garlic and pepperoncini around the roast and pour in the brine and broth."],
+      ["Cover and cook on LOW for 8 to 10 hours (or HIGH for 5 to 6), until the beef pulls apart easily."],
+      ["Shred the beef right in the pot with two forks, skim off the fat that rises and let the meat soak in the juices for 10 minutes.", 10],
+      ["Toast the rolls, pile on the beef and peppers and top with provolone. Spoon extra juice over the top, or dunk the whole sandwich, Chicago style."]
+    ],
+    tip: "Use sturdy rolls and toast them. Soft buns fall apart the second they meet the juice, and the juice is the best part.",
+    sw: "Use hot giardiniera in place of the pepperoncini for real Chicago heat, or use both. Mozzarella works in place of provolone.",
+    lo: "Keeps 4 days in its juices and freezes for 3 months. Reheat it gently in the juice so it stays moist."
+  },
+  {
+    id: "slow-cooker-taco-soup", n: "Slow Cooker Taco Soup", p: "beef", t: 320, a: 20, d: 1, s: 6,
+    tags: ["slow", "budget", "kid", "soup", "fall", "winter"],
+    b: "Everything you love about taco night in a hearty, cozy soup. Brown the beef, open the cans and walk away.",
+    i: [
+      [1, "lb", "ground_beef"],
+      [1, "", "onion", "diced"],
+      [1, "tbsp", "chili_powder"],
+      [2, "tsp", "cumin"],
+      [1, "tsp", "garlic_powder"],
+      [1, "tsp", "paprika"],
+      [1, "tsp", "oregano"],
+      [1, "tsp", "salt"],
+      [1, "can", "black_beans", "drained and rinsed"],
+      [1, "can", "kidney_beans", "drained and rinsed"],
+      [1, "can", "rotel"],
+      [1, "can", "diced_tomatoes"],
+      [1.5, "cup", "corn"],
+      [2, "cup", "beef_broth"],
+      [1, "cup", "mexican_cheese", "for topping"],
+      [2, "cup", "tortilla_chips", "lightly crushed"],
+      [0.5, "cup", "sour_cream", "for topping", "o"],
+      [1, "", "avocado", "diced", "o"]
+    ],
+    st: [
+      ["Brown the beef with the onion in a skillet over medium-high, breaking it up, until no pink remains. Spoon off the extra fat.", 8],
+      ["Stir in the chili powder, cumin, garlic powder, paprika, oregano and salt for 1 minute, then scrape everything into the slow cooker."],
+      ["Add the beans, both cans of tomatoes with their juices, the corn and the broth and stir."],
+      ["Cover and cook on LOW for 4 to 6 hours (or HIGH for 2 to 3)."],
+      ["Taste for salt and ladle into bowls. Top with cheese, crushed chips, sour cream and avocado."]
+    ],
+    tip: "Toast the spices in the hot beef for a minute before it goes in the cooker. Raw spices taste dusty; toasted ones taste like taco night.",
+    sw: "Ground turkey works. Pinto beans are great in place of the kidney beans. For the church-supper version, stir a packet of ranch seasoning in with the spices.",
+    lo: "Keeps 5 days and freezes for 3 months. Freeze it without the toppings."
+  },
 
   // ---------------- PORK ----------------
   {
@@ -1937,6 +2145,128 @@ const RECIPES = [
     tip: "Use pork shoulder, also sold as pork butt. Leaner cuts like loin turn dry and stringy after a long cook.",
     sw: "No slow cooker? Cook it covered in a Dutch oven at 300°F for 4 to 5 hours.",
     lo: "Keeps 5 days and freezes for 3 months. Use it in tacos, nachos, quesadillas or on BBQ pizza."
+  },
+  {
+    id: "slow-cooker-carnitas", n: "Slow Cooker Pork Carnitas", p: "pork", t: 540, a: 20, d: 1, s: 8,
+    tags: ["slow", "budget", "fun", "weekend"],
+    b: "Juicy, citrusy pork with crispy edges, for a fraction of what the taco truck charges.",
+    i: [
+      [3, "lb", "pork_shoulder", "cut into 4 big chunks"],
+      [2, "tsp", "salt"],
+      [2, "tsp", "cumin"],
+      [2, "tsp", "oregano"],
+      [1, "tsp", "chili_powder"],
+      [0.5, "tsp", "pepper"],
+      [1, "", "onion", "quartered"],
+      [6, "clove", "garlic", "smashed"],
+      [1, "", "orange"],
+      [2, "", "lime", "for juice and wedges"],
+      [0.5, "cup", "chicken_broth"],
+      [16, "", "tortillas_small", "warmed"],
+      [0.5, "cup", "cilantro", "chopped"],
+      [0.5, "", "red_onion", "finely diced", "o"],
+      [1, "cup", "salsa", "", "o"]
+    ],
+    st: [
+      ["Mix the salt, cumin, oregano, chili powder and pepper and rub it all over the pork. Put the onion and garlic in the slow cooker and set the pork on top."],
+      ["Cut the orange in half and squeeze the juice over the pork, along with the juice of one lime. Toss in the squeezed orange halves and pour the broth around the pork."],
+      ["Cover and cook on LOW for 8 to 10 hours (or HIGH for 5 to 6), until the pork falls apart when you push it with a fork."],
+      ["Heat the broiler. Shred the pork with two forks, throwing out the orange halves and any big pieces of fat. Spread it on a sheet pan and drizzle with 1/2 cup of the cooking juices."],
+      ["Broil on the top rack until the edges are browned and crisp. Toss, splash with a little more juice and broil 2 to 3 minutes more.", 5],
+      ["Pile into warm tortillas with cilantro, onion, salsa and lime wedges."]
+    ],
+    tip: "The broiler is the secret. Slow cooking makes the pork tender, and a few minutes under high heat gives it the crispy, caramelized edges real carnitas are known for.",
+    sw: "No orange? Use 1/2 cup of orange juice. Serve it over rice with black beans for burrito bowls.",
+    lo: "Keeps 5 days in its juices and freezes for 3 months. Crisp leftovers in a hot skillet for tacos, nachos or quesadillas."
+  },
+  {
+    id: "slow-cooker-ham-bean-soup", n: "Slow Cooker Ham & Bean Soup", p: "pork", t: 420, a: 15, d: 1, s: 6,
+    tags: ["slow", "budget", "soup", "comfort", "fall", "winter"],
+    b: "The thrifty Midwest classic: smoky ham and creamy white beans in a pot that feeds you all week.",
+    i: [
+      [3, "can", "white_beans", "drained and rinsed"],
+      [2, "cup", "ham"],
+      [1, "", "onion", "diced"],
+      [3, "", "carrots", "diced"],
+      [2, "stalk", "celery", "diced"],
+      [3, "clove", "garlic", "minced"],
+      [5, "cup", "chicken_broth"],
+      [1, "tsp", "thyme"],
+      [1, "", "bay_leaf"],
+      [0.5, "tsp", "pepper"],
+      [null, "", "salt", "to taste"],
+      [3, "oz", "spinach", "", "o"],
+      [1, "loaf", "crusty_bread", "or cornbread, for serving", "o"]
+    ],
+    st: [
+      ["Put the beans, ham, onion, carrots, celery and garlic in the slow cooker."],
+      ["Add the broth, thyme, bay leaf and pepper and stir. Hold off on salt until the end, because the ham brings plenty."],
+      ["Cover and cook on LOW for 6 to 8 hours (or HIGH for 3 to 4), until the vegetables are soft."],
+      ["Discard the bay leaf. Mash about a cup of the beans against the side of the pot and stir to thicken the soup, then stir in the spinach until it wilts."],
+      ["Taste and add salt if it needs it. Serve with crusty bread or cornbread."]
+    ],
+    tip: "Mashing a cup of the beans at the end turns a thin broth into a thick, creamy soup without a drop of cream.",
+    sw: "Got a leftover ham bone? Add it at the start and pick the meat off at the end. Dried beans work too: soak 1 lb overnight, boil them hard for 10 minutes, drain, and cook on LOW 8 to 10 hours with 2 more cups of broth.",
+    lo: "Keeps 5 days and freezes for 3 months. It thickens as it sits, so loosen it with a little broth or water."
+  },
+  {
+    id: "slow-cooker-red-beans-rice", n: "Slow Cooker Red Beans & Rice", p: "pork", t: 450, a: 20, d: 1, s: 6,
+    tags: ["slow", "budget", "spicy", "comfort"],
+    b: "Creamy, smoky New Orleans-style red beans with sausage over rice. Big flavor for pocket change.",
+    i: [
+      [12, "oz", "andouille", "sliced into coins"],
+      [3, "can", "kidney_beans", "drained and rinsed"],
+      [1, "", "onion", "diced"],
+      [1, "", "green_bell", "diced"],
+      [2, "stalk", "celery", "diced"],
+      [4, "clove", "garlic", "minced"],
+      [2, "tsp", "cajun"],
+      [1, "tsp", "thyme"],
+      [2, "", "bay_leaf"],
+      [2, "cup", "chicken_broth"],
+      [1.5, "cup", "rice"],
+      [3, "", "green_onions", "sliced"],
+      [null, "", "hot_sauce", "to serve"]
+    ],
+    st: [
+      ["Brown the sausage in a skillet over medium-high for a few minutes. It adds a lot of flavor, but skip it if you're short on time.", 5],
+      ["Put the sausage, beans, onion, bell pepper, celery and garlic in the slow cooker. Add the Cajun seasoning, thyme, bay leaves and broth and stir."],
+      ["Cover and cook on LOW for 6 to 8 hours (or HIGH for 3 to 4)."],
+      ["About 30 minutes before dinner, cook the rice according to the package.", 20],
+      ["Discard the bay leaves and mash about a third of the beans against the side of the pot so the sauce turns thick and creamy. Taste for salt, spoon over the rice and top with green onions. Pass the hot sauce."]
+    ],
+    tip: "Mash some of the beans at the end. It's how New Orleans cooks get that thick, creamy pot of red beans without any cream.",
+    sw: "Any smoked sausage or kielbasa works. Cajun seasoning brands vary a lot in salt, so taste before you add more.",
+    lo: "Keeps 5 days and freezes for 3 months. Like chili, it's even better the next day."
+  },
+  {
+    id: "slow-cooker-zuppa-toscana", n: "Slow Cooker Zuppa Toscana", p: "pork", t: 420, a: 25, d: 1, s: 6,
+    tags: ["slow", "comfort", "soup", "spicy", "fall", "winter"],
+    b: "The restaurant favorite at home: Italian sausage, tender potatoes and spinach in a creamy, peppery broth.",
+    i: [
+      [4, "slice", "bacon", "chopped"],
+      [1, "lb", "italian_sausage", "hot or mild, casings removed"],
+      [1, "", "onion", "diced"],
+      [4, "clove", "garlic", "minced"],
+      [2, "lb", "potatoes_russet", "cut into 1/2-inch pieces"],
+      [6, "cup", "chicken_broth"],
+      [0.25, "tsp", "red_pepper_flakes"],
+      [1, "cup", "heavy_cream"],
+      [4, "oz", "spinach"],
+      [null, "", "salt", "to taste"],
+      [0.25, "cup", "parmesan", "for topping", "o"]
+    ],
+    st: [
+      ["Cook the bacon in a large skillet over medium until crisp. Move it to a paper towel and refrigerate it until dinner.", 7],
+      ["Brown the sausage and onion in the bacon fat, breaking up the sausage, until no pink remains. Add the garlic for 30 seconds, then spoon off most of the fat.", 8],
+      ["Scrape the sausage mixture into the slow cooker. Add the potatoes, broth and red pepper flakes."],
+      ["Cover and cook on LOW for 6 to 7 hours (or HIGH for 3 to 4), until the potatoes are tender."],
+      ["Stir in the cream and spinach, cover and let it heat through until the spinach wilts. Taste for salt.", 10],
+      ["Ladle into bowls and top with the bacon and parmesan."]
+    ],
+    tip: "Stir the cream in at the end. Dairy can curdle over a long cook, and adding it last keeps the broth smooth and silky.",
+    sw: "Kale is the classic green: strip it from the stems, chop it and add it with the cream, giving it 20 minutes. Use mild sausage and skip the pepper flakes for kids.",
+    lo: "Keeps 4 days. Potatoes turn grainy in the freezer, so this one is best not frozen."
   },
   {
     id: "pierogi-kielbasa", n: "Pierogi & Kielbasa Skillet", p: "pork", t: 30, a: 30, d: 1,
@@ -2262,6 +2592,35 @@ const RECIPES = [
     sw: "Use 2 cups of shredded rotisserie chicken in place of the tuna.",
     lo: "Keeps 3 days."
   },
+  {
+    id: "slow-cooker-shrimp-boil", n: "Slow Cooker Cajun Shrimp Boil", p: "seafood", t: 240, a: 15, d: 1,
+    tags: ["slow", "spicy", "fun", "weekend", "summer"],
+    b: "A Lowcountry-style boil with Cajun potatoes, corn, sausage and shrimp. Pour it out on a sheet pan and dig in.",
+    i: [
+      [1.5, "lb", "potatoes_baby"],
+      [4, "", "corn_cob", "husked and snapped in half"],
+      [12, "oz", "andouille", "cut into 2-inch pieces"],
+      [1, "", "onion", "cut into wedges"],
+      [6, "clove", "garlic", "smashed"],
+      [1, "", "lemon", "halved"],
+      [2, "tbsp", "cajun", "divided"],
+      [2, "cup", "chicken_broth"],
+      [3, "cup", "water"],
+      [1, "lb", "shrimp"],
+      [4, "tbsp", "butter"],
+      [2, "tbsp", "parsley", "chopped", "o"]
+    ],
+    st: [
+      ["Put the potatoes in the slow cooker with the corn, sausage, onion and garlic. Squeeze in the lemon and toss in the halves."],
+      ["Sprinkle with 1 1/2 tablespoons of the Cajun seasoning and pour in the broth and water."],
+      ["Cover and cook on HIGH for 3 to 4 hours (or LOW for 6 to 7), until the potatoes are tender all the way through."],
+      ["Stir in the shrimp, pushing them down into the liquid. Cover and cook on HIGH just until they turn pink and opaque, 10 to 15 minutes.", 10],
+      ["Melt the butter with the rest of the Cajun seasoning. Lift everything out with a slotted spoon onto a sheet pan or platter, leaving the lemon behind. Drizzle with the Cajun butter and sprinkle with parsley."]
+    ],
+    tip: "Add the shrimp at the very end and pull them as soon as they turn pink. Overcooked shrimp go rubbery, and in a slow cooker it's easy to let them go too long.",
+    sw: "Shell-on shrimp are the classic for a boil and stay juicier; give them 15 to 20 minutes. Kielbasa works in place of andouille, frozen corn cobs are fine without thawing, and Old Bay is a classic swap for the Cajun seasoning.",
+    lo: "Best the day it's made. Leftover shrimp, sausage and potatoes keep 2 days and make a great breakfast hash."
+  },
 
   // ---------------- MEATLESS ----------------
   {
@@ -2585,6 +2944,70 @@ const RECIPES = [
     tip: "Toast the burritos seam-side down first. It seals them shut and gives you a crisp, golden outside.",
     sw: "Add leftover chicken, taco meat or a can of drained black beans. Mashed pinto beans work if you don't have refried.",
     lo: "Wrap cooled burritos one by one and freeze up to 3 months. Microwave 2 minutes, then crisp in a skillet."
+  },
+  {
+    id: "slow-cooker-lentil-soup", n: "Slow Cooker Lentil & Vegetable Soup", p: "meatless", t: 420, a: 15, d: 1, s: 6,
+    tags: ["slow", "budget", "light", "soup", "fall", "winter"],
+    b: "Hearty lentil soup that costs pennies a bowl. A squeeze of lemon at the end makes it sing.",
+    i: [
+      [1.5, "cup", "lentils", "rinsed and picked over"],
+      [1, "", "onion", "diced"],
+      [3, "", "carrots", "diced"],
+      [2, "stalk", "celery", "diced"],
+      [4, "clove", "garlic", "minced"],
+      [1, "can", "diced_tomatoes"],
+      [6, "cup", "veg_broth"],
+      [1.5, "tsp", "cumin"],
+      [1, "tsp", "paprika", "smoked if you have it"],
+      [1, "tsp", "thyme"],
+      [1, "", "bay_leaf"],
+      [1, "tsp", "salt"],
+      [0.5, "tsp", "pepper"],
+      [3, "oz", "spinach"],
+      [1, "", "lemon", "juiced"],
+      [2, "tbsp", "olive_oil", "for drizzling", "o"],
+      [0.25, "cup", "parmesan", "for topping", "o"]
+    ],
+    st: [
+      ["Put the lentils, onion, carrots, celery, garlic and the tomatoes with their juices in the slow cooker."],
+      ["Add the broth, cumin, paprika, thyme, bay leaf, salt and pepper and stir."],
+      ["Cover and cook on LOW for 6 to 8 hours (or HIGH for 3 to 4), until the lentils are very tender."],
+      ["Discard the bay leaf and stir in the spinach until it wilts. Squeeze in the lemon juice and taste for salt."],
+      ["Ladle into bowls and finish with a drizzle of olive oil and some parmesan."]
+    ],
+    tip: "Add the lemon juice at the very end. A little acid wakes up a long-simmered pot and makes every flavor brighter.",
+    sw: "Use brown or green lentils; red lentils cook down to mush. Kale or chard works in place of the spinach.",
+    lo: "Keeps 5 days and freezes for 3 months. It thickens as it sits, so add a splash of broth when you reheat it."
+  },
+  {
+    id: "slow-cooker-enchilada-casserole", n: "Slow Cooker Black Bean Enchilada Casserole", p: "meatless", t: 240, a: 20, d: 1, s: 6,
+    tags: ["slow", "budget", "kid", "fun"],
+    b: "Layers of tortillas, black beans, corn and melty cheese in red enchilada sauce. All the flavor, none of the rolling.",
+    i: [
+      [2, "can", "black_beans", "drained and rinsed"],
+      [1.5, "cup", "corn"],
+      [1, "", "onion", "^small, diced"],
+      [1, "", "bell_pepper", "diced"],
+      [1, "tsp", "cumin"],
+      [1, "tsp", "chili_powder"],
+      [0.5, "tsp", "salt"],
+      [2, "can", "enchilada_sauce"],
+      [12, "", "tortillas_small", "preferably corn"],
+      [2.5, "cup", "mexican_cheese", "divided"],
+      [0.5, "cup", "sour_cream", "to serve", "o"],
+      [0.25, "cup", "cilantro", "chopped", "o"],
+      [1, "", "avocado", "diced", "o"]
+    ],
+    st: [
+      ["Stir together the beans, corn, onion, bell pepper, cumin, chili powder and salt."],
+      ["Grease the slow cooker and spread 1/2 cup of the enchilada sauce over the bottom. Then make three layers: 4 tortillas (tear them to fit), a third of the bean mix, 1/2 cup of sauce and 1/2 cup of cheese."],
+      ["Pour the rest of the sauce over the top and sprinkle on the rest of the cheese."],
+      ["Cover and cook on LOW for 3 to 4 hours (or HIGH for 2), until it's bubbling at the edges and the cheese has melted."],
+      ["Turn off the cooker, take off the lid and let it rest so it sets up and scoops neatly. Top with sour cream, cilantro and avocado.", 10]
+    ],
+    tip: "Corn tortillas hold their shape in the slow cooker much better than flour, which turn gummy. Tear them so each layer reaches edge to edge.",
+    sw: "Stir 2 cups of shredded rotisserie chicken or cooked ground beef into the bean mix. Green enchilada sauce works too.",
+    lo: "Keeps 4 days. Reheat in the microwave with a little fresh cheese on top."
   }
 ];
 
@@ -2627,7 +3050,9 @@ const PRICE = {
   cornstarch: { tbsp: 0.06 }, garlic_powder: { tsp: 0.12 }, onion_powder: { tsp: 0.12 }, paprika: { tsp: 0.12 },
   chili_powder: { tsp: 0.12 }, cumin: { tsp: 0.12 }, italian_seasoning: { tsp: 0.12 }, oregano: { tsp: 0.12 },
   thyme: { tsp: 0.12 }, red_pepper_flakes: { tsp: 0.12 }, water: { cup: 0 },
-  corn: { cup: 0.6 }, peas: { cup: 0.6 }, peas_carrots: { cup: 0.6 }, pierogi: { box: 3.79 }
+  corn: { cup: 0.6 }, peas: { cup: 0.6 }, peas_carrots: { cup: 0.6 }, pierogi: { box: 3.79 },
+  orange: { each: 0.9 }, corn_cob: { each: 0.6 }, lentils: { cup: 0.75 }, white_beans: { can: 1.09 },
+  enchilada_sauce: { can: 1.79 }, pepperoncini: { cup: 2 }
 };
 
 </script>
@@ -2740,8 +3165,19 @@ const PRICE = {
   }
   const money = (n) => '$' + (Math.round(n * 100) / 100).toFixed(2);
   const moneyR = (n) => '$' + Math.round(n);
-  const priceClass = (cps) => (cps < 2.5 ? 'cheap' : cps >= 4 ? 'splurge' : '');
-  const priceTag = (r) => (r.cps ? `<span class="price ${priceClass(r.cps)}">${money(r.cps)}<span class="vh"> per serving</span><span aria-hidden="true">/serving</span></span>` : '');
+  /* Three price tiers by cost per serving, so the cheap dinners are easy to spot and to pick. */
+  const TIERS = [
+    null,
+    { sign: '$', name: 'Thrifty', range: 'under $2.50 a serving' },
+    { sign: '$$', name: 'Everyday', range: '$2.50 to $3.50 a serving' },
+    { sign: '$$$', name: 'Treat', range: '$3.50 or more a serving' }
+  ];
+  const TIER_HINT = 'Thrifty is under $2.50 a serving, Everyday is $2.50 to $3.50, and Treat is $3.50 or more.';
+  const tierOfCps = (cps) => (!cps ? 0 : cps < 2.5 ? 1 : cps < 3.5 ? 2 : 3);
+  const tierOf = (r) => tierOfCps(r ? r.cps : 0);
+  const tierWord = (t) => (t ? `${TIERS[t].sign} ${TIERS[t].name}` : '');
+  const tierBadge = (t, html, vh) => `<span class="price t${t}" title="${TIERS[t].name}: ${TIERS[t].range}"><b class="tier" aria-hidden="true">${TIERS[t].sign}</b>${html}${vh ? `<span class="vh">${vh}</span>` : ''}</span>`;
+  const priceTag = (r) => { const t = tierOf(r); return t ? tierBadge(t, `${money(r.cps)}<span aria-hidden="true">/serving</span>`, ` per serving, ${TIERS[t].name} price`) : ''; };
   function fmtTime(t) {
     if (t < 60) return t + ' min';
     if (t >= 180) return Math.floor(t / 60) + ' hr';
@@ -2785,7 +3221,8 @@ const PRICE = {
     r.mainChip = mainIng ? ING[mainIng[2]][3] : '';
     r.cost = recipeCost(r);
     r.cps = r.s ? r.cost / r.s : 0;
-    r.hay = [r.n, P_NAME[r.p] || '', r.tags.map((t) => TAG_NAME[t] || t).join(' '), r.i.map((e) => (ING[e[2]] || [''])[0]).join(' ')].join(' ').toLowerCase();
+    const tier = tierOf(r);
+    r.hay = [r.n, P_NAME[r.p] || '', r.tags.map((t) => TAG_NAME[t] || t).join(' '), tier ? TIERS[tier].name : '', r.i.map((e) => (ING[e[2]] || [''])[0]).join(' ')].join(' ').toLowerCase();
     R.set(r.id, r);
     return r;
   }
@@ -2853,7 +3290,7 @@ const PRICE = {
 
   const UI = {
     tab: 'tonight',
-    filters: { time: 0, cost: 0, protein: '', moods: [] },
+    filters: { time: 0, tier: 0, protein: '', moods: [] },
     spinId: null, spinHist: [], printing: false,
     fridgeQ: '', fridgeMore: {}, fridgeShow: 12,
     rxQ: '', rxSort: 'cheap', rxFilter: 'all',
@@ -3052,10 +3489,10 @@ const PRICE = {
     const f = UI.filters;
     const hour = new Date().getHours();
     return BUILTIN.concat(cookbookList()).filter((r) =>
-      (!f.time || r.t <= f.time) && (!f.cost || (r.cps && r.cps < f.cost)) && (!f.protein || r.p === f.protein) &&
+      (!f.time || r.t <= f.time) && (!f.tier || tierOf(r) === f.tier) && (!f.protein || r.p === f.protein) &&
       f.moods.every((m) => r.tags.includes(m)) && (f.moods.includes('slow') || !r.tags.includes('slow') || hour < 11));
   }
-  const filtersActive = () => UI.filters.time || UI.filters.cost || UI.filters.protein || UI.filters.moods.length;
+  const filtersActive = () => UI.filters.time || UI.filters.tier || UI.filters.protein || UI.filters.moods.length;
   function spin() {
     const all = filteredPool();
     const current = UI.spinId || tonightInfo().v;
@@ -3308,7 +3745,7 @@ const PRICE = {
     }).join('');
     const more = r.keyItems.length - 6;
     const tags = r.tags.filter((t) => TAG_NAME[t] && !['fall', 'winter', 'summer', 'spring', 'budget', 'weekend'].includes(t)).slice(0, 3).map((t) => TAG_NAME[t]);
-    if (r.cps && r.cps < 2.5) tags.unshift('Budget');
+    if (tierOf(r)) tags.unshift(tierWord(tierOf(r)));
     const hour = now.getHours();
     let warn = '';
     if (r.tags.includes('slow')) {
@@ -3349,7 +3786,7 @@ const PRICE = {
     return `<section class="panel" aria-labelledby="flt-h">
       <h2 class="panel-h" id="flt-h">Not feeling it? Narrow it down.</h2>
       <div class="ctrl"><span class="ctrl-l" id="l-time">Time</span><div class="seg" role="radiogroup" aria-labelledby="l-time">${seg('time', 0, 'Any')}${seg('time', 20, '20 min')}${seg('time', 30, '30 min')}${seg('time', 45, '45 min')}</div></div>
-      <div class="ctrl"><span class="ctrl-l" id="l-cost">Cost per serving</span><div class="seg" role="radiogroup" aria-labelledby="l-cost">${seg('cost', 0, 'Any')}${seg('cost', 2, 'Under $2')}${seg('cost', 3, 'Under $3')}${seg('cost', 4, 'Under $4')}</div></div>
+      <div class="ctrl"><span class="ctrl-l" id="l-tier">Price</span><div class="chips" role="radiogroup" aria-labelledby="l-tier" aria-describedby="tier-hint">${[0, 1, 2, 3].map((k) => `<button type="button" class="chip" role="radio" id="f-t-${k}" aria-checked="${f.tier === k}" data-act="f-tier" data-v="${k}">${k ? tierWord(k) : 'Any'}</button>`).join('')}</div><p class="ctrl-hint" id="tier-hint">${TIER_HINT}</p></div>
       <div class="ctrl"><span class="ctrl-l" id="l-prot">Protein</span><div class="chips" role="radiogroup" aria-labelledby="l-prot">${[['', 'Any']].concat(PROTEINS).map(([k, l]) => `<button type="button" class="chip" role="radio" id="f-p-${k || 'any'}" aria-checked="${f.protein === k}" data-act="f-protein" data-v="${k}">${l}</button>`).join('')}</div></div>
       <div class="ctrl"><span class="ctrl-l" id="l-mood">Mood</span><div class="chips" role="group" aria-labelledby="l-mood">${MOODS.map(([k, l]) => `<button type="button" class="chip" id="f-m-${k}" aria-pressed="${f.moods.includes(k)}" data-act="f-mood" data-v="${k}">${l}</button>`).join('')}</div></div>
       <div class="flt-foot"><span class="count${n ? '' : ' zero'}" aria-live="polite">${n ? `${n} ${plural(n, 'dinner fits', 'dinners fit')}` : 'No dinners match. Remove a filter.'}</span>${filtersActive() ? '<button type="button" class="btn-quiet" data-act="f-reset">Reset</button>' : ''}<button type="button" class="btn btn-primary sm" data-act="spin"${n ? '' : ' disabled'}>${ic('shuffle')} Spin</button></div>
@@ -3370,6 +3807,13 @@ const PRICE = {
   function renderTonight() {
     const today = startOfToday();
     const cur = UI.spinId || tonightInfo().v;
+    const hour = new Date().getHours();
+    const curR = cur && cur !== 'off' ? R.get(cur) : null;
+    const slowAll = BUILTIN.filter((r) => r.tags.includes('slow'));
+    const slowCheap = slowAll.filter((r) => tierOf(r) === 1).length;
+    const slowCall = hour >= 4 && hour < 11 && slowAll.length && !(curR && curR.tags.includes('slow')) && !UI.filters.moods.includes('slow')
+      ? `<section class="callout"><h2>Start a slow cooker dinner?</h2><p>A few minutes now and dinner's ready when you get home. Pick from ${slowAll.length} slow cooker recipes${slowCheap ? `, ${slowCheap} of them under $2.50 a serving` : ''}.</p><button type="button" class="btn btn-line" data-act="slow-spin">${ic('clock')} Spin a slow cooker dinner</button></section>`
+      : '';
     const ask = AI.ok ? `<section class="callout"><h2>Got odds and ends in the fridge?</h2><p>Tell the chef what you have and get a cheap recipe built around it.</p><button type="button" class="btn btn-line" data-act="ask-open">${ic('hat')} Ask the chef</button></section>` : '';
     patch($('#s-tonight'), `<div class="wrap">
       <div class="greet">
@@ -3380,7 +3824,7 @@ const PRICE = {
       </div>
       <div class="tonight-grid">
         <div class="tonight-main">${ticketHTML()}</div>
-        <div class="tonight-side">${filtersHTML()}${altsHTML(cur)}${ask}</div>
+        <div class="tonight-side">${slowCall}${filtersHTML()}${altsHTML(cur)}${ask}</div>
       </div>
     </div>`);
   }
@@ -3463,7 +3907,7 @@ const PRICE = {
       dish = `<div class="day-dish"><span class="day-name">Nothing planned</span><span class="day-meta">Swap for an idea or choose one.</span></div>`;
     } else {
       const slow = r.tags.includes('slow') ? ` · <span class="start">Start by ${startByText(r)}</span>` : '';
-      dish = `<button type="button" class="day-dish" data-act="open-recipe" data-id="${r.id}"><span class="ptag p-${r.p}">${P_NAME[r.p]}</span><span class="day-name">${esc(r.n)}</span><span class="day-meta">${fmtTime(r.t)} · ${r.cps ? money(r.cps) + ' a serving' : 'cost not estimated'}${slow}</span></button>`;
+      dish = `<button type="button" class="day-dish" data-act="open-recipe" data-id="${r.id}"><span class="day-top"><span class="ptag p-${r.p}">${P_NAME[r.p]}</span>${priceTag(r)}</span><span class="day-name">${esc(r.n)}</span><span class="day-meta">${fmtTime(r.t)}${r.cps ? '' : ' · cost not estimated'}${slow}</span></button>`;
     }
     return `<li class="day${isToday ? ' is-today' : ''}${state}">
       <div class="day-date"><span class="dow">${DOW[d.getDay()]}</span><span class="dnum">${d.getDate()}</span>${isToday ? '<span class="today-pill">Tonight</span>' : ''}</div>
@@ -3481,12 +3925,15 @@ const PRICE = {
     const wc = weekCost();
     const custom = isCustomWindow();
     const items = listView();
+    const mix = [0, 0, 0, 0];
+    for (const e of ents) if (e.r) mix[tierOf(e.r)]++;
+    const mixHTML = [1, 2, 3].some((t) => mix[t]) ? `<span class="ws-mix"><span class="vh">Price tiers this week: </span>${[1, 2, 3].filter((t) => mix[t]).map((t) => tierBadge(t, `${mix[t]} ${TIERS[t].name}`)).join('')}</span>` : '';
     patch($('#s-week'), `<div class="wrap">
       <header class="scr-head"><div><h1>This week</h1><p>${DOW[first.getDay()]}, ${MON[first.getMonth()]} ${first.getDate()} to ${DOW[last.getDay()]}, ${MON[last.getMonth()]} ${last.getDate()}</p></div>
         <div class="stepper" role="group" aria-label="Cooking for"><span class="lbl">Cooking for</span><button type="button" id="sv-dec" data-act="serv-dec" aria-label="Fewer people">${ic('minus')}</button><output class="num" aria-live="polite">${S.servings}</output><button type="button" id="sv-inc" data-act="serv-inc" aria-label="More people">${ic('plus')}</button></div>
       </header>
       <div class="week-sum">
-        <div class="ws-cost"><span class="l">Food cost for the week</span><b class="num">${wc.n ? moneyR(wc.total) : '$0'}</b><span class="per">${wc.n ? `about ${money(wc.per)} a serving, ${wc.n} ${plural(wc.n, 'dinner', 'dinners')} for ${S.servings}` : 'Plan a dinner to see the cost'}</span></div>
+        <div class="ws-cost"><span class="l">Food cost for the week</span><b class="num">${wc.n ? moneyR(wc.total) : '$0'}</b><span class="per">${wc.n ? `about ${money(wc.per)} a serving, ${wc.n} ${plural(wc.n, 'dinner', 'dinners')} for ${S.servings}` : 'Plan a dinner to see the cost'}</span>${mixHTML}</div>
         <div class="ws-actions">
           <button type="button" class="btn btn-line sm" data-act="week-cheaper"${wc.n ? '' : ' disabled'}>${ic('trend-down')} Make it cheaper</button>
           <button type="button" class="btn btn-line sm" data-act="week-new">${ic('shuffle')} New week</button>
@@ -3555,14 +4002,15 @@ const PRICE = {
     const cb = cookbookList();
     const filters = [['all', 'All'], ['saved', `Saved${S.favs.length ? ' (' + S.favs.filter((id) => R.has(id)).length + ')' : ''}`]]
       .concat(cb.length ? [['cookbook', `Chef made (${cb.length})`]] : [])
-      .concat([['under2', 'Under $2.50'], ['quick', '30 min or less'], ['slow', 'Slow cooker']])
+      .concat([1, 2, 3].map((t) => ['tier' + t, tierWord(t)]))
+      .concat([['slow', 'Slow cooker'], ['quick', '30 min or less']])
       .concat(PROTEINS);
     if (UI.rxFilter === 'cookbook' && !cb.length) UI.rxFilter = 'all';
     let list = BUILTIN.concat(cb);
     const f = UI.rxFilter;
     if (f === 'saved') list = list.filter((r) => S.favs.includes(r.id));
     else if (f === 'cookbook') list = cb;
-    else if (f === 'under2') list = list.filter((r) => r.cps && r.cps < 2.5);
+    else if (/^tier[123]$/.test(f)) list = list.filter((r) => tierOf(r) === +f.slice(4));
     else if (f === 'quick') list = list.filter((r) => r.t <= 30);
     else if (f === 'slow') list = list.filter((r) => r.tags.includes('slow'));
     else if (P_NAME[f]) list = list.filter((r) => r.p === f);
@@ -3578,7 +4026,7 @@ const PRICE = {
         <div class="rx-sort"><label for="rx-sort">Sort</label><select id="rx-sort"><option value="cheap"${s === 'cheap' ? ' selected' : ''}>Cheapest</option><option value="quick"${s === 'quick' ? ' selected' : ''}>Quickest</option><option value="az"${s === 'az' ? ' selected' : ''}>A to Z</option></select></div>
       </div>
       <div class="chip-row" role="radiogroup" aria-label="Show">${filters.map(([k, l]) => `<button type="button" class="chip" role="radio" id="rf-${k}" aria-checked="${UI.rxFilter === k}" data-act="rx-filter" data-v="${k}">${esc(l)}</button>`).join('')}</div>
-      <p class="rx-count" aria-live="polite">${list.length} ${plural(list.length, 'recipe', 'recipes')}</p>
+      <p class="rx-count" aria-live="polite">${list.length} ${plural(list.length, 'recipe', 'recipes')}${/^tier[123]$/.test(f) ? `, ${TIERS[+f.slice(4)].range}` : ''}</p>
       ${list.length ? `<div class="rx-grid">${list.map(rxCard).join('')}</div>` : empty}
     </div>`);
   }
@@ -3638,7 +4086,7 @@ const PRICE = {
     const label = shortName(r);
     const steps = r.st.map((st, i) => `<li><p>${esc(st[0])}</p>${st[1] ? `<button type="button" class="timer-btn" data-act="timer" data-min="${st[1]}" data-label="${esc(label)} · step ${i + 1}">${ic('timer')} Start ${st[1]}-minute timer</button>` : ''}</li>`).join('');
     const scaleNote = s.servings !== r.s ? `<p class="scale-note">Scaled from ${r.s} to ${s.servings} servings. Cook times stay about the same; use a bigger pan or cook in batches when you scale up.</p>` : '';
-    const tags = [effortWord(r)].concat(r.tags.filter((t) => TAG_NAME[t] && !['fall', 'winter', 'summer', 'spring', 'budget'].includes(t)).map((t) => TAG_NAME[t]));
+    const tags = [effortWord(r)].concat(tierOf(r) ? [tierWord(tierOf(r))] : []).concat(r.tags.filter((t) => TAG_NAME[t] && !['fall', 'winter', 'summer', 'spring', 'budget'].includes(t)).map((t) => TAG_NAME[t]));
     const days = s.daypick ? `<div class="daypick"><p>Which night?</p><div class="daypick-grid">${weekEntries().map((e, i) => `<button type="button" data-act="rs-day" data-d="${e.iso}"><b>${i === 0 ? 'Tonight' : DOW_LONG[e.d.getDay()]}</b><span>${e.v === 'off' ? 'Night off' : e.r ? esc(e.r.n) : 'Nothing planned'}</span></button>`).join('')}</div></div>` : '';
     const actions = draft
       ? `<button type="button" class="btn btn-primary" data-act="ai-save">${ic('heart')} Save to my cookbook</button><button type="button" class="btn btn-line" data-act="cook-start">${ic('flame')} Start cooking</button><button type="button" class="btn btn-line" data-act="ask-again">${ic('shuffle')} Try another</button><button type="button" class="btn btn-line" data-act="ask-open">Change my request</button>`
@@ -3656,6 +4104,7 @@ const PRICE = {
           <div><dt>Per serving</dt><dd class="num">${r.cps ? money(r.cps) : 'n/a'}</dd></div>
         </dl>
         <p class="muted" style="margin-top:10px;font-size:15px">${esc(tags.join(' · '))}</p>
+        ${r.tags.includes('slow') ? `<p class="slow-note">${ic('clock')}<span>Slow cooker dinner. Start it by ${startByText(r)} to eat around 6.</span></p>` : ''}
         <div class="rs-actions">${actions}</div>
         ${days}
       </header>
@@ -3688,7 +4137,7 @@ const PRICE = {
       <div class="pick-list">${list.length ? list.map((r) => `<button type="button" class="pick-row" data-act="pick-set" data-id="${r.id}"><span class="p-name">${esc(r.n)}</span>${priceTag(r)}<span class="p-meta">${P_NAME[r.p]} · ${fmtTime(r.t)} · ${effortWord(r)}</span></button>`).join('') : '<p class="empty">No recipes match.</p>'}</div>
     </div>`;
   }
-  const ASK_EXTRAS = [['cheap', 'Extra cheap', 'as cheap as possible'], ['kid', 'Kid-friendly', 'kid-friendly and not spicy'], ['onepan', 'One pan', 'one pan or one pot'], ['nooven', 'No oven', 'stovetop or microwave only, no oven'], ['light', 'Lighter', 'on the lighter, healthier side'], ['spicy', 'Spicy', 'with some heat']];
+  const ASK_EXTRAS = [['cheap', 'Extra cheap', 'as cheap as possible'], ['kid', 'Kid-friendly', 'kid-friendly and not spicy'], ['onepan', 'One pan', 'one pan or one pot'], ['nooven', 'No oven', 'stovetop or microwave only, no oven'], ['light', 'Lighter', 'on the lighter, healthier side'], ['spicy', 'Spicy', 'with some heat'], ['slow', 'Slow cooker', 'made in a slow cooker, with LOW and HIGH cook times and no more than 20 minutes of hands-on work']];
   function askSheetHTML() {
     const a = UI.ask;
     if (!a.touched && !a.text && S.fridge.length) a.text = 'I have ' + S.fridge.map((k) => (CHIP_MAP.get(k) || {}).label || k).join(', ').toLowerCase() + '.';
@@ -3935,7 +4384,7 @@ const PRICE = {
       '',
       'Requirements:',
       `- Serves ${servings}.`,
-      time ? `- Ready in ${time} minutes or less, start to finish.` : '- Weeknight-friendly timing is best.',
+      extras.includes('slow') ? '- It cooks in a slow cooker, so the total time can be long. Count the slow cooker time in totalMinutes, and give that step "minutes": null.' : time ? `- Ready in ${time} minutes or less, start to finish.` : '- Weeknight-friendly timing is best.',
       ex.length ? `- Make it ${ex.join('; ')}.` : null,
       '- Build it around what they have. Add at most 3 ingredients they would need to buy, and only if they really matter.',
       `- Assume a normal pantry: ${PANTRY_TEXT}.`,
@@ -4159,10 +4608,11 @@ const PRICE = {
     fav: (el) => toggleFav(el.dataset.id),
     'make-tonight': (el) => { UI.spinId = null; setPlanDay(isoOf(startOfToday()), el.dataset.id, "Done. It's tonight's dinner, and your grocery list is updated."); },
     'f-time': (el) => { UI.filters.time = +el.dataset.v; renderTonight(); },
-    'f-cost': (el) => { UI.filters.cost = +el.dataset.v; renderTonight(); },
+    'f-tier': (el) => { UI.filters.tier = +el.dataset.v; renderTonight(); },
     'f-protein': (el) => { UI.filters.protein = el.dataset.v; renderTonight(); },
     'f-mood': (el) => { const v = el.dataset.v; const m = UI.filters.moods; const i = m.indexOf(v); if (i >= 0) m.splice(i, 1); else m.push(v); renderTonight(); },
-    'f-reset': () => { UI.filters = { time: 0, cost: 0, protein: '', moods: [] }; renderTonight(); },
+    'f-reset': () => { UI.filters = { time: 0, tier: 0, protein: '', moods: [] }; renderTonight(); },
+    'slow-spin': () => { UI.filters.time = 0; UI.filters.moods = ['slow']; spin(); },
 
     'fridge-toggle': (el) => { const k = el.dataset.k; const i = S.fridge.indexOf(k); if (i >= 0) S.fridge.splice(i, 1); else S.fridge.push(k); UI.fridgeShow = 12; commit(); },
     'fridge-more': (el) => { UI.fridgeMore[el.dataset.g] = true; renderFridge(); },

@@ -43,8 +43,10 @@ Scoop moved his non-weather pages here: `faith/`, `amazon/`, `markets/`, `ai-sur
 ## The Dinner Scoop (the homepage, `index.html`)
 
 A what's-for-dinner app: tonight's pick with what it costs, a week planner with the food cost and a
-"Make it cheaper" button, a grocery list that builds itself, a what's-in-my-fridge finder, and 51 recipes
-with timers and a step-by-step cook mode. Everything is in the one file `index.html` (recipes, prices,
+"Make it cheaper" button, a grocery list that builds itself, a what's-in-my-fridge finder, and 64 recipes
+(16 of them slow cooker dinners) with timers and a step-by-step cook mode. Every recipe falls in one of three
+price tiers by cost per serving: $ Thrifty (under $2.50), $$ Everyday ($2.50 to $3.50) and $$$ Treat ($3.50 or
+more), set by `TIERS` in the script; Tonight and Recipes can filter by tier. Everything is in the one file `index.html` (recipes, prices,
 styles and script); there's no build step and nothing loads from other sites. The Menu's links are the
 `window.SCOOP_SITE` list near the bottom of the file. Visitors' plans, lists and favorites stay in their own
 browser (localStorage). The fonts, Big Shoulders and Atkinson Hyperlegible Next, are in `assets/fonts/`. It
