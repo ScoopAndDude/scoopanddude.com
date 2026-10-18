@@ -357,6 +357,22 @@
   .ex-pin { cursor: pointer; pointer-events: auto; font-size: 22px; line-height: 1; transform: translate(-50%, -100%); filter: drop-shadow(0 2px 3px rgba(0,0,0,.7)); user-select: none; }
   .ex-pin.home { font-size: 34px; }
   .ex-pin span { display: block; font: 800 11px/1.1 var(--sans, sans-serif); color: #fff; text-align: center; text-shadow: 0 1px 3px #000; white-space: nowrap; }
+  .ex-layers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+  .ex-lab { font-weight: 800; color: var(--ink-soft); margin-right: 4px; }
+  .ex-layers button { border: 2px solid var(--line); background: var(--cream-2); color: var(--ink); border-radius: 999px; padding: 8px 14px; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; min-height: 44px; }
+  .ex-layers button[aria-pressed="true"] { border-color: #2f7d4f; background: #e6f4ea; }
+  .ex-layer-info { background: #0b1030; color: #dfe9ff; border-radius: var(--radius-sm); padding: 14px 16px; margin-top: 10px; font-size: 16px; line-height: 1.5; }
+  .ex-layer-info b { color: #fff; } .ex-layer-info a { color: #8fd3ff; }
+  .ex-layer-info h3 { color: #ffc233; margin: 0 0 6px; font-size: 19px; }
+  .ex-layer-info .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .ex-layer-info button { border: 0; background: #ffc233; color: #1b1300; border-radius: 999px; padding: 8px 14px; font: inherit; font-weight: 800; cursor: pointer; min-height: 42px; }
+  .ex-drift { display: grid; gap: 8px; margin-top: 8px; }
+  .ex-drift img { width: 100%; max-width: 480px; background: #fff; border-radius: 10px; }
+  .ex-drift input { width: 100%; max-width: 480px; accent-color: #ffc233; min-height: 36px; }
+  .ex-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 14px; } .ex-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+  .ex-animals { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px; margin-top: 8px; }
+  .ex-animals div { background: rgba(255,255,255,.08); border-radius: 10px; padding: 10px 12px; }
+  .ex-pin.small { font-size: 18px; }
   .bn-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 16px; align-items: start; }
   @media (max-width: 760px) { .bn-grid { grid-template-columns: 1fr; } .bn-svg { max-height: 58vh; width: auto; max-width: 100%; } }
   .bn-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; background: #0b1030; border-radius: var(--radius-sm); touch-action: manipulation; }
@@ -388,6 +404,16 @@
       <button type="button" id="exSpin" aria-pressed="true">Auto-spin &#128260;</button>
     </div>
     <div class="ex-card" id="exCard" aria-live="polite"><b class="t">&#127968; Cebu, Philippines: Yuyu&rsquo;s home!</b>You are here! Cebu is an island in the middle of the Philippines, a country made of more than 7,600 islands. Tap any pin to fly there.</div>
+    <div class="ex-layers" id="exLayers" role="group" aria-label="Globe layers">
+      <span class="ex-lab">Layers:</span>
+      <button type="button" data-l="quakes" aria-pressed="false">&#127755; Earthquakes today</button>
+      <button type="button" data-l="volcanoes" aria-pressed="false">&#127755; Volcanoes &amp; Ring of Fire</button>
+      <button type="button" data-l="iss" aria-pressed="false">&#128752; Space station live</button>
+      <button type="button" data-l="clouds" aria-pressed="false">&#9729;&#65039; Real clouds &amp; storms</button>
+      <button type="button" data-l="animals" aria-pressed="false">&#128062; Animal map</button>
+      <button type="button" data-l="dinos" aria-pressed="false">&#129430; Dinosaur Earth</button>
+    </div>
+    <div class="ex-layer-info" id="exLayerInfo" aria-live="polite" hidden></div>
     <div class="ex-places" id="exPlaces" aria-label="Places to visit"></div>
     <p class="small-print" style="margin-top:10px;">Earth pictures: NASA Blue Marble and Black Marble, shown with the free globe.gl library. The globe only loads when you scroll here.</p>
   </div>
@@ -1028,6 +1054,7 @@
           .atmosphereColor("#8fd3ff")
           .htmlElementsData(PLACES)
           .htmlElement((p) => {
+            if (p.el) return p.el();
             const d = document.createElement("div");
             d.className = "ex-pin" + (p.home || p.uncle ? " home" : "");
             d.innerHTML = `${p.ic}<span>${p.home ? "Yuyu's home" : p.uncle ? "Uncle Scoop's home" : ""}</span>`;
@@ -1039,7 +1066,9 @@
         globe.controls().autoRotate = true; globe.controls().autoRotateSpeed = 0.5;
         globe.pointOfView({ lat: HOME.lat, lng: HOME.lng, altitude: 2.2 }, 0);
         window.slGlobe = globe;
+        window.slEarth = { PLACES, show, setSpin, IMG, card: (h) => { $("exCard").innerHTML = h; } };
         const ld = $("exLoad"); if (ld) ld.remove();
+        const ls = document.createElement("script"); ls.src = "/space-lab/layers.js?v=1"; document.head.appendChild(ls);
         addEventListener("resize", () => globe.width(el.clientWidth).height(el.clientHeight));
       } catch (e) { console.warn(e); const ld = $("exLoad") || el.appendChild(Object.assign(document.createElement("div"), { className: "ex-load", id: "exLoad" })); ld.textContent = "This device can't draw the 3D globe, but you can still tap the places below!"; }
     };
