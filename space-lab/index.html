@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, follow">
 <title>Yuyu’s Space Lab | Scoop &amp; Dude</title>
-<meta name="description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments and badges to earn.">
+<meta name="description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments, a 3D Earth to explore, bones and anatomy, and badges to earn.">
 <link rel="canonical" href="https://scoopanddude.com/space-lab/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scoopanddude.com/space-lab/">
 <meta property="og:title" content="Yuyu’s Space Lab">
-<meta property="og:description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments and badges to earn.">
+<meta property="og:description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments, a 3D Earth to explore, bones and anatomy, and badges to earn.">
 <meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -49,7 +49,7 @@
     <p class="lede">See what&rsquo;s in tonight&rsquo;s sky over Cebu. Wave at the space station. Fire Newton&rsquo;s cannonball into orbit. Weigh yourself on Jupiter and race a beam of light to Neptune. Then do real experiments at home, the way scientists do: guess first, then test.</p>
     <p class="sl-ded">Made for Yuyu, a young scientist in Cebu who asks big questions. Keep asking them. Every great discovery started with someone who wanted to know why. &mdash; Scoop</p>
     <nav class="sl-jump" aria-label="On this page">
-      <a href="#sky">Tonight&rsquo;s sky</a><a href="#iss">Space station</a><a href="#launch">Next launch</a><a href="#weigh">Planet weights</a><a href="#cannon">Cannonball</a><a href="#typhoons">Typhoons</a><a href="#ph-space">Philippines in space</a><a href="#badges">Badges</a>
+      <a href="#sky">Tonight&rsquo;s sky</a><a href="#iss">Space station</a><a href="#launch">Next launch</a><a href="#weigh">Planet weights</a><a href="#cannon">Cannonball</a><a href="#typhoons">Typhoons</a><a href="#ph-space">Philippines in space</a><a href="#earth">Explore Earth</a><a href="#anatomy">Bones &amp; anatomy</a><a href="#badges">Badges</a>
     </nav>
   </div>
 </header>
@@ -338,6 +338,103 @@
       <details><summary>Why are there seasons?</summary><p>The Earth is tilted. For half the year your part of the Earth leans toward the Sun and gets more direct sunlight; then it leans away. In the Philippines, near the equator, the sunlight stays strong all year, so the big change is wet season and dry season instead of summer and winter.</p></details>
       <details><summary>How big is the universe?</summary><p>The part we can see is about 93 billion light-years across, and it has more stars than all the grains of sand on all the beaches of Earth. Nobody knows what is past the edge we can see. Maybe you will help find out.</p></details>
     </div>
+  </div>
+</section>
+
+<style>
+  #earth, #anatomy { scroll-margin-top: 72px; }
+  .ex-wrap { position: relative; background: #05060f; border-radius: var(--radius-sm); overflow: hidden; height: min(72vh, 560px); min-height: 340px; touch-action: none; }
+  .ex-wrap .ex-load { position: absolute; inset: 0; display: grid; place-items: center; color: #dfe9ff; font-weight: 800; font-size: 18px; text-align: center; padding: 20px; }
+  .ex-card { background: var(--card); border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 16px 18px; margin-top: 12px; font-size: 18px; line-height: 1.5; border-left: 6px solid #3d7bd9; }
+  .ex-card b.t { display: block; font-size: 22px; margin-bottom: 4px; color: var(--ink); }
+  .ex-bar, .bn-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .ex-bar button, .bn-bar button, .bn-tabs button { border: 2px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 9px 16px; font: inherit; font-weight: 800; font-size: 16px; cursor: pointer; min-height: 46px; }
+  .ex-bar button.go, .bn-bar button.go { background: var(--amber); border-color: var(--amber); color: #1b1300; }
+  .ex-bar button[aria-pressed="true"], .bn-tabs button[aria-pressed="true"] { border-color: #3d7bd9; background: #e8f0fc; }
+  .ex-bar button:focus-visible, .bn-bar button:focus-visible, .bn-tabs button:focus-visible { outline: 3px solid #3d7bd9; outline-offset: 2px; }
+  .ex-places { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .ex-places button { border: 1px solid var(--line); background: var(--cream-2); color: var(--ink); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 14.5px; font-weight: 700; cursor: pointer; min-height: 38px; }
+  .ex-pin { cursor: pointer; pointer-events: auto; font-size: 22px; line-height: 1; transform: translate(-50%, -100%); filter: drop-shadow(0 2px 3px rgba(0,0,0,.7)); user-select: none; }
+  .ex-pin.home { font-size: 34px; }
+  .ex-pin span { display: block; font: 800 11px/1.1 var(--sans, sans-serif); color: #fff; text-align: center; text-shadow: 0 1px 3px #000; white-space: nowrap; }
+  .bn-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 16px; align-items: start; }
+  @media (max-width: 760px) { .bn-grid { grid-template-columns: 1fr; } .bn-svg { max-height: 58vh; width: auto; max-width: 100%; } }
+  .bn-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; background: #0b1030; border-radius: var(--radius-sm); touch-action: manipulation; }
+  .bn-svg .bone { fill: #f4ecd8; stroke: #8a7b5c; stroke-width: 1.5; cursor: pointer; transition: fill .15s; }
+  .bn-svg .bone:hover, .bn-svg .bone:focus { fill: #ffe08a; outline: none; }
+  .bn-svg .bone.on { fill: #ffc233; }
+  .bn-svg .bone.right { fill: #7ed69b; } .bn-svg .bone.wrong { fill: #f28b82; }
+  .bn-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 10px; }
+  .bn-organs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+  .bn-organ { background: var(--card); border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 14px 16px; font-size: 16.5px; line-height: 1.5; color: var(--ink-soft); }
+  .bn-organ b { display: block; font-size: 19px; color: var(--ink); margin-bottom: 4px; }
+  .bn-organ .ic { font-size: 32px; }
+  .bn-score { font-size: 20px; font-weight: 800; }
+</style>
+
+<section class="section alt" id="earth">
+  <div class="wrap">
+    <div class="section-eyebrow">EXPLORE EARTH &middot; YOUR OWN SPINNING PLANET</div>
+    <h2>Fly around the whole world.</h2>
+    <p class="lede">This is our planet, made from real pictures taken by NASA satellites. Drag it to spin it, pinch or scroll to zoom, and tap a pin to learn something amazing. It starts at home: Cebu!</p>
+    <div class="ex-wrap" id="exGlobe" role="application" aria-label="A 3D globe of the Earth you can spin and zoom">
+      <div class="ex-load" id="exLoad">Getting the Earth ready&hellip; &#127757;</div>
+    </div>
+    <div class="ex-bar">
+      <button class="go" type="button" id="exRandom">Fly me somewhere random! &#128640;</button>
+      <button class="go" type="button" id="exTrip">Fly from Yuyu&rsquo;s home to Uncle&rsquo;s home &#9992;&#65039;</button>
+      <button type="button" id="exHome">Take me home to Cebu &#127968;</button>
+      <button type="button" id="exNight" aria-pressed="false">Night lights &#127747;</button>
+      <button type="button" id="exSpin" aria-pressed="true">Auto-spin &#128260;</button>
+    </div>
+    <div class="ex-card" id="exCard" aria-live="polite"><b class="t">&#127968; Cebu, Philippines: Yuyu&rsquo;s home!</b>You are here! Cebu is an island in the middle of the Philippines, a country made of more than 7,600 islands. Tap any pin to fly there.</div>
+    <div class="ex-places" id="exPlaces" aria-label="Places to visit"></div>
+    <p class="small-print" style="margin-top:10px;">Earth pictures: NASA Blue Marble and Black Marble, shown with the free globe.gl library. The globe only loads when you scroll here.</p>
+  </div>
+</section>
+
+<section class="section" id="anatomy">
+  <div class="wrap">
+    <div class="section-eyebrow">BONES &amp; ANATOMY &middot; THE AMAZING MACHINE YOU LIVE IN</div>
+    <h2>What&rsquo;s inside you?</h2>
+    <p class="lede">You carry a whole skeleton around with you every day! Tap any bone to find out its name and a cool fact. Then try the bone quiz.</p>
+    <div class="bn-grid">
+      <div>
+        <svg class="bn-svg" id="bnSvg" viewBox="0 0 200 440" role="group" aria-label="A skeleton. Tap a bone to learn about it.">
+          <g id="bnBones">
+            <ellipse class="bone" data-b="skull" cx="100" cy="34" rx="24" ry="27"/>
+            <path class="bone" data-b="jaw" d="M82 50 Q100 76 118 50 L114 64 Q100 74 86 64Z"/>
+            <circle class="bone" data-b="stapes" cx="125" cy="40" r="3.5"/>
+            <rect class="bone" data-b="spine" x="96" y="72" width="8" height="150" rx="3"/>
+            <path class="bone" data-b="collarbone" d="M60 84 Q80 78 98 82 L98 86 Q80 83 60 89Z M140 84 Q120 78 102 82 L102 86 Q120 83 140 89Z"/>
+            <path class="bone" data-b="ribs" d="M72 96 Q100 88 128 96 L130 104 Q100 96 70 104Z M70 110 Q100 102 130 110 L131 118 Q100 110 69 118Z M70 124 Q100 116 130 124 L130 132 Q100 124 70 132Z M72 138 Q100 130 128 138 L127 146 Q100 138 73 146Z M76 152 Q100 145 124 152 L122 159 Q100 152 78 159Z"/>
+            <path class="bone" data-b="humerus" d="M56 90 L64 92 L58 170 L50 168Z M144 90 L136 92 L142 170 L150 168Z"/>
+            <path class="bone" data-b="radiusulna" d="M49 172 L55 173 L46 240 L40 239Z M57 173 L62 175 L52 241 L47 240Z M151 172 L145 173 L154 240 L160 239Z M143 173 L138 175 L148 241 L153 240Z"/>
+            <path class="bone" data-b="hand" d="M36 244 L56 244 L58 272 L34 272Z M164 244 L144 244 L142 272 L166 272Z"/>
+            <path class="bone" data-b="pelvis" d="M70 218 Q100 206 130 218 L126 246 Q100 262 74 246Z"/>
+            <path class="bone" data-b="femur" d="M78 248 L88 250 L86 340 L76 340Z M122 248 L112 250 L114 340 L124 340Z"/>
+            <circle class="bone" data-b="kneecap" cx="81" cy="346" r="6"/><circle class="bone" data-b="kneecap" cx="119" cy="346" r="6"/>
+            <path class="bone" data-b="tibiafibula" d="M76 354 L84 354 L82 418 L76 418Z M86 356 L90 356 L88 416 L85 416Z M124 354 L116 354 L118 418 L124 418Z M114 356 L110 356 L112 416 L115 416Z"/>
+            <path class="bone" data-b="foot" d="M70 420 L90 420 L94 434 L64 434Z M130 420 L110 420 L106 434 L136 434Z"/>
+          </g>
+        </svg>
+        <p class="sl-note" style="text-align:center;margin-top:6px;">The tiny dot by the ear is the stapes. It&rsquo;s really much smaller!</p>
+      </div>
+      <div>
+        <div class="ex-card" id="bnCard" aria-live="polite"><b class="t">&#129460; Tap a bone!</b>Grown-ups have 206 bones. Babies are born with about 300, and many of them join together as you grow. So right now, you have more bones than your parents!</div>
+        <div class="ex-card" style="border-left-color:var(--amber);">
+          <b class="t">&#129504; Bone quiz</b>
+          <p class="bn-score" id="bnQ" aria-live="polite">Press start, then tap the bone I ask for.</p>
+          <div class="bn-bar"><button class="go" type="button" id="bnStart">Start the quiz</button></div>
+          <p class="sl-note" id="bnScore"></p>
+        </div>
+      </div>
+    </div>
+    <div class="bn-tabs" role="group" aria-label="Body systems">
+      <button type="button" data-s="organs" aria-pressed="true">Organs</button>
+      <button type="button" data-s="systems" aria-pressed="false">Body systems</button>
+    </div>
+    <div class="bn-organs" id="bnOrgans"></div>
   </div>
 </section>
 
@@ -847,5 +944,197 @@
 })();
 
 </script>
+<script>
+(function () {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  // ---------- Explore Earth ----------
+  const HOME = { n: "Cebu, Philippines", lat: 10.32, lng: 123.89, ic: "🏠", home: true, f: "Yuyu's home! Cebu is an island in the middle of the Philippines, a country made of more than 7,600 islands. Ferdinand Magellan's ships arrived here in 1521 on the first trip all the way around the world." };
+  const PLACES = [HOME,
+    { n: "Chocolate Hills, Bohol", lat: 9.83, lng: 124.14, ic: "🍫", f: "More than 1,200 round hills! In the dry season the grass turns brown, so they look like giant chocolate drops. They're very close to Cebu, just across the water." },
+    { n: "Mayon Volcano", lat: 13.26, lng: 123.69, ic: "🌋", f: "Famous for its almost perfect cone shape. It's the most active volcano in the Philippines and has erupted about 50 times in the last 400 years." },
+    { n: "Tubbataha Reef", lat: 8.92, lng: 119.92, ic: "🐠", f: "A coral reef far out in the Sulu Sea, home to about 600 kinds of fish, plus sea turtles and sharks. It's protected as a World Heritage Site." },
+    { n: "Philippine Trench", lat: 10.0, lng: 127.0, ic: "🌊", f: "A super-deep crack in the ocean floor east of the Philippines. Its deepest spot, the Emden Deep, is about 10.5 km down. That's deeper than Mount Everest is tall!" },
+    { n: "Mariana Trench", lat: 11.35, lng: 142.2, ic: "🕳️", f: "The deepest place in all the oceans. Challenger Deep is almost 11 km down. Only a few people have ever been to the bottom, in special submarines." },
+    { n: "Mount Everest", lat: 27.99, lng: 86.93, ic: "🏔️", f: "The highest mountain on Earth: 8,849 meters tall. At the top the air is so thin that most climbers bring bottles of oxygen to breathe." },
+    { n: "Grand Canyon", lat: 36.1, lng: -112.1, ic: "🏜️", f: "The Colorado River carved this canyon over millions of years. It's about 1.8 km deep, and its bottom rocks are almost 2 billion years old!" },
+    { n: "Amazon Rainforest", lat: -3.47, lng: -62.2, ic: "🌳", f: "The biggest rainforest in the world. About 1 in every 10 kinds of animals and plants we know lives here, like jaguars, sloths and poison dart frogs." },
+    { n: "Sahara Desert", lat: 23.4, lng: 13.0, ic: "🐪", f: "The biggest hot desert on Earth, almost as big as the whole United States. Thousands of years ago it was green, with lakes, hippos and crocodiles!" },
+    { n: "Great Barrier Reef", lat: -18.29, lng: 147.7, ic: "🪸", f: "The biggest coral reef in the world, about 2,300 km long. It's made by tiny animals called coral polyps, and astronauts can see it from space." },
+    { n: "Antarctica", lat: -82.0, lng: 30.0, ic: "🐧", f: "The coldest, windiest place on Earth. It holds about 70% of all the fresh water on the planet, frozen as ice. The coldest temperature ever measured here was about −89 °C." },
+    { n: "Pacific Ocean", lat: 0, lng: -150, ic: "🌊", f: "The biggest ocean. It's so big that all the land on Earth could fit inside it, with room left over. The Philippines sits on its western edge." },
+    { n: "Atlantic Ocean", lat: 15, lng: -40, ic: "⛵", f: "The second-biggest ocean. It's slowly getting wider, a few centimeters every year, about as fast as your fingernails grow." },
+    { n: "Indian Ocean", lat: -20, lng: 80, ic: "🐋", f: "The warmest ocean. Blue whales, the biggest animals that have ever lived, swim here." },
+    { n: "Arctic Ocean", lat: 88, lng: 0, ic: "🐻‍❄️", f: "The smallest and coldest ocean, around the North Pole. Much of it is covered with floating sea ice where polar bears hunt." },
+    { n: "Asia", lat: 45, lng: 95, ic: "🌏", f: "The biggest continent, with more than half of all the people in the world. The Philippines is part of Asia." },
+    { n: "Africa", lat: 5, lng: 22, ic: "🦁", f: "Home to the longest river (the Nile), the biggest hot desert (the Sahara) and the fastest land animal, the cheetah." },
+    { n: "North America", lat: 45, lng: -100, ic: "🦅", f: "Has the biggest freshwater lake by area, Lake Superior, and the Grand Canyon." },
+    { n: "South America", lat: -15, lng: -60, ic: "🦜", f: "Has the longest mountain range on land, the Andes, and the Amazon River, which carries more water than any other river." },
+    { n: "Europe", lat: 50, lng: 15, ic: "🏰", f: "A small continent with about 50 countries. The Romans built roads here about 2,000 years ago that people still walk on." },
+    { n: "Australia", lat: -25, lng: 134, ic: "🦘", f: "The smallest continent. Kangaroos, koalas and platypuses live in the wild only here." },
+    { n: "La Porte, Indiana, USA", lat: 41.61, lng: -86.72, ic: "🏡", uncle: true, f: "Uncle Scoop's home! La Porte is a small city near Lake Michigan, one of the five Great Lakes. Lake Michigan is so big you can't see across it, like an ocean, but its water is fresh, not salty. In winter, snow can pile up from \"lake-effect\" storms!" }
+  ];
+  let globe = null, spin = true, loaded = false;
+  function show(p) {
+    $("exCard").innerHTML = `<b class="t">${p.ic} ${p.n}${p.home ? ": Yuyu's home!" : p.uncle ? ": Uncle Scoop's home!" : ""}</b>${p.f}`;
+    if (globe) { globe.controls().autoRotate = false; setSpin(false); globe.pointOfView({ lat: p.lat, lng: p.lng, altitude: p.home ? 1.6 : 1.4 }, 1600); }
+    try { if (window.slEarthVisit) window.slEarthVisit(p.n); } catch (e) {}
+  }
+  function setSpin(on) { spin = on; $("exSpin").setAttribute("aria-pressed", String(on)); if (globe) globe.controls().autoRotate = on; }
+  $("exPlaces").innerHTML = PLACES.map((p, i) => `<button type="button" data-i="${i}">${p.ic} ${p.n}</button>`).join("");
+  $("exPlaces").addEventListener("click", (e) => { const b = e.target.closest("[data-i]"); if (b) show(PLACES[+b.dataset.i]); });
+  let last = 0;
+  $("exRandom").addEventListener("click", () => { let i; do { i = 1 + Math.floor(Math.random() * (PLACES.length - 1)); } while (i === last); last = i; show(PLACES[i]); });
+  // Cebu -> La Porte trip: great-circle distance and live time difference
+  const UNCLE = PLACES.find((p) => p.uncle);
+  function gcKm(a, b) { const r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLng = (b.lng - a.lng) * r;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLng / 2) ** 2; return 2 * 6371 * Math.asin(Math.sqrt(h)); }
+  function tzOff(tz) { const d = new Date(); const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(d).map((x) => [x.type, x.value]));
+    return (Date.UTC(+p.year, p.month - 1, +p.day, +p.hour, +p.minute) - Math.floor(d.getTime() / 60000) * 60000) / 3600000; }
+  function clock(tz) { return new Date().toLocaleTimeString("en-US", { timeZone: tz, hour: "numeric", minute: "2-digit" }); }
+  $("exTrip").addEventListener("click", () => {
+    const km = gcKm(HOME, UNCLE), hrs = Math.round(tzOff("Asia/Manila") - tzOff("America/Chicago")), fly = km / 900;
+    $("exCard").innerHTML = `<b class="t">✈️ From Yuyu's home to Uncle Scoop's home</b>Cebu to La Porte is about <b>${(Math.round(km / 100) * 100).toLocaleString("en-US")} km</b> (${(Math.round(km * 0.621371 / 100) * 100).toLocaleString("en-US")} miles) in a straight line around the curve of the Earth. A jet flying 900 km per hour would take about <b>${Math.round(fly)} hours</b> without stopping.<br>Cebu is <b>${hrs} hours ahead</b> of La Porte. Right now it's <b>${clock("Asia/Manila")}</b> in Cebu and <b>${clock("America/Chicago")}</b> in La Porte.`;
+    if (!globe) return;
+    setSpin(false);
+    globe.arcsData([{ startLat: HOME.lat, startLng: HOME.lng, endLat: UNCLE.lat, endLng: UNCLE.lng }])
+      .arcColor(() => ["#ffc233", "#8fd3ff"]).arcStroke(0.8).arcAltitudeAutoScale(0.4)
+      .arcDashLength(0.4).arcDashGap(0.2).arcDashAnimateTime(2500);
+    globe.pointOfView({ lat: HOME.lat, lng: HOME.lng, altitude: 2.4 }, 900);
+    setTimeout(() => globe.pointOfView({ lat: 52, lng: -170, altitude: 2.6 }, 2200), 1000);
+    setTimeout(() => globe.pointOfView({ lat: UNCLE.lat, lng: UNCLE.lng, altitude: 1.8 }, 2200), 3300);
+  });
+  $("exHome").addEventListener("click", () => show(HOME));
+  $("exSpin").addEventListener("click", () => setSpin(!spin));
+  const IMG = "https://cdn.jsdelivr.net/npm/three-globe@2.31.0/example/img/";
+  $("exNight").addEventListener("click", () => {
+    const b = $("exNight"), on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", String(on));
+    if (globe) globe.globeImageUrl(IMG + (on ? "earth-night.jpg" : "earth-blue-marble.jpg"));
+    if (on) $("exCard").innerHTML = `<b class="t">🌃 Earth at night</b>Those glowing dots are city lights, photographed by satellites at night. Can you find the Philippines? Look for Manila and Cebu shining!`;
+  });
+  function boot() {
+    if (loaded) return; loaded = true;
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/globe.gl@2.33.0/dist/globe.gl.min.js";
+    s.onload = () => {
+      const el = $("exGlobe");
+      try {
+        globe = Globe()(el)
+          .width(el.clientWidth).height(el.clientHeight)
+          .globeImageUrl(IMG + "earth-blue-marble.jpg")
+          .bumpImageUrl(IMG + "earth-topology.png")
+          .backgroundImageUrl(IMG + "night-sky.png")
+          .atmosphereColor("#8fd3ff")
+          .htmlElementsData(PLACES)
+          .htmlElement((p) => {
+            const d = document.createElement("div");
+            d.className = "ex-pin" + (p.home || p.uncle ? " home" : "");
+            d.innerHTML = `${p.ic}<span>${p.home ? "Yuyu's home" : p.uncle ? "Uncle Scoop's home" : ""}</span>`;
+            d.title = p.n; d.setAttribute("role", "button"); d.setAttribute("aria-label", p.n);
+            d.addEventListener("click", (e) => { e.stopPropagation(); show(p); });
+            d.addEventListener("pointerdown", (e) => e.stopPropagation());
+            return d;
+          });
+        globe.controls().autoRotate = true; globe.controls().autoRotateSpeed = 0.5;
+        globe.pointOfView({ lat: HOME.lat, lng: HOME.lng, altitude: 2.2 }, 0);
+        window.slGlobe = globe;
+        const ld = $("exLoad"); if (ld) ld.remove();
+        addEventListener("resize", () => globe.width(el.clientWidth).height(el.clientHeight));
+      } catch (e) { console.warn(e); const ld = $("exLoad") || el.appendChild(Object.assign(document.createElement("div"), { className: "ex-load", id: "exLoad" })); ld.textContent = "This device can't draw the 3D globe, but you can still tap the places below!"; }
+    };
+    s.onerror = () => { $("exLoad").textContent = "The globe couldn't load. Check the internet and try again later. You can still tap the places below!"; };
+    document.head.appendChild(s);
+  }
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); boot(); } }, { rootMargin: "400px" });
+    io.observe($("exGlobe"));
+  } else boot();
+
+  // ---------- Bones & Anatomy ----------
+  const BONES = {
+    skull: ["Skull (cranium)", "Your skull is like a bike helmet you were born with. It's made of about 22 bones that fit together like puzzle pieces to protect your brain."],
+    jaw: ["Jaw (mandible)", "The mandible is the only bone in your head that can move. It's the strongest bone in your face. Chomp chomp!"],
+    stapes: ["Stapes (stirrup)", "The smallest bone in your body, deep inside your ear. It's only about 3 mm long, smaller than a grain of rice! It helps you hear by passing sound along."],
+    spine: ["Spine (backbone)", "Your spine is a stack of 33 small bones called vertebrae. It holds you up, lets you bend and twist, and protects the spinal cord, the body's main message cable."],
+    collarbone: ["Collarbone (clavicle)", "The collarbone connects your arm to your body. It's one of the bones people break most often, especially kids who fall while playing. It heals well!"],
+    ribs: ["Ribs", "You have 24 ribs, 12 on each side. They make a cage that protects your heart and lungs, and they move out and in every time you breathe."],
+    humerus: ["Humerus (upper arm)", "The bone from your shoulder to your elbow. The funny bone isn't a bone at all: it's a nerve that runs past the humerus, and bumping it makes your arm tingle!"],
+    radiusulna: ["Radius and ulna (forearm)", "Two bones side by side in your forearm. The radius can roll around the ulna, which is how you can turn your hand palm-up and palm-down."],
+    hand: ["Hand and wrist bones", "Each hand and wrist has 27 bones! That's why your fingers can do tricky things like writing, drawing and building."],
+    pelvis: ["Pelvis (hip bones)", "The pelvis is shaped like a bowl. It holds up your whole upper body and connects your spine to your legs."],
+    femur: ["Femur (thigh bone)", "The longest and strongest bone in your body! It's about one quarter of your height, and it's stronger than the same weight of concrete."],
+    kneecap: ["Kneecap (patella)", "A little shield in front of your knee. Babies' kneecaps are mostly soft cartilage, and they slowly turn into bone as kids grow."],
+    tibiafibula: ["Tibia and fibula (shin)", "The tibia is your shin bone, the second-longest bone in the body. The thin fibula next to it helps hold your ankle steady."],
+    foot: ["Foot and ankle bones", "Each foot and ankle has 26 bones. Your two feet together have about a quarter of all the bones in your body!"]
+  };
+  const svg = $("bnSvg");
+  svg.querySelectorAll(".bone").forEach((el) => { el.setAttribute("tabindex", "0"); el.setAttribute("role", "button"); el.setAttribute("aria-label", BONES[el.dataset.b][0]); });
+  let quiz = null;
+  function pick(key) {
+    if (quiz) return answer(key);
+    svg.querySelectorAll(".bone").forEach((el) => el.classList.toggle("on", el.dataset.b === key));
+    const [n, f] = BONES[key];
+    $("bnCard").innerHTML = `<b class="t">🦴 ${n}</b>${f}`;
+  }
+  svg.addEventListener("click", (e) => { const b = e.target.closest(".bone"); if (b) pick(b.dataset.b); });
+  svg.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("bone")) { e.preventDefault(); pick(e.target.dataset.b); } });
+  const CHEER = ["Great job!", "You got it!", "Super scientist!", "Amazing!", "Nailed it!"];
+  function ask() {
+    if (quiz.i >= quiz.order.length) {
+      $("bnQ").textContent = `Quiz done! You got ${quiz.score} out of ${quiz.order.length} on the first try. ${quiz.score >= 6 ? "You're a real bone expert! 🏆" : "Every scientist practices. Try again!"}`;
+      $("bnStart").textContent = "Play again"; quiz = null; return;
+    }
+    quiz.tries = 0;
+    $("bnQ").textContent = `Question ${quiz.i + 1} of ${quiz.order.length}: Tap the ${BONES[quiz.order[quiz.i]][0].replace(/ \(.*\)/, "")}!`;
+  }
+  function answer(key) {
+    const want = quiz.order[quiz.i];
+    const els = svg.querySelectorAll(`.bone[data-b="${key}"]`);
+    if (key === want) {
+      if (quiz.tries === 0) quiz.score++;
+      els.forEach((el) => el.classList.add("right"));
+      $("bnCard").innerHTML = `<b class="t">✅ ${CHEER[quiz.i % CHEER.length]} That's the ${BONES[key][0]}.</b>${BONES[key][1]}`;
+      setTimeout(() => els.forEach((el) => el.classList.remove("right")), 900);
+      quiz.i++; $("bnScore").textContent = `Score: ${quiz.score}`; ask();
+    } else {
+      quiz.tries++;
+      els.forEach((el) => el.classList.add("wrong"));
+      setTimeout(() => els.forEach((el) => el.classList.remove("wrong")), 700);
+      $("bnCard").innerHTML = `<b class="t">Almost! That one is the ${BONES[key][0]}.</b>Good try. Look again and find the ${BONES[want][0].replace(/ \(.*\)/, "")}.`;
+    }
+  }
+  $("bnStart").addEventListener("click", () => {
+    const keys = Object.keys(BONES).sort(() => Math.random() - 0.5).slice(0, 8);
+    svg.querySelectorAll(".bone").forEach((el) => el.classList.remove("on"));
+    quiz = { order: keys, i: 0, score: 0, tries: 0 }; $("bnScore").textContent = "Score: 0"; $("bnStart").textContent = "Restart"; ask();
+  });
+  const ORGANS = {
+    organs: [
+      ["🫀", "Heart", "A muscle about the size of your fist. It beats about 100,000 times every day, pumping blood all around your body without ever taking a break."],
+      ["🫁", "Lungs", "Two spongy lungs fill up with air when you breathe in. Inside are millions of tiny air sacs that pass oxygen into your blood. The left lung is a little smaller to make room for your heart."],
+      ["🧠", "Brain", "The boss of your body! It sends messages along your nerves super fast, more than 400 km per hour. It uses about one fifth of all your body's energy."],
+      ["🍽️", "Stomach", "A stretchy bag that mashes your food with strong acid and squeezing muscles. When it's empty it growls: that's air and juices moving around!"],
+      ["💪", "Muscles", "You have more than 600 muscles. Even smiling uses muscles in your face. The strongest for its size is the masseter, your chewing muscle."],
+      ["🩸", "Blood", "If you laid out all of an adult's blood vessels end to end, they would wrap around the Earth more than twice! Red blood cells are made inside your bones."]
+    ],
+    systems: [
+      ["🦴", "Skeleton system", "206 bones in grown-ups (about 300 at birth). Bones hold you up, protect your organs, and make new blood cells in their soft middle, the marrow."],
+      ["❤️", "Circulatory system", "Your heart and blood vessels work like a delivery service, carrying oxygen and food to every part of you and taking away the garbage."],
+      ["🌬️", "Respiratory system", "Your nose, windpipe and lungs. You breathe about 20,000 times a day without even thinking about it."],
+      ["⚡", "Nervous system", "Your brain, spinal cord and nerves. Touch something hot and your nerves tell you to pull away before you even feel the hurt!"],
+      ["🍎", "Digestive system", "Food takes about a day or more to travel through you. Your small intestine is longer than a school bus if you stretch it out, about 6 meters!"],
+      ["🏃", "Muscular system", "Muscles can only pull, never push. That's why they work in pairs: one bends your arm, another straightens it."]
+    ]
+  };
+  function organs(s) {
+    $("bnOrgans").innerHTML = ORGANS[s].map(([ic, n, f]) => `<div class="bn-organ"><div class="ic" aria-hidden="true">${ic}</div><b>${n}</b>${f}</div>`).join("");
+    document.querySelectorAll(".bn-tabs button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.s === s)));
+  }
+  document.querySelector(".bn-tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-s]"); if (b) organs(b.dataset.s); });
+  organs("organs");
+})();
+</script>
+
 </body>
 </html>
