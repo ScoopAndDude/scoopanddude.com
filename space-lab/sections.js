@@ -233,7 +233,8 @@
   dq();
 
   // =============== 11. Ask Uncle ===============
-  const ASK = window.SL_ASK_URL || "";
+  // Netlify form "yuyu-question" on laporteweathernow.com; questions land as private issues for Uncle Scoop.
+  const ASK = window.SL_ASK_URL || "https://laporteweathernow.com/contact";
   const form = $("askForm");
   if (form) {
     const box = $("askQ");
@@ -252,7 +253,7 @@
         const body = new URLSearchParams({ "form-name": "yuyu-question", question: q.slice(0, 500), "bot-field": $("askHp").value });
         await fetch(ASK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
         store.set("sl_ask_last", String(Date.now()));
-        box.value = ""; $("askOut").textContent = "Sent! 📬 Uncle Scoop will read it. Keep wondering!"; badge("ask");
+        box.value = ""; $("askOut").textContent = "Sent to Uncle! 📬 Uncle Scoop will read your question. Keep wondering!"; badge("ask");
       } catch (err) { $("askOut").textContent = "It didn't send. Check the internet and try again."; }
       $("askSend").disabled = false;
     });
