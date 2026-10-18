@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, follow">
 <title>Yuyu’s Space Lab | Scoop &amp; Dude</title>
-<meta name="description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments, a 3D Earth to explore, bones and anatomy, and badges to earn.">
+<meta name="description" content="Yuyu’s Space Lab: experiment of the week, a daily science quiz, the solar system, an ocean deep dive, dinosaurs, a live 3D Earth with earthquakes, volcanoes and the space station, tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments, a 3D Earth to explore, bones and anatomy, and badges to earn.">
 <link rel="canonical" href="https://scoopanddude.com/space-lab/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scoopanddude.com/space-lab/">
 <meta property="og:title" content="Yuyu’s Space Lab">
-<meta property="og:description" content="Yuyu’s Space Lab: tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments, a 3D Earth to explore, bones and anatomy, and badges to earn.">
+<meta property="og:description" content="Yuyu’s Space Lab: experiment of the week, a daily science quiz, the solar system, an ocean deep dive, dinosaurs, a live 3D Earth with earthquakes, volcanoes and the space station, tonight’s sky over Cebu, the space station live, the next rocket launch, Newton’s cannonball, typhoon science, the Philippines in space, planet weights, a light race, home experiments, a 3D Earth to explore, bones and anatomy, and badges to earn.">
 <meta property="og:image" content="https://scoopanddude.com/assets/img/og-badge-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -49,7 +49,7 @@
     <p class="lede">See what&rsquo;s in tonight&rsquo;s sky over Cebu. Wave at the space station. Fire Newton&rsquo;s cannonball into orbit. Weigh yourself on Jupiter and race a beam of light to Neptune. Then do real experiments at home, the way scientists do: guess first, then test.</p>
     <p class="sl-ded">Made for Yuyu, a young scientist in Cebu who asks big questions. Keep asking them. Every great discovery started with someone who wanted to know why. &mdash; Scoop</p>
     <nav class="sl-jump" aria-label="On this page">
-      <a href="#sky">Tonight&rsquo;s sky</a><a href="#iss">Space station</a><a href="#launch">Next launch</a><a href="#weigh">Planet weights</a><a href="#cannon">Cannonball</a><a href="#typhoons">Typhoons</a><a href="#ph-space">Philippines in space</a><a href="#earth">Explore Earth</a><a href="#anatomy">Bones &amp; anatomy</a><a href="#badges">Badges</a>
+      <a href="#sky">Tonight&rsquo;s sky</a><a href="#iss">Space station</a><a href="#launch">Next launch</a><a href="#weigh">Planet weights</a><a href="#cannon">Cannonball</a><a href="#typhoons">Typhoons</a><a href="#ph-space">Philippines in space</a><a href="#earth">Explore Earth</a><a href="#anatomy">Bones &amp; anatomy</a><a href="#eow">Experiment of the week</a><a href="#solar">Solar system</a><a href="#ocean">Ocean dive</a><a href="#dinos">Dinosaurs</a><a href="#daily">Daily quiz</a><a href="#ask">Ask Uncle</a><a href="#badges">Badges</a>
     </nav>
   </div>
 </header>
@@ -357,6 +357,7 @@
   .ex-pin { cursor: pointer; pointer-events: auto; font-size: 22px; line-height: 1; transform: translate(-50%, -100%); filter: drop-shadow(0 2px 3px rgba(0,0,0,.7)); user-select: none; }
   .ex-pin.home { font-size: 34px; }
   .ex-pin span { display: block; font: 800 11px/1.1 var(--sans, sans-serif); color: #fff; text-align: center; text-shadow: 0 1px 3px #000; white-space: nowrap; }
+  @media (max-width: 700px) { .ex-wrap { height: min(58vh, 480px); } }
   .ex-layers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
   .ex-lab { font-weight: 800; color: var(--ink-soft); margin-right: 4px; }
   .ex-layers button { border: 2px solid var(--line); background: var(--cream-2); color: var(--ink); border-radius: 999px; padding: 8px 14px; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; min-height: 44px; }
@@ -373,6 +374,35 @@
   .ex-animals { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px; margin-top: 8px; }
   .ex-animals div { background: rgba(255,255,255,.08); border-radius: 10px; padding: 10px 12px; }
   .ex-pin.small { font-size: 18px; }
+  #eow, #solar, #ocean, #dinos, #daily, #ask { scroll-margin-top: 72px; }
+  .xs-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .xs-list button { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 7px 13px; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; min-height: 40px; }
+  .xs-list button[aria-pressed="true"] { border-color: #3d7bd9; background: #e8f0fc; }
+  .xs-exp { background: var(--card); border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 18px 20px; font-size: 17px; line-height: 1.55; }
+  .xs-exp h3 { margin: 0 0 10px; font-size: 24px; } .xs-big { font-size: 46px; line-height: 1; }
+  .xs-cols { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; } @media (max-width: 700px) { .xs-cols { grid-template-columns: 1fr; } }
+  .xs-cols ul, .xs-cols ol { margin: 6px 0 0; padding-left: 22px; display: grid; gap: 4px; }
+  .xs-why { background: #e8f0fc; border-radius: 10px; padding: 12px 14px; } .xs-safe { background: #fff6e5; border-radius: 10px; padding: 12px 14px; }
+  .xs-ss-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; } @media (max-width: 800px) { .xs-ss-grid { grid-template-columns: 1fr; } }
+  .xs-ss { width: 100%; max-width: 520px; display: block; margin: 0 auto; background: radial-gradient(#141a45, #05060f 70%); border-radius: var(--radius-sm); }
+  .xs-orbit { transform-origin: 250px 250px; animation: xs-spin linear infinite; } .xs-ss.paused .xs-orbit { animation-play-state: paused; }
+  @keyframes xs-spin { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .xs-orbit { animation: none; } }
+  .xs-planet { cursor: pointer; outline: none; } .xs-planet:focus circle:first-of-type, .xs-planet:hover circle:first-of-type { stroke: #fff; stroke-width: 2; }
+  .xs-dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 8px; vertical-align: -2px; }
+  .xs-calc select, .xs-calc input { font-size: 18px; min-height: 44px; } .xs-calc select { border-radius: 10px; border: 2px solid var(--line); padding: 4px 8px; background: var(--card); color: var(--ink); }
+  .xs-ocean { position: relative; }
+  .xs-dive { height: min(70vh, 560px); overflow-y: auto; border-radius: var(--radius-sm); background: rgb(80,160,220); position: relative; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .xs-inner { position: relative; }
+  .xs-meter { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; background: #0b1030; color: #fff; border-radius: 12px; padding: 8px 14px; margin-bottom: 8px; }
+  .xs-meter b { display: block; font-size: 26px; font-variant-numeric: tabular-nums; } .xs-meter span { font-size: 13px; color: #8fd3ff; font-weight: 800; }
+  .xs-stop { position: absolute; left: 12px; right: 12px; max-width: 520px; background: rgba(255,255,255,.92); color: #10162f; border-radius: 12px; padding: 10px 14px; font-size: 16px; line-height: 1.45; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+  .xs-stop b { display: block; font-size: 18px; } .xs-depth { float: right; font-weight: 800; color: #3d7bd9; margin-left: 8px; }
+  .xs-time { display: flex; border-radius: 999px; overflow: hidden; font-size: 13px; font-weight: 800; color: #fff; margin: 4px 0 10px; }
+  .xs-time span { padding: 8px 6px; text-align: center; background: #2f7d4f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .xs-time span:nth-child(2) { background: #3d7bd9; } .xs-time span:nth-child(3) { background: #d98b00; } .xs-time .now { background: #6b5b95; }
+  .xs-qs { display: grid; gap: 14px; } .xs-q b { display: block; font-size: 18px; margin-bottom: 6px; }
+  .sl-quiz button[disabled] { cursor: default; opacity: .9; }
+  .xs-ask { width: 100%; font: inherit; font-size: 18px; border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-top: 6px; box-sizing: border-box; background: var(--card); color: var(--ink); }
+  .xs-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .bn-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 16px; align-items: start; }
   @media (max-width: 760px) { .bn-grid { grid-template-columns: 1fr; } .bn-svg { max-height: 58vh; width: auto; max-width: 100%; } }
   .bn-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; background: #0b1030; border-radius: var(--radius-sm); touch-action: manipulation; }
@@ -464,16 +494,107 @@
   </div>
 </section>
 
+
+<section class="section alt" id="eow">
+  <div class="wrap">
+    <div class="section-eyebrow">EXPERIMENT OF THE WEEK</div>
+    <h2>Be a scientist at home.</h2>
+    <p class="lede">A new experiment every week (the &#11088; one). Guess what will happen first, then test it, the way real scientists do. Want more? Pick any one below.</p>
+    <div class="xs-list" id="eowList" role="group" aria-label="All experiments"></div>
+    <div id="eowCard" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section" id="solar">
+  <div class="wrap">
+    <div class="section-eyebrow">SOLAR SYSTEM EXPLORER</div>
+    <h2>Visit the Sun and all 8 planets.</h2>
+    <p class="lede">Tap the Sun and each planet to learn its secrets. (The sizes and distances are squished to fit. The real solar system is MUCH bigger and emptier!)</p>
+    <div class="xs-ss-grid">
+      <div><svg id="ssSvg" class="xs-ss" viewBox="0 0 500 500" role="group" aria-label="The Sun and planets going around it. Tap one."></svg>
+        <div class="bn-bar"><button type="button" id="ssPause">Pause the planets &#9208;&#65039;</button></div></div>
+      <div>
+        <div class="ex-card" id="ssCard" aria-live="polite"><b class="t">&#127775; Tap the Sun or a planet!</b>The inner planets zoom around fast. Far-away Neptune is so slow, it has only gone around the Sun about once since it was discovered in 1846.</div>
+        <div class="ex-card" style="border-left-color:var(--amber);">
+          <b class="t">&#9878;&#65039; How much would I weigh on Mars?</b>
+          <div class="sl-row xs-calc"><label for="ssW">I weigh</label><input class="sl-input" id="ssW" type="number" inputmode="decimal" min="1" max="500" value="25"><select id="ssU" aria-label="Units"><option>kg</option><option>lb</option></select><label for="ssWorld">on</label><select id="ssWorld"></select></div>
+          <p class="bn-score" id="ssOut" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="ocean">
+  <div class="wrap">
+    <div class="section-eyebrow">OCEAN DEEP DIVE</div>
+    <h2>Dive to the bottom of the sea.</h2>
+    <p class="lede">Scroll down inside the ocean (or press Dive deeper) to sink from the sunny surface all the way to Challenger Deep, almost 11 km down. Watch the light fade!</p>
+    <div class="xs-ocean">
+      <div class="xs-meter" aria-live="off"><b id="odM">0 m</b><span id="odZ">Sunlight zone</span></div>
+      <div class="xs-dive" id="odBox" tabindex="0" aria-label="The ocean, from the surface to the deepest point. Scroll to dive."><div id="odInner" class="xs-inner"></div></div>
+    </div>
+    <div class="bn-bar"><button class="go" type="button" id="odDown">Dive deeper &#11015;&#65039;</button><button type="button" id="odTop">Back to the surface &#11014;&#65039;</button></div>
+  </div>
+</section>
+
+<section class="section" id="dinos">
+  <div class="wrap">
+    <div class="section-eyebrow">DINOSAURS</div>
+    <h2>When dinosaurs ruled the Earth.</h2>
+    <p class="lede">Dinosaurs lived for about 165 million years, in three big chapters of time. Tap each one.</p>
+    <div class="bn-tabs" id="dnEras" role="group" aria-label="Time periods"><button type="button" data-e="Triassic">Triassic</button><button type="button" data-e="Jurassic">Jurassic</button><button type="button" data-e="Cretaceous">Cretaceous</button></div>
+    <div class="xs-time" aria-hidden="true"><span style="flex:51">Triassic</span><span style="flex:56">Jurassic</span><span style="flex:79">Cretaceous</span><span class="now" style="flex:66">After the dinosaurs &rarr; you!</span></div>
+    <p class="sl-sub" id="dnEra"></p>
+    <div class="bn-organs" id="dnGrid"></div>
+    <div class="ex-card" style="border-left-color:#c62828;margin-top:16px">
+      <b class="t">&#9732;&#65039; 66 million years ago&hellip;</b>
+      <button class="btn btn-amber sl-btn" type="button" id="dnBoom">What happened? &#128165;</button>
+      <div id="dnBoomOut" hidden>An asteroid about 10 km wide (bigger than Mount Everest is tall) crashed into the Earth near what is now Mexico. It made a crater about 180 km across, called <b>Chicxulub</b> (CHEEK-shoo-loob). Dust and smoke blocked the Sun, plants died, and about 3 out of every 4 kinds of living things died out, including all the big dinosaurs. But small mammals and some feathered dinosaurs survived. Those dinosaurs became today's birds!</div>
+    </div>
+    <div class="ex-card" style="border-left-color:#2f7d4f">
+      <b class="t">&#129460; How do we know? Fossils!</b>When an animal died and got buried quickly in mud or sand, over millions of years minerals slowly replaced its bones and turned them to stone. Those stone bones are <b>fossils</b>. Scientists called <b>paleontologists</b> dig them up, put them together like puzzles, and figure out how dinosaurs lived. Footprints, eggs and even dinosaur poop (called coprolites) can be fossils too!
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="daily">
+  <div class="wrap">
+    <div class="section-eyebrow">DAILY SCIENCE QUIZ</div>
+    <h2>5 new questions every day.</h2>
+    <p class="lede"><span id="dqDate"></span>. Come back every day to keep your streak going!</p>
+    <p class="bn-score" id="dqStreak"></p>
+    <div id="dqList" class="xs-qs"></div>
+    <p class="bn-score" id="dqScore" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="section" id="ask">
+  <div class="wrap">
+    <div class="section-eyebrow">ASK UNCLE SCOOP</div>
+    <h2>Got a science question?</h2>
+    <p class="lede">Wondering why something happens? Write your question here and Uncle Scoop will read it.</p>
+    <form class="ex-card" id="askForm" autocomplete="off">
+      <label for="askQ" class="bn-score">My question:</label>
+      <textarea id="askQ" class="xs-ask" maxlength="500" rows="4" placeholder="Why is the sky blue?"></textarea>
+      <input type="text" id="askHp" name="bot-field" tabindex="-1" aria-hidden="true" class="xs-hp" autocomplete="off">
+      <p class="sl-note"><span id="askLeft">500 letters left</span> &middot; Just the question, please. Don&rsquo;t write your full name, address, school or phone number.</p>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" type="submit" id="askSend">Send to Uncle Scoop &#128236;</button></div>
+      <p class="bn-score" id="askOut" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
 <section class="section" id="badges">
   <div class="wrap">
     <div class="section-eyebrow">JUNIOR SCIENTIST BADGES</div>
-    <h2>Earn all 10 badges.</h2>
-    <p class="lede">Every badge is for doing real science on this page. Get all 10 and print your Junior Space Scientist certificate. Badges are saved on this phone or computer.</p>
-    <p class="sl-big" id="badgeCount">0 of 10</p>
+    <h2>Earn all 20 badges.</h2>
+    <p class="lede">Every badge is for doing real science on this page. Get all 20 and print your Junior Space Scientist certificate. Badges are saved on this phone or computer.</p>
+    <p class="sl-big" id="badgeCount">0 of 20</p>
     <div class="sl-badges" id="badgeGrid"></div>
     <div class="sl-panel" style="margin-top:16px;">
       <div class="sl-row"><label for="certInput">Name on the certificate:</label><input class="sl-input" id="certInput" type="text" value="Yuyu" maxlength="40" style="width:200px;font-size:18px;"></div>
-      <div class="sl-row"><button class="btn btn-amber sl-btn" id="certPrint" type="button" disabled>Print my certificate &#127942;</button><span class="sl-note" id="certNote">Earn all 10 badges to unlock it.</span></div>
+      <div class="sl-row"><button class="btn btn-amber sl-btn" id="certPrint" type="button" disabled>Print my certificate &#127942;</button><span class="sl-note" id="certNote">Earn all 20 badges to unlock it.</span></div>
     </div>
   </div>
 </section>
@@ -483,7 +604,7 @@
   <h2>Junior Space Scientist</h2>
   <p>This certificate goes to</p>
   <p class="who" id="certName">Yuyu</p>
-  <p>for earning all 10 Space Lab badges: weighing in on other worlds, jumping on the Moon, racing a beam of light, watching the sky over Cebu, waving at the space station, counting down to a rocket launch, putting a cannonball into orbit, doing a real experiment, learning how typhoons work, and learning about the Philippines in space.</p>
+  <p>for earning all 20 Space Lab badges: weighing in on other worlds, jumping on the Moon, racing a beam of light, watching the sky over Cebu, waving at the space station, counting down to a rocket launch, putting a cannonball into orbit, doing a real experiment, learning how typhoons work, learning about the Philippines in space, exploring the Earth, tracking the space station, finding animals, becoming a bone expert, doing the experiment of the week, hopping across the planets, diving to Challenger Deep, detecting dinosaurs, acing the daily quiz and keeping a 3-day quiz streak.</p>
   <p id="certDate"></p>
   <p>Keep asking big questions. &mdash; Scoop</p>
 </div>
@@ -658,17 +779,29 @@
     ["orbit", "🌍", "Cannon captain", "Put the cannonball into orbit"],
     ["lab", "🧪", "Home scientist", "Do an experiment at home"],
     ["storm", "🌀", "Storm scientist", "Answer the typhoon question"],
-    ["ph", "🇵🇭", "Philippine space fan", "Answer the satellite question"]
+    ["ph", "🇵🇭", "Philippine space fan", "Answer the satellite question"],
+    ["globe", "🌍", "Earth explorer", "Turn on a layer on the 3D globe"],
+    ["stationlive", "📡", "Station tracker", "Watch the space station live on the globe"],
+    ["animals", "🐒", "Animal finder", "Open the animal map on the globe"],
+    ["bones", "🦴", "Bone expert", "Finish the bone quiz"],
+    ["eow", "🧪", "Experiment of the week", "Do an experiment and tap “I did it!”"],
+    ["planets", "🪐", "Planet hopper", "Tap the Sun and all 8 planets"],
+    ["ocean", "🌊", "Deep diver", "Dive all the way to Challenger Deep"],
+    ["dinos", "🦖", "Dino detective", "Visit all three dinosaur time periods"],
+    ["daily", "❓", "Quiz whiz", "Finish today's daily quiz"],
+    ["streak", "🔥", "3-day streak", "Do the daily quiz 3 days in a row"]
   ];
+  const BADGE_ALIAS = { "earth-quakes": "globe", "earth-volcanoes": "globe", "earth-clouds": "globe", "earth-dinos": "globe", "earth-iss": "stationlive", "earth-animals": "animals" };
+  window.slBadge = (k) => { k = BADGE_ALIAS[k] || k; if (k === "stationlive" || k === "animals") earn("globe"); if (BADGES.some((b) => b[0] === k)) earn(k); };
   let got = {};
   try { got = JSON.parse(store.get("sl_badges") || "{}") || {}; } catch (e) { got = {}; }
   function drawBadges() {
     const n = BADGES.filter((b) => got[b[0]]).length, all = n === BADGES.length;
-    $("badgeCount").textContent = all ? "All 10! You're a Junior Space Scientist." : `${n} of ${BADGES.length} badges`;
+    $("badgeCount").textContent = all ? `All ${BADGES.length}! You're a Junior Space Scientist.` : `${n} of ${BADGES.length} badges`;
     $("badgeGrid").innerHTML = BADGES.map(([k, ic, name, how]) =>
       `<div class="sl-badge${got[k] ? " on" : ""}"><div class="ic" aria-hidden="true">${ic}</div><b>${esc(name)}</b><small>${got[k] ? "Earned!" : esc(how)}</small></div>`).join("");
     $("certPrint").disabled = !all;
-    $("certNote").textContent = all ? "Unlocked! Print it, or save it as a PDF." : "Earn all 10 badges to unlock it.";
+    $("certNote").textContent = all ? "Unlocked! Print it, or save it as a PDF." : `Earn all ${BADGES.length} badges to unlock it.`;
   }
   let toastTimer = 0;
   function toast(text) {
@@ -1112,7 +1245,7 @@
   function ask() {
     if (quiz.i >= quiz.order.length) {
       $("bnQ").textContent = `Quiz done! You got ${quiz.score} out of ${quiz.order.length} on the first try. ${quiz.score >= 6 ? "You're a real bone expert! 🏆" : "Every scientist practices. Try again!"}`;
-      $("bnStart").textContent = "Play again"; quiz = null; return;
+      $("bnStart").textContent = "Play again"; quiz = null; try { window.slBadge && window.slBadge("bones"); } catch (e) {} return;
     }
     quiz.tries = 0;
     $("bnQ").textContent = `Question ${quiz.i + 1} of ${quiz.order.length}: Tap the ${BONES[quiz.order[quiz.i]][0].replace(/ \(.*\)/, "")}!`;
@@ -1165,5 +1298,6 @@
 })();
 </script>
 
+<script src="/space-lab/sections.js?v=1" defer></script>
 </body>
 </html>
