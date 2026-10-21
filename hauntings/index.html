@@ -1,1 +1,254 @@
-PLACEHOLDER
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hauntings of the World | Scoop & Dude</title>
+<meta name="description" content="A curated guide to Earth's most compelling haunted places. Tower of London, Stanley Hotel, Paris Catacombs, Bhangarh Fort, Winchester Mystery House and more — with history, reported phenomena, and visitor notes.">
+<link rel="canonical" href="https://scoopanddude.com/hauntings/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scoopanddude.com/hauntings/">
+<meta property="og:title" content="Hauntings of the World | Scoop & Dude">
+<meta property="og:description" content="Curated, deeply researched ghost stories from the world's most haunted locations. History meets the unexplained.">
+<meta property="og:image" content="https://hauntings-of-the-world.netlify.app/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scoopanddude">
+<meta name="theme-color" content="#191970">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/css/site.css">
+<style>
+  .haunt-hero {
+    position: relative;
+    background: linear-gradient(180deg, rgba(13,20,66,.55) 0%, rgba(13,20,66,.88) 100%), url('https://hauntings-of-the-world.netlify.app/hero.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 100px 0 80px;
+    text-align: center;
+  }
+  .haunt-hero h1 {
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 5.2rem);
+    line-height: .9;
+    margin: 0 0 .4em;
+    text-shadow: 0 8px 32px rgba(0,0,0,.55);
+  }
+  .haunt-hero .lede { max-width: 62ch; margin: 0 auto 1.8rem; font-size: 1.25rem; color: #e8edf5; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 24px 0 8px; }
+  .filters button {
+    background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px; padding: 8px 16px; font-weight: 700; cursor: pointer; font: inherit;
+  }
+  .filters button.on, .filters button:hover { background: #fff; color: var(--sign); }
+  .haunt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; margin-top: 28px; }
+  .haunt-card {
+    background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid var(--line);
+    box-shadow: 0 4px 20px rgba(25,25,112,.08); transition: transform .2s, box-shadow .2s;
+  }
+  .haunt-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(25,25,112,.15); }
+  .haunt-card img { width: 100%; height: 190px; object-fit: cover; }
+  .haunt-card-body { padding: 16px 18px 18px; }
+  .haunt-card h3 { margin: 0 0 4px; font-size: 1.35rem; }
+  .haunt-loc { color: var(--sign); font-weight: 700; font-size: .92rem; margin-bottom: 8px; }
+  .haunt-tag { display: inline-block; background: var(--concrete); color: var(--sign); font-size: .75rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-right: 6px; }
+  .haunt-card p { margin: 8px 0 0; font-size: .98rem; line-height: 1.5; color: var(--ink-soft); }
+  .region-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .region-card { background: var(--concrete); padding: 20px; border-radius: 12px; border-left: 5px solid var(--sign); }
+  .region-card h3 { margin-top: 0; }
+  .region-card ul { margin: 8px 0 0; padding-left: 18px; }
+  .story { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; }
+  .story h3 { color: var(--sign); margin-top: 0; }
+  .visitor-note { background: var(--concrete); border-radius: 12px; padding: 18px 20px; margin-top: 20px; font-size: .98rem; }
+  html.dark .haunt-card, html.dark .story { background: #152050; }
+  html.dark .region-card { background: #1a2744; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../"><span class="mark">Scoop & Dude</span></a>
+    <nav aria-label="Sections">
+      <a class="opt2" href="../van-life/#crew">The crew</a>
+      <a class="opt3" href="../van-life/#map">The map</a>
+      <a href="../camp-map/">Camp map</a>
+      <a href="../projects/">Projects</a>
+      <a class="opt" href="../van-life/#clips">Clips</a>
+      <a class="opt" href="../van-life/#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <header class="haunt-hero">
+    <div class="wrap">
+      <div class="blade">HAUNTINGS OF THE WORLD</div>
+      <h1>Places the Past Still Walks</h1>
+      <p class="lede">A curated guide to Earth’s most compelling haunted locations. Real history, documented reports, and the stories that refuse to stay buried.</p>
+      <div class="filters" role="group" aria-label="Filter by region">
+        <button class="on" data-filter="all">All</button>
+        <button data-filter="europe">Europe</button>
+        <button data-filter="americas">Americas</button>
+        <button data-filter="asia">Asia & Oceania</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:40px;">
+    <div class="wrap">
+      <div class="haunt-grid" id="hauntGrid">
+        <article class="haunt-card" data-region="europe">
+          <img src="https://hauntings-of-the-world.netlify.app/tower.jpg" alt="Tower of London at dusk">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Europe</span>
+            <h3>Tower of London</h3>
+            <div class="haunt-loc">London, England</div>
+            <p>Nearly a thousand years of imprisonment and execution. The headless ghost of Anne Boleyn is frequently reported leading silent processions, alongside the lost Princes in the Tower.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="americas">
+          <img src="https://hauntings-of-the-world.netlify.app/stanley.jpg" alt="Stanley Hotel lobby">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Americas</span>
+            <h3>The Stanley Hotel</h3>
+            <div class="haunt-loc">Estes Park, Colorado</div>
+            <p>Inspiration for Stephen King’s <em>The Shining</em>. Room 217 (site of a 1911 explosion) and the ghosts of founders F.O. and Flora Stanley are among the most reported apparitions.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="europe">
+          <img src="https://hauntings-of-the-world.netlify.app/catacombs.jpg" alt="Paris Catacombs ossuary">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Europe</span>
+            <h3>Paris Catacombs</h3>
+            <div class="haunt-loc">Paris, France</div>
+            <p>The remains of more than six million people arranged in elaborate patterns. Visitors report cold spots, whispers, and an overwhelming sense of the surrounding dead.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="europe">
+          <img src="https://hauntings-of-the-world.netlify.app/edinburgh.jpg" alt="Edinburgh Castle">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Europe</span>
+            <h3>Edinburgh Castle</h3>
+            <div class="haunt-loc">Edinburgh, Scotland</div>
+            <p>Perched on volcanic rock, its dungeons once held soldiers and civilians. Ghosts of prisoners, a spectral piper, and a dog in the cemetery are commonly reported.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="europe">
+          <img src="https://hauntings-of-the-world.netlify.app/poveglia.jpg" alt="Poveglia Island">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Europe</span>
+            <h3>Poveglia Island</h3>
+            <div class="haunt-loc">Venice Lagoon, Italy</div>
+            <p>Once a plague quarantine station where thousands died, later an asylum. Locals avoid it; reports of tormented spirits and a mad doctor’s ghost persist.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="asia">
+          <img src="https://hauntings-of-the-world.netlify.app/bhangarh.jpg" alt="Bhangarh Fort ruins">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Asia</span>
+            <h3>Bhangarh Fort</h3>
+            <div class="haunt-loc">Rajasthan, India</div>
+            <p>India’s most haunted fort, cursed so no one may live within its walls after sunset. Official signs warn visitors to leave before dark.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="americas">
+          <img src="https://hauntings-of-the-world.netlify.app/dolls.jpg" alt="Island of the Dolls">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Americas</span>
+            <h3>Island of the Dolls</h3>
+            <div class="haunt-loc">Xochimilco, Mexico</div>
+            <p>Hundreds of decaying dolls hang from trees, placed by a caretaker who believed they were possessed by the spirit of a drowned girl.</p>
+          </div>
+        </article>
+        <article class="haunt-card" data-region="americas">
+          <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800" alt="Winchester Mystery House exterior">
+          <div class="haunt-card-body">
+            <span class="haunt-tag">Americas</span>
+            <h3>Winchester Mystery House</h3>
+            <div class="haunt-loc">San Jose, California</div>
+            <p>Built by Sarah Winchester to confuse spirits of those killed by Winchester rifles. Staircases to nowhere, doors that open onto walls, and continuous construction for 38 years.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--concrete);">
+    <div class="wrap">
+      <h2>By Region</h2>
+      <div class="region-grid">
+        <div class="region-card">
+          <h3>Europe</h3>
+          <ul>
+            <li>Tower of London & Leap Castle (Ireland)</li>
+            <li>Edinburgh Castle & Ancient Ram Inn</li>
+            <li>Paris Catacombs & Château de Brissac</li>
+            <li>Poveglia Island & Corvin Castle</li>
+            <li>Čachtice Castle (Elizabeth Báthory)</li>
+          </ul>
+        </div>
+        <div class="region-card">
+          <h3>The Americas</h3>
+          <ul>
+            <li>Stanley Hotel & Winchester Mystery House</li>
+            <li>Lizzie Borden House & Amityville</li>
+            <li>Island of the Dolls & La Recoleta Cemetery</li>
+            <li>Eastern State Penitentiary & Gettysburg</li>
+          </ul>
+        </div>
+        <div class="region-card">
+          <h3>Asia & Oceania</h3>
+          <ul>
+            <li>Bhangarh Fort & Aokigahara Forest</li>
+            <li>Forbidden City & Lawang Sewu</li>
+            <li>Hanging Coffins of Sagada</li>
+            <li>Old Adelaide Gaol</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Stories That Linger</h2>
+      <div class="story">
+        <h3>Anne Boleyn’s Procession</h3>
+        <p>In the 19th century, a soldier at the Tower of London reported a blue-white light in the Chapel of St Peter ad Vincula. Peering inside, he saw a silent procession of Tudor-dressed figures led by the headless Anne Boleyn. Other accounts describe her carrying her severed head under her arm across Tower Green.</p>
+      </div>
+      <div class="story">
+        <h3>The Nightmare That Became <em>The Shining</em></h3>
+        <p>In September 1974, Stephen King and his wife were the only guests at the Stanley Hotel as it closed for winter. That night, King dreamed his young son was chased down the corridors by a living fire hose. By morning, the outline of the novel was complete. They stayed in Room 217, site of an earlier gas explosion that injured chambermaid Elizabeth Wilson.</p>
+      </div>
+      <div class="story">
+        <h3>The Curse of Bhangarh</h3>
+        <p>According to legend, a wizard cursed the fort after the king’s daughter rejected his advances. The curse stipulated that the fort would never be inhabited again. Today, official signs warn visitors to leave before sunset, and many locals refuse to enter after dark.</p>
+      </div>
+      <div class="visitor-note">
+        <strong>Visiting these places:</strong> Most are open to the public. Respect local customs, check access rules (especially after dark), and remember that the supernatural remains a matter of personal belief. Experiences vary widely.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>A project from <a href="../">Scoop & Dude</a>. Home base: La Porte, Indiana.</p>
+    <p class="motto">Love God. Love people. Care for all that lives.</p>
+    <p class="small">&copy; 2026 Scoop & Dude. Stories compiled from historical accounts, travel guides, and folklore.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.haunt-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.region === filter) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
